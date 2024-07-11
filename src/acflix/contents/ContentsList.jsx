@@ -5,8 +5,6 @@ import api from '../js/api.js';
 import requests from '../js/requests.js';
 
 import ContentsModal from "./ContentsModal.jsx";
-import { getLoginedSessionID } from "../js/session.js";
-
 import '../css/modal.css'
 
 

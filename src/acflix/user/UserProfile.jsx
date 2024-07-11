@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import requests  from '../js/requests';
+import api from "../js/api.js";
 
 import { getLoginedSessionID } from '../js/session.js';
 import { useNavigate } from "react-router-dom";
@@ -23,25 +23,25 @@ const UserProfile = () => {
       
     // }
 
-  //   const fetchmyFav = async () => {
-  //     const myFav = JSON.parse(localStorage.getItem("acFavDB")) || [];
-  //     const movies = await Promise.all(
-  //         myFav.map(async (id) => {
-  //             try {
-  //                 const response = await api.get(`/movie/${id}`);
-  //                 return response.data;
-  //             } catch (error) {
-  //                 console.error("Failed to fetch movie details for id:", id);
-  //                 return null;
-  //             }
-  //         })
-  //     );
+    const fetchmyFav = async () => {
+      const myFav = JSON.parse(localStorage.getItem("acFavDB")) || [];
+      const movies = await Promise.all(
+        myFav.map(async (id) => {
+          try {
+            const response = await api.get(`/movie/${id}`);
+            return response.data;
+          } catch (error) {
+            console.error("Failed to fetch movie details for id:", id);
+            return null;
+          }
+        })
+      );
+    
+      // movies 배열에서 null 값을 제외하고 설정
+      setMyFav(movies.filter((movie) => movie !== null));
+    };
 
-  //     // movies 배열에서 null 값을 제외하고 설정
-  //     setMyFav(movies.filter((movie) => movie !== null));
-  // };
-
-  // fetchmyFav();
+  fetchmyFav();
 
 }, []);
 
@@ -49,20 +49,19 @@ const UserProfile = () => {
 
 
 
-  return(
+  return (
     <div>
-        <h2>내가 찜한 영화 목록</h2>
-        <ul>
-            {myFav.map((movie) => (
-                <li key={movie.id}>
-                    <h3>{movie.title}</h3>
-                    <p>{movie.overview}</p>
-                    <p>평점: {movie.vote_average}</p>
-                </li>
-            ))}
-        </ul>
+      <h2>내가 찜한 영화 목록</h2>
+      <ul>
+        {myFav.map((movie) => (
+          <li key={movie.id}>
+            <h3>{movie.title}</h3>
+            <p>{movie.overview}</p>
+            <p>평점: {movie.vote_average}</p>
+          </li>
+        ))}
+      </ul>
     </div>
-
   );
 }
 
