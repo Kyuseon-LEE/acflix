@@ -131,7 +131,7 @@ const SignIn = () => {
                 <input className="txt_basic" type="text" onChange={uNickChangeHandler} placeholder="닉네임" />
                 {errors.uNick && <p style={{ color: 'red', textAlign: 'center' }}>{errors.uNick}</p>}
                 <br />
-                <select name="gender" id="gen" onChange={uGenderChangeHandler}>
+                <select className="gen"name="gender" id="gen" onChange={uGenderChangeHandler}>
                     <option value="0">성별</option>
                     <option value="m">남성</option>
                     <option value="w">여성</option>

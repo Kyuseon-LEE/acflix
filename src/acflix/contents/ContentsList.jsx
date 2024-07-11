@@ -70,7 +70,7 @@ const ContentsList = () => {
     // Slide
     const sliderSettings = {
         infinite: true,
-        speed: 1,
+        speed: 500,
         slidesToShow: 7.5,
         slidesToScroll: 7.5,
     };
@@ -82,31 +82,37 @@ const ContentsList = () => {
             <h2 className="info">TOP 20</h2>
             <Slider {...sliderSettings}>                
                     {movieList.map((item, idx) => (
+                        <label onClick={() => movieInfoClickHandler(item)}>
                         <div key={idx} className="movie-item">
                             <img src={`http://image.tmdb.org/t/p/w500${item.poster_path}`} alt={item.title} />
                             <br />
-                            <a href="#none" className="title" onClick={() => movieInfoClickHandler(item)}>{item.title}</a>
+                            <a href="#none" className="title" >{item.title}</a>
                         </div>
+                        </label>
                     ))}
                     </Slider>
                 <h2 className="info">액션</h2>
                 <Slider {...sliderSettings}> 
                     {actionList.map((item, idx) => (
+                        <label onClick={() => movieInfoClickHandler(item)}>
                         <div key={idx} className="movie-item">
                             <img src={`http://image.tmdb.org/t/p/w500${item.poster_path}`} alt={item.title} />
                             <br />
-                            <a href="#none" className="title" onClick={() => movieInfoClickHandler(item)}>{item.title}</a>
+                            <a href="#none" className="title" >{item.title}</a>
                         </div>
+                        </label>
                     ))}
                     </Slider>
                 <h2 className="info">코미디</h2>
                 <Slider {...sliderSettings}>
                     {comedyList.map((item, idx) => (
+                        <label onClick={() => movieInfoClickHandler(item)}>
                         <div key={idx} className="movie-item">
                             <img src={`http://image.tmdb.org/t/p/w500${item.poster_path}`} alt={item.title} />
                             <br />
-                            <a href="#none" className="title" onClick={() => movieInfoClickHandler(item)}>{item.title}</a>
+                            <a href="#none" className="title" >{item.title}</a>
                         </div>
+                        </label>
                     ))}
                    </Slider>
             {selectedMovie && (
