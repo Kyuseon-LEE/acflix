@@ -17,9 +17,9 @@ const Header = () => {
 
   
   return(
-    <>
-      Header
-    </>
+    <div className="header">
+      <a href="#none"><img src={process.env.PUBLIC_URL + '/imgs/logo.png'} alt="logo_img" /></a>
+     </div>
   );
 }
 
