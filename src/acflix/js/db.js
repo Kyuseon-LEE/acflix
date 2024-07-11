@@ -14,7 +14,7 @@ export const getAcMemDB = () => {
 export const setAcMemDB = (member) => {
     console.log('setAcMemDB()');
 
-    return localStorage.setItem(ACFLIX_MEMBER_DB_IN_LOCALSTORAGE, JSON.stringify(member));
+    localStorage.setItem(ACFLIX_MEMBER_DB_IN_LOCALSTORAGE, JSON.stringify(member));
     
 }
 // 멤버 종료
@@ -55,7 +55,7 @@ export const getAcFavDB = () => {
 export const setAcFavDB = (favs) => {
     console.log('setAcFavDB()');
 
-    return localStorage.setItem(ACFLIX_FAVORITE_DB_IN_LOCALSTORAGE, JSON.stringify(favs));
+    localStorage.setItem(ACFLIX_FAVORITE_DB_IN_LOCALSTORAGE, JSON.stringify(favs));
     
 }
 // 찜 종료

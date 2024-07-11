@@ -55,10 +55,10 @@ const Login = () => {
 
   return(
     <>
-    <div class="header">
+    <div className="header">
             <a href="#none"><img src="../../public/imgs/logo.png" alt="" /></a>
         </div>
-        <div class="log_in">
+        <div className="log_in">
             <h2>로그인</h2>
             <input className="txt_basic" type="text" onChange={uIdChangeHandler} placeholder="아이디를 입력하시오"/>
             <br />
