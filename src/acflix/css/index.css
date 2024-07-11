@@ -57,7 +57,7 @@ input.txt_basic {
     border-radius: 5px;
     display: block;
     margin: 0px auto;
-    color: #000;
+    color: #242424;
     font-size: 1.2em;
 }
 .log_in input.txt_basic{
@@ -79,6 +79,9 @@ button.btn_basic {
     box-sizing: border-box;
     margin-bottom: 20px;
     margin-top: 20px;
+}
+button.btn_basic:hover{
+    background-color: #a10808;
 }
 #footer{
     background-color: rgba(0,0,0,0.7);
@@ -149,4 +152,51 @@ select {
     color: #000;
     font-size: 1.2em;
     margin-bottom: 20px;
+}
+
+/* 메인 페이지 부분 */
+#main_wrap{
+    background-color: rgba(0, 0, 0, 0.9);
+    min-height: 100vh;
+    max-height: 300vh;
+    background-size: cover;
+    position: relative;
+}
+#main_wrap .header{
+    position: fixed;
+    width: 100%;
+    background-color: #000;
+    z-index: 999;
+}
+#main_wrap .header img{
+    width: 90px;
+    height: 35px;
+    padding:15px 30px ;
+    display: block;
+}
+#main_wrap .header ul{
+    position: absolute;
+    right:0%;
+    top:12%;
+}
+#main_wrap .header ul li{
+    float:right;
+    padding : 15px;
+}
+#main_wrap .header ul li a{
+    color: #fff;
+}
+.header{
+    width:100%;
+    margin: 0 auto;
+}
+.mainimg {
+    width: 100%;
+    height: 100vh; /* 화면 전체 높이 */
+}
+
+.mainimg img {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover; /* 이미지를 컨테이너에 맞게 채우기 */
 }
