@@ -62,61 +62,7 @@ export const setAcFavDB = (favs) => {
 // 데이터 베이스 종료
 
 /*
-// 회원가입 데이터 입력
-let acMemDB = getAcMemDB();
-if (getAcMemDB === null) {
-    let newMemObj = {
-        [uId] : {
-            'uId': uId,
-            'uPw': uPw,
-            'uMail': uMail,
-            'uPhone': uPhone,
-            'uRegDate': uRegDate,
-            'uModDate': uModDate,
-        }
-    }
 
-    setAcMemDB(newMemObj);
-
-} else {
-
-    let aldAcMem = JSON.parse(acMemDB);
-    aldAcMem[uId] = {
-        'uId': uId,
-        'uPw': uPw,
-        'uMail': uMail,
-        'uPhone': uPhone,
-        'uRegDate': uRegDate,
-        'uModDate': uModDate,
-    }
-
-    setAcMemDB(aldAcMem);
-
-}
-
-// 찜 목록 생성
-let acFavDB = getAcFavDB();
-if (acFavDB === null) {
-    let newFavObj = {
-        [uId]: {}
-    }
-
-    setAcFavDB(newFavObj);
-
-} else {
-
-    let aldAcFavDB = JSON.parse(aldAcFavDB)
-    aldAcFavDB[uId] = {}
-
-    setAcFavDB(aldAcFavDB);
-
-}
-
-alert('회원가입이 완료되었습니다.');
-
-navigate('/');
-// 찜 목록 생성 종료
-// 회원가입 데이터 입력 종료
 
 // 회원가입 유효성 검사
 
