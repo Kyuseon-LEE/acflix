@@ -26,13 +26,6 @@
     margin-bottom:50px;
 }
 
-.row-poster {
-    display: flex;
-    flex-wrap: nowrap; 
-    overflow-x: auto; 
-    margin-bottom: 10px;
-    margin-top: 10px;
-}
 
 .title {
     text-align: center;
@@ -48,7 +41,8 @@
 
 .movie-item img {
     width: 207px; 
-    height: 296px; 
+    height: 296px;
+    cursor: pointer;
 }
 
 .info {
