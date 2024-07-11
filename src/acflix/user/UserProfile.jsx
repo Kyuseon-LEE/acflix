@@ -50,6 +50,7 @@ const UserProfile = () => {
 
 
   return(
+
     <div>
         <h2>내가 찜한 영화 목록</h2>
         <ul>
