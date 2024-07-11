@@ -23,6 +23,7 @@
 
 .contents-list {
     padding: 20px;
+    margin-bottom:50px;
 }
 
 .row-poster {
@@ -37,6 +38,8 @@
     text-align: center;
     font-size: bold;
     color: #fff;
+    width: 207px;
+    display: inline-block;
 }
 
 .movie-item {
@@ -44,15 +47,15 @@
 }
 
 .movie-item img {
-    width: 200px; 
-    height: auto; 
+    width: 207px; 
+    height: 296px; 
 }
 
 .info {
     padding: 30px;
-    font-size: 18px;
+    font-size: 2.3em;
     font-weight: bold;
+    margin-left: 100px;
     margin-bottom: 10px;
     color: #fff;
-    text-align: center;
 }
