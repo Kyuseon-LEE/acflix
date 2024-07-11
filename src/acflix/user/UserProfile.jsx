@@ -23,25 +23,25 @@ const UserProfile = () => {
       
     // }
 
-    const fetchmyFav = async () => {
-      const myFav = JSON.parse(localStorage.getItem("acFavDB")) || [];
-      const movies = await Promise.all(
-          myFav.map(async (id) => {
-              try {
-                  const response = await api.get(`/movie/${id}`);
-                  return response.data;
-              } catch (error) {
-                  console.error("Failed to fetch movie details for id:", id);
-                  return null;
-              }
-          })
-      );
+  //   const fetchmyFav = async () => {
+  //     const myFav = JSON.parse(localStorage.getItem("acFavDB")) || [];
+  //     const movies = await Promise.all(
+  //         myFav.map(async (id) => {
+  //             try {
+  //                 const response = await api.get(`/movie/${id}`);
+  //                 return response.data;
+  //             } catch (error) {
+  //                 console.error("Failed to fetch movie details for id:", id);
+  //                 return null;
+  //             }
+  //         })
+  //     );
 
-      // movies 배열에서 null 값을 제외하고 설정
-      setMyFav(movies.filter((movie) => movie !== null));
-  };
+  //     // movies 배열에서 null 값을 제외하고 설정
+  //     setMyFav(movies.filter((movie) => movie !== null));
+  // };
 
-  fetchmyFav();
+  // fetchmyFav();
 
 }, []);
 
