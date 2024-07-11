@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import api from "../js/api.js";
 
 import { getLoginedSessionID } from '../js/session.js';
+import { getMyFavDB } from '../js/db.js';
 import { useNavigate } from "react-router-dom";
+
+import '../css/index.css';
 
 
 const UserProfile = () => {
@@ -22,28 +25,38 @@ const UserProfile = () => {
     //   return;
       
     // }
+  
 
-    const fetchmyFav = async () => {
-      const myFav = JSON.parse(localStorage.getItem("acFavDB")) || [];
-      const movies = await Promise.all(
-        myFav.map(async (id) => {
-          try {
-            const response = await api.get(`/movie/${id}`);
-            return response.data;
-          } catch (error) {
-            console.error("Failed to fetch movie details for id:", id);
-            return null;
+    const fetchMyFav = async () => {
+          let myFavMovies = getMyFavDB(getLoginedSessionID());
+          console.log('session',getLoginedSessionID());
+          
+          // 유저 찜 목록 배열 체크
+          if (!Array.isArray(myFavMovies)) {
+            myFavMovies = [];
           }
-        })
-      );
-    
-      // movies 배열에서 null 값을 제외하고 설정
-      setMyFav(movies.filter((movie) => movie !== null));
-    };
 
-  fetchmyFav();
+          // 찜 목록 Movie id 조회
+          const movies = await Promise.all(
+            myFavMovies.map(async (id) => {
+              try {
+                const response = await api.get(`/movie/${id}`);
+                return response.data;
+              } catch (error) {
+                console.error("Failed to fetch movie details for id:", id);
+                return null;
+              }
+            })
+          );
 
-}, []);
+          // null 값 체크
+          setMyFav(movies.filter((movie) => movie !== null));
+
+        };
+
+        fetchMyFav();
+
+    }, []);
 
   // Handler
 
@@ -51,13 +64,12 @@ const UserProfile = () => {
 
   return (
     <div>
-      <h2>내가 찜한 영화 목록</h2>
-      <ul>
+      <h2 className="user-profile-h2">내가 찜한 영화 목록</h2>
+      <ul className="user-profile-list">
         {myFav.map((movie) => (
           <li key={movie.id}>
+            <img src={`http://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title}/>
             <h3>{movie.title}</h3>
-            <p>{movie.overview}</p>
-            <p>평점: {movie.vote_average}</p>
           </li>
         ))}
       </ul>

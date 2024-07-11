@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 
 import Header from "./Header";
@@ -13,6 +13,10 @@ import './css/index.css'
 import MainHeader from "./MainHeader";
 
 const Wrap = () => {
+
+  // hook
+  const [isLogined, setIsLogined] = useState(false);
+
   const location = useLocation();
 
   return (
