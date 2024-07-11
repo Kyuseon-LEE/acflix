@@ -14,14 +14,14 @@ export const getAcMemDB = () => {
 export const setAcMemDB = (member) => {
     console.log('setAcMemDB()');
 
-    return localStorage.setItem(ACFLIX_MEMBER_DB_IN_LOCALSTORAGE, JSON.stringify(member));
+    localStorage.setItem(ACFLIX_MEMBER_DB_IN_LOCALSTORAGE, JSON.stringify(member));
     
 }
 // 멤버 종료
 
 // 정보 가져오기
 export const getMyInfo = (uId) => {
-    console.log('getMyInfo()');
+    console.log('[DB] getMyInfo()');
 
     if (getAcMemDB() === null) {
         return undefined;
@@ -35,7 +35,7 @@ export const getMyInfo = (uId) => {
 }
 
 export const setMyInfo = (uId, myInfo) => {
-    console.log('setMyInfo()');
+    console.log('[DB] setMyInfo()');
 
     let mems = JSON.parse(getAcMemDB());
     mems[uId] = myInfo;
@@ -46,77 +46,44 @@ export const setMyInfo = (uId, myInfo) => {
 
 // 찜
 export const getAcFavDB = () => {
-    console.log('getAcFavDB()');
+    console.log('[DB] getAcFavDB()');
 
     return localStorage.getItem(ACFLIX_FAVORITE_DB_IN_LOCALSTORAGE);
 
 }
 
 export const setAcFavDB = (favs) => {
-    console.log('setAcFavDB()');
+    console.log('[DB] setAcFavDB()');
 
-    return localStorage.setItem(ACFLIX_FAVORITE_DB_IN_LOCALSTORAGE, JSON.stringify(favs));
+    localStorage.setItem(ACFLIX_FAVORITE_DB_IN_LOCALSTORAGE, JSON.stringify(favs));
     
 }
+
+// MY 찜
+export const getMyFavDB = (uId) => {
+    console.log('[DB] getMyFavDB()');
+
+    let favs = JSON.parse(getAcFavDB());
+    let myFavs = favs[uId];
+
+    return myFavs;
+
+}
+
+export const setMyFavDB = (uId, myFavs) => {
+    console.log('[DB] setMyFavDB()');
+
+    let favs = JSON.parse(getAcFavDB()) || {};
+    favs[uId] = myFavs;
+
+    setAcFavDB(favs);
+};
+
 // 찜 종료
 // 데이터 베이스 종료
 
 /*
-// 회원가입 데이터 입력
-let acMemDB = getAcMemDB();
-if (getAcMemDB === null) {
-    let newMemObj = {
-        [uId] : {
-            'uId': uId,
-            'uPw': uPw,
-            'uMail': uMail,
-            'uPhone': uPhone,
-            'uRegDate': uRegDate,
-            'uModDate': uModDate,
-        }
-    }
 
-    setAcMemDB(newMemObj);
-
-} else {
-
-    let aldAcMem = JSON.parse(acMemDB);
-    aldAcMem[uId] = {
-        'uId': uId,
-        'uPw': uPw,
-        'uMail': uMail,
-        'uPhone': uPhone,
-        'uRegDate': uRegDate,
-        'uModDate': uModDate,
-    }
-
-    setAcMemDB(aldAcMem);
-
-}
-
-// 찜 목록 생성
-let acFavDB = getAcFavDB();
-if (acFavDB === null) {
-    let newFavObj = {
-        [uId]: {}
-    }
-
-    setAcFavDB(newFavObj);
-
-} else {
-
-    let aldAcFavDB = JSON.parse(aldAcFavDB)
-    aldAcFavDB[uId] = {}
-
-    setAcFavDB(aldAcFavDB);
-
-}
-
-alert('회원가입이 완료되었습니다.');
-
-navigate('/');
-// 찜 목록 생성 종료
-// 회원가입 데이터 입력 종료
 
 // 회원가입 유효성 검사
 

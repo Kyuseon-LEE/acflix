@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
+import { useNavigate } from "react-router-dom";
+
 import api from '../js/api.js';
 import requests from '../js/requests.js';
+
 import ContentsModal from "./ContentsModal.jsx";
 import '../css/modal.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import MainImg from "./MainImg.jsx";
+
+import { getLoginedSessionID } from "../js/session.js";
+
+import '../css/modal.css'
+
 
 
 const ContentsList = () => {
@@ -17,14 +25,26 @@ const ContentsList = () => {
     const [comedyList, setComedyList] = useState([]);
     const [selectedMovie, setSelectedMovie] = useState(null);
 
-    // 도메인 유효성 검사 (미구현)
-
-
+    const navigate = useNavigate();
     
+
     useEffect(() => {
-        fetchData(requests.fetchNowPlaying, setMovieList);
-        fetchData(requests.fetchActionMovies, setActionList);
-        fetchData(requests.fetchComedyMovies, setComedyList);
+        // // 도메인 유효성 검사 
+        // console.log('[ContentsList] useEffect()');
+        // if (getLoginedSessionID() === ''){
+        //     alert('로그인 하시겠습니까?');
+
+        //     navigate('/signin');
+        //     return;
+
+        // }
+        
+            fetchData(requests.fetchNowPlaying, setMovieList);
+        
+            fetchData(requests.fetchActionMovies, setActionList);
+
+            fetchData(requests.fetchComedyMovies, setComedyList);
+
     }, []);
 
 
