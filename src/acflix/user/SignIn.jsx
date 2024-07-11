@@ -88,8 +88,12 @@ const SignIn = () => {
   }
 
   return(
-    <div className="log_in">
-        <h3>회원 가입</h3>
+    <div id="sign_up_modal">
+        <div className="sign_up_modal_content">
+        <div class="close">
+                X
+        </div>
+        <h2>회원 가입</h2>
         <input className="txt_basic" type="text" onChange={uIdChangeHandler} placeholder="아이디"/>
         <br />
         <input className="txt_basic" type="password" onChange={uPwChangeHandler} placeholder="비밀번호"/>
@@ -99,6 +103,7 @@ const SignIn = () => {
         <input className="txt_basic" type="text" onChange={uPhoneChangeHandler} placeholder="휴대전화번호"/>
         <br />
         <button className="btn_basic" onClick={signUpBtnClickHandler}>회원 가입</button>
+    </div>
     </div>
   );
 }

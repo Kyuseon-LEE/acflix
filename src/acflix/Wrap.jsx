@@ -15,8 +15,9 @@ import './css/index.css'
 const Wrap = () => {
   return(
     <BrowserRouter>
-      <Header/>
+      
         <div id="wrap">
+        <Header/>
             <Routes>
               <Route path="/" element={<Home/>}></Route>                          {/* 홈 */}
               <Route path="/signin" element={<SignIn/>}></Route>                  {/* 회원가입 */}
@@ -25,8 +26,9 @@ const Wrap = () => {
               <Route path="/contentslist" element={<ContentsList/>}></Route>      {/* 영화리스트 */}
               <Route path="/*" element={<NG/>}></Route>                           {/* 404 페이지 */}
             </Routes>
+            <Footer/>
         </div>
-      <Footer/>
+      
     </BrowserRouter>
   );
 }

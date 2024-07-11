@@ -55,9 +55,7 @@ const Login = () => {
 
   return(
     <>
-    <div class="header">
-            <a href="#none"><img src="../../public/imgs/logo.png" alt="" /></a>
-        </div>
+    
         <div class="log_in">
             <h2>로그인</h2>
             <input className="txt_basic" type="text" onChange={uIdChangeHandler} placeholder="아이디를 입력하시오"/>
@@ -66,7 +64,9 @@ const Login = () => {
             <br />
             <button className="btn_basic" onClick={loginBtnClickHandler}>로그인</button>
             <button className="btn_basic" onClick={signInBtnClickHandler}>회원가입</button>
+        
         </div>
+        
         </>
   );
 }
