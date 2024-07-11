@@ -25,13 +25,13 @@ const ContentsList = () => {
     useEffect(() => {
         // 도메인 유효성 검사 
         console.log('[ContentsList] useEffect()');
-        // if (getLoginedSessionID() === ''){
-        //     alert('로그인 하시겠습니까?');
+        if (getLoginedSessionID() === ''){
+            alert('로그인 하시겠습니까?');
 
-        //     navigate('/signin');
-        //     return;
+            navigate('/signin');
+            return;
 
-        // }
+        }
         
             fetchData(requests.fetchNowPlaying, setMovieList);
         

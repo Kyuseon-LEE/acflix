@@ -33,7 +33,7 @@ const Login = () => {
         alert('SIGNIN SUCCESS!!');
 
         setLoginedSessionID(uId);
-        navigate('/');
+        navigate('/contentslist');
 
     } else {
         alert('SIGNIN FAIL!!');

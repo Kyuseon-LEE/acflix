@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import api from '../js/api.js';
-
+import { getMyFavDB, setMyFavDB } from '../js/db.js';
 import { getLoginedSessionID } from '../js/session.js';
-import { setAcFavDB, getAcFavDB } from '../js/db.js';
 
 const ContentsModal = ({ movieInfo, closeModal }) => {
 
@@ -10,9 +9,13 @@ const ContentsModal = ({ movieInfo, closeModal }) => {
     const [play, setPlay] = useState(null);
 
     useEffect(() => {
+
         fetchPlay(movieInfo.id);
+
     }, [movieInfo.id]);
 
+
+    // GET Movie Streaming API 
     const fetchPlay = async (movieId) => {
         try {
             const response = await api.get(`/movie/${movieId}/videos`);
@@ -25,7 +28,6 @@ const ContentsModal = ({ movieInfo, closeModal }) => {
             console.log('Error fetching video data:', error);
         }
     };
-
 
     // Handler
     const playBtnClickHandler = () => {
@@ -56,16 +58,26 @@ const ContentsModal = ({ movieInfo, closeModal }) => {
     }
 
     const favBtnClickHandler = () => {
-        console.log("[ContentsModal] favBtnClickHandler() ");
-
-        let myFavObj = getAcFavDB(getLoginedSessionID());
-        myFavObj = {
-            "찜목록" : movieInfo.id,
+        // Get current user's favorites from localStorage
+        let myFavs = getMyFavDB(getLoginedSessionID());
+    
+        // Ensure myFavs is an array (handle case when null or undefined)
+        if (!Array.isArray(myFavs)) {
+            myFavs = [];
         }
+    
+        // Check if the movieInfo.id is already in myFavs
+        if (!myFavs.includes(movieInfo.id)) {
+            // Add movieInfo.id to myFavs
+            myFavs.push(movieInfo.id);
+            setMyFavDB(getLoginedSessionID(), myFavs);
+            alert(`${movieInfo.title}을 찜하셨습니다!!`);
+        } else {
+            alert(`${movieInfo.title}가 이미 찜 목록에 있습니다!!`);
+        }
+    };
 
-        setAcFavDB(getLoginedSessionID(), myFavObj);
-    }
-
+    
     // Function
     const handleCloseModal = () => {
 
@@ -74,6 +86,7 @@ const ContentsModal = ({ movieInfo, closeModal }) => {
 
         closeModal();
     };
+    
 
     return (
         <div className="modal">
