@@ -1,0 +1,58 @@
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    z-index: 1000;
+}
+
+.modal-content {
+    text-align: center;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.contents-list {
+    padding: 20px;
+}
+
+.row-poster {
+    display: flex;
+    flex-wrap: nowrap; 
+    overflow-x: auto; 
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.title {
+    text-align: center;
+    font-size: bold;
+    color: #fff;
+}
+
+.movie-item {
+    margin-right: 10px; 
+}
+
+.movie-item img {
+    width: 200px; 
+    height: auto; 
+}
+
+.info {
+    padding: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #fff;
+    text-align: center;
+}
