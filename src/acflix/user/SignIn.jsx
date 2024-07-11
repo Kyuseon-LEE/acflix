@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAcMemDB, setAcMemDB, getAcFavDB, setAcFavDB } from "../js/db";
 
-const SignIn = () => {  
-
-    // Hook
+const SignIn = ({ setIsSignIned }) => {
+    //hook
     const [uId, setUId] = useState('');
     const [uPw, setUPw] = useState('');
     const [uNick, setUNick] = useState('');
@@ -14,7 +13,6 @@ const SignIn = () => {
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
 
-    // 유효성 검사 로직
     const validateInputs = () => {
         const newErrors = {};
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -39,7 +37,6 @@ const SignIn = () => {
         return Object.keys(newErrors).length === 0;
     }
 
-    // Handlers
     const uIdChangeHandler = (e) => {
         setUId(e.target.value);
     }
@@ -112,31 +109,41 @@ const SignIn = () => {
         }
   
         alert('회원가입이 완료되었습니다.');
-        navigate('/login');
+        
+        // 입력 정보 초기화
+        setUId('');
+        setUPw('');
+        setUNick('');
+        setUGender(0);
+        setUAge(0);
+        setUPhone('');
+
+        setIsSignIned(true);
+        navigate('/');
     }
 
-    return(
+    return (
         <div id="sign_up_modal">
             <div className="sign_up_modal_content">
                 <div className="close" onClick={closeClickHandler}>
                     X
                 </div>
                 <h2>회원 가입</h2>
-                <input className="txt_basic" type="email" onChange={uIdChangeHandler} placeholder="이메일 주소(아이디)" />
+                <input className="txt_basic" type="email" value={uId} onChange={uIdChangeHandler} placeholder="이메일 주소(아이디)" />
                 {errors.uId && <p style={{ color: 'red', textAlign: 'center' }}>{errors.uId}</p>}
                 <br />
-                <input className="txt_basic" type="password" onChange={uPwChangeHandler} placeholder="비밀번호" />
+                <input className="txt_basic" type="password" value={uPw} onChange={uPwChangeHandler} placeholder="비밀번호" />
                 {errors.uPw && <p style={{ color: 'red', textAlign: 'center' }}>{errors.uPw}</p>}
                 <br />
-                <input className="txt_basic" type="text" onChange={uNickChangeHandler} placeholder="닉네임" />
+                <input className="txt_basic" type="text" value={uNick} onChange={uNickChangeHandler} placeholder="닉네임" />
                 {errors.uNick && <p style={{ color: 'red', textAlign: 'center' }}>{errors.uNick}</p>}
                 <br />
-                <select className="gen"name="gender" id="gen" onChange={uGenderChangeHandler}>
+                <select className="gen" name="gender" id="gen" value={uGender} onChange={uGenderChangeHandler}>
                     <option value="0">성별</option>
                     <option value="m">남성</option>
                     <option value="w">여성</option>
                 </select>
-                <select name="u_age" id="age" onChange={uAgeChangeHandler}>
+                <select name="u_age" id="age" value={uAge} onChange={uAgeChangeHandler}>
                     <option value="0">나이</option>
                     <option value="10">10대</option>
                     <option value="20">20대</option>
@@ -149,7 +156,7 @@ const SignIn = () => {
                     <option value="90">90대</option>
                 </select>
                 <br />
-                <input className="txt_basic" type="text" onChange={uPhoneChangeHandler} placeholder="휴대전화번호" />
+                <input className="txt_basic" type="text" value={uPhone} onChange={uPhoneChangeHandler} placeholder="휴대전화번호" />
                 {errors.uPhone && <p style={{ color: 'red', textAlign: 'center' }}>{errors.uPhone}</p>}
                 <br />
                 <button className="btn_basic" onClick={signUpBtnClickHandler}>회원 가입</button>
