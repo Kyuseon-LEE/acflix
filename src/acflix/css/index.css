@@ -297,6 +297,14 @@ select{
     margin-bottom:20px;
     margin-left: 20px; 
 }
+.user-profile2 h3{
+    font-size:1.0em;
+    color: #fff;
+    width:200px;
+}
+.user-profile2 img{
+    margin-right:20px;
+}
 
 .user-profile-list li{
     float:left
