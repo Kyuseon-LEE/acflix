@@ -1,65 +1,41 @@
 import React, { useState } from "react";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, Navigate, Outlet, BrowserRouter } from "react-router-dom";
 
-import Header from "./Header";
-import MainHeader from "./MainHeader"; // MainHeader 추가
-import Footer from "./Footer";
 import Home from "./Home";
 import Login from "./user/Login";
 import SignIn from "./user/SignIn";
 import UserProfile from "./user/UserProfile";
 import ContentsList from "./contents/ContentsList";
+import Layout from "./LayOut";
 import NG from "./NG";
 import './css/index.css'
 
-const PrivateRoute = ({ element, isSignIned }) => {
-  const navigate = useNavigate();
-
-  if (!isSignIned) {
-    navigate('/');
-    return null;
-  }
-
-  return element;
+const PrivateRoute = ({ isSignIned }) => {
+    console.log("PrivateRoute----------", isSignIned);
+    return isSignIned ? <Outlet /> : <Navigate to="/" />;
 };
 
 const Wrap = () => {
-  const [isSignIned, setIsSignIned] = useState(false);
+    const [isSignIned, setIsSignIned] = useState(false);
 
-  return (
-    <BrowserRouter>
-    {isSignIned ? 
-      (
-      <div id="main_wrap">
-        <MainHeader />
-        <Routes>
-          <Route path="/" element={isSignIned ? <ContentsList /> : <Home />} />
-          <Route path="/signin" element={<SignIn setIsSignIned={setIsSignIned} />} />
-          <Route path="/login" element={<Login setIsSignIned={setIsSignIned} />} />
-          <Route path="/userprofile" element={<PrivateRoute element={<UserProfile />} isSignIned={isSignIned} />} />
-          <Route path="/contentslist" element={<PrivateRoute element={<ContentsList />} isSignIned={isSignIned} />} />
-          <Route path="/*" element={<NG />} />
-        </Routes>
-        <Footer />
-      </div>
-      ) : 
-      (
-        <div id="wrap">
-        <Header />
-        <Routes>
-          <Route path="/" element={isSignIned ? <ContentsList /> : <Home />} />
-          <Route path="/signin" element={<SignIn setIsSignIned={setIsSignIned} />} />
-          <Route path="/login" element={<Login setIsSignIned={setIsSignIned} />} />
-          <Route path="/userprofile" element={<PrivateRoute element={<UserProfile />} isSignIned={isSignIned} />} />
-          <Route path="/contentslist" element={<PrivateRoute element={<ContentsList />} isSignIned={isSignIned} />} />
-          <Route path="/*" element={<NG />} />
-        </Routes>
-        <Footer />
-      </div>
+    return (
+      <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Layout isSignIned={isSignIned} setIsSignIned={setIsSignIned} />}>
+                    <Route index element={<Home />} />
+                    <Route path="signin" element={<SignIn />} />
+                    <Route path="login" element={<Login setIsSignIned={setIsSignIned}/>} />
+                    <Route path="/*" element={<NG />} />
 
-      )}
-    </BrowserRouter>
-  );
-}
+                    {/* 보호된 경로 */}
+                    <Route element={<PrivateRoute isSignIned={isSignIned}/>}>
+                        <Route path="userprofile" element={<UserProfile />} />
+                        <Route path="contentslist" element={<ContentsList />} />
+                    </Route>
+                </Route>
+            </Routes>
+        </BrowserRouter>
+    );
+};
 
 export default Wrap;
