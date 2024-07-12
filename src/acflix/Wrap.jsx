@@ -12,7 +12,15 @@ import './css/index.css'
 
 const PrivateRoute = ({ isSignIned }) => {
     console.log("PrivateRoute----------", isSignIned);
-    return isSignIned ? <Outlet /> : <Navigate to="/" />;
+
+    if (isSignIned) {
+        return <Outlet />;
+
+    } else {
+        alert("로그인이 필요합니다.");
+
+        return <Navigate to="/login" />;
+    }
 };
 
 const Wrap = () => {
@@ -29,8 +37,8 @@ const Wrap = () => {
 
                     {/* 보호된 경로 */}
                     <Route element={<PrivateRoute isSignIned={isSignIned}/>}>
-                        <Route path="/userprofile" element={<UserProfile setIsSignIned={setIsSignIned} />} />
-                        <Route path="/contentslist" element={<ContentsList />} />
+                        <Route path="userprofile" element={<UserProfile setIsSignIned={setIsSignIned}/>} />
+                        <Route path="contentslist" element={<ContentsList />} />
                     </Route>
                 </Route>
             </Routes>

@@ -12,7 +12,7 @@ import MainImg from "./MainImg.jsx";
 
 import '../css/modal.css'
 
-const ContentsList = () => {
+const ContentsList = ({ isSignIned }) => {
 
     // Hook
     const [movieList, setMovieList] = useState([]);
@@ -20,10 +20,8 @@ const ContentsList = () => {
     const [comedyList, setComedyList] = useState([]);
     const [selectedMovie, setSelectedMovie] = useState(null);
 
-
+    
     useEffect(() => {
-        // 로그인 상태 확인
-       
         
         fetchData(requests.fetchNowPlaying, setMovieList);
         fetchData(requests.fetchActionMovies, setActionList);
