@@ -252,3 +252,16 @@ select{
     padding : 20px;
     color: #fff;
 }
+
+.txt_basic1 {
+    width: 300px;
+    padding:20px;
+    background-color: rgba(0,0,0 ,0);
+    border: 1px solid rgba(100, 100, 100, .7);
+    outline: none;
+    border-radius: 5px;
+    display: block;
+    margin: 0px auto;
+    color: #fff;
+    font-size: 1.2em;
+}
