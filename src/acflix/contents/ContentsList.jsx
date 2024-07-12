@@ -69,12 +69,12 @@ const ContentsList = () => {
         infinite: true,
         speed: 800,
         slidesToShow: 6,
-        slidesToScroll: 6,
+        slidesToScroll: 5,
         arrows : true,
         nextArrow: <NextArrow />,
 		prevArrow: <PrevArrow />,
         draggable:false,
-        initialSlide: 0
+        padding : '70px',
     };
     
 

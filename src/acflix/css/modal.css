@@ -50,6 +50,9 @@
     height: 72px;
     cursor: pointer;
 }
+.content-list{
+    height:220vh
+}
 
 
 /* 영화 리스트 부분 */
@@ -66,7 +69,7 @@
     color: #fff;
     font-size:1.1em;
     width:305px;
-    display: inline-block;
+    display: block;
     opacity: 0.8;
 }
 
@@ -81,6 +84,7 @@
     height: 457px;
     cursor: pointer;
     border-radius: 10px;
+    margin-bottom:-15px;
 }
 .movie-item img:hover{
     opacity: 0.5;
@@ -89,6 +93,7 @@
 
 .info {
     padding: 30px;
+    padding-left:50px;
     font-size: 2.3em;
     font-weight: bold;
     margin-bottom: 10px;
@@ -122,3 +127,4 @@
     opacity: 0.7;
     transition: 0.2s;
 }
+
