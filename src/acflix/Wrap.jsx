@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { getLoginedSessionID, setLoginedSessionID } from "./js/session.js"
+=======
+import React, { useState } from "react";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+>>>>>>> 11f9c67931443131d888426d777e50a49e91021d
 
 import Header from "./Header";
 import Footer from "./Footer";
@@ -17,8 +22,13 @@ import './css/index.css';
 
 const Wrap = () => {
 
+<<<<<<< HEAD
   // Hook 로그인 인증
   // const [isSignIned, setIsSignIned] = useState(false);
+=======
+  // hook
+  const [isLogined, setIsLogined] = useState(false);
+>>>>>>> 11f9c67931443131d888426d777e50a49e91021d
 
   const location = useLocation();
   // const navigate = useNavigate();

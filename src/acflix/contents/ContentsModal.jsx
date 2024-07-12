@@ -58,21 +58,22 @@ const ContentsModal = ({ movieInfo, closeModal }) => {
     }
 
     const favBtnClickHandler = () => {
-        // Get current user's favorites from localStorage
+
         let myFavs = getMyFavDB(getLoginedSessionID());
-    
-        // Ensure myFavs is an array (handle case when null or undefined)
+
         if (!Array.isArray(myFavs)) {
             myFavs = [];
         }
     
-        // Check if the movieInfo.id is already in myFavs
+        // 찜 목록 중복체크
         if (!myFavs.includes(movieInfo.id)) {
-            // Add movieInfo.id to myFavs
+
             myFavs.push(movieInfo.id);
             setMyFavDB(getLoginedSessionID(), myFavs);
             alert(`${movieInfo.title}을 찜하셨습니다!!`);
+
         } else {
+
             alert(`${movieInfo.title}가 이미 찜 목록에 있습니다!!`);
         }
     };

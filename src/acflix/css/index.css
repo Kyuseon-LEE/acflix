@@ -103,17 +103,19 @@ button.btn_basic:hover{
     background-color: rgba(0, 0, 0, .9);
     position: fixed;
     left: 0; top: 0;
+    z-index: 999;
 }
 #sign_up_modal div.sign_up_modal_content {
     background-color: #fff;
     border-radius: 20px;
     width:450px;
-    height:750px;
+    height:800px;
     position: absolute;
     margin: 0 auto;
     top:50%;
     left:50%;
     transform: translate(-50%,-50%);
+    box-sizing: border-box;
 }
 #sign_up_modal div.sign_up_modal_content .close{
     cursor: pointer;
@@ -139,6 +141,18 @@ button.btn_basic:hover{
 }
 .sign_up_modal_content input.txt_basic{
     color: #242424;
+    margin-bottom:5px;
+}
+.sign_up_modal_content p{
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%);
+    width:450px;
+    font-size: 0.9em;
+    line-height: 14px;
+}
+.sign_up_modal_content .gen{
+    margin-top: 0px;
 }
 select {
     width: 340px;
@@ -151,8 +165,12 @@ select {
     margin: 0px auto;
     color: #000;
     font-size: 1.2em;
-    margin-bottom: 20px;
 }
+select{
+
+    margin-top: 20px;
+}
+
 
 /* 메인 페이지 부분 */
 #main_wrap{
@@ -199,4 +217,19 @@ select {
     width: 100%;
     height: 100vh;
     object-fit: cover; /* 이미지를 컨테이너에 맞게 채우기 */
+}
+
+
+
+
+/* USER PROFILE */
+.user-profile-h2{
+    color: #fff;
+
+}
+
+.user-profile-list{
+    display: flex;
+    padding : 20px;
+    color: #fff;
 }
