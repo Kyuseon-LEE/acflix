@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
-import { useNavigate } from "react-router-dom";
 
 import api from '../js/api.js';
 import requests from '../js/requests.js';
@@ -13,7 +12,7 @@ import MainImg from "./MainImg.jsx";
 
 import '../css/modal.css'
 
-const ContentsList = ({ isSignIned }) => {
+const ContentsList = () => {
 
     // Hook
     const [movieList, setMovieList] = useState([]);
@@ -21,7 +20,6 @@ const ContentsList = ({ isSignIned }) => {
     const [comedyList, setComedyList] = useState([]);
     const [selectedMovie, setSelectedMovie] = useState(null);
 
-    const navigate = useNavigate();
 
     useEffect(() => {
         // 로그인 상태 확인

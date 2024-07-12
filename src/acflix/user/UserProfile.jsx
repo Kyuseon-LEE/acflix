@@ -3,12 +3,11 @@ import api from "../js/api.js";
 
 import { getLoginedSessionID } from '../js/session.js';
 import { getMyFavDB, getMyInfo, setMyInfo, getAllFavDB } from '../js/db.js';
-import { useNavigate } from "react-router-dom";
 
 import '../css/index.css';
 
 
-const UserProfile = () => {
+const UserProfile = ({isSignIned}) => {
 
   // Hook
   const [uId, setUId] = useState('');
@@ -48,9 +47,6 @@ const UserProfile = () => {
     return Object.keys(newErrors).length === 0;
 }
 
-  useEffect(() => {
-    console.log('[UserProfile] useEffect()');
-
     let myInfo = getMyInfo(getLoginedSessionID());
 
     if(myInfo === undefined){
@@ -70,6 +66,9 @@ const UserProfile = () => {
     
 
     // 유저 찜 목록 Function START
+  useEffect(() => {
+    console.log('[UserProfile] useEffect()');
+
     const fetchMyFav = async () => {
       let myFavMovies = getMyFavDB(getLoginedSessionID());
       console.log('session',getLoginedSessionID());

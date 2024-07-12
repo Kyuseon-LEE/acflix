@@ -3,7 +3,7 @@ import { getMyInfo } from "../js/db"
 import { setLoginedSessionID } from "../js/session"
 import { useNavigate } from "react-router-dom";
 
-const Login = ({ setIsSignIned }) => {
+const Login = ({setIsSignIned}) => {
 
   // Hook
   const [uId, setUId] = useState('');
