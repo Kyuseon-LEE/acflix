@@ -249,18 +249,26 @@ const UserProfile = ({setIsSignIned}) => {
     </div>
     <div className="user-profile2">
       <h2 className="user-profile-h2">내가 찜한 영화 목록</h2>
-
-      <ul className="user-profile-list">      
-      <Slider2 {...sliderSettings}>
-        {myFav.map((movie) => (   
-          <li key={movie.id}>
-            <img src={`http://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title}/>
-            <h3>{movie.title}</h3>
-          </li>
-        ))}    
-        </Slider2>   
-      </ul>
-    </div>
+      {myFav.length >= 9 ? (
+          <Slider2 {...sliderSettings}>
+            {myFav.map((movie) => (
+              <li key={movie.id}>
+                <img src={`http://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
+                <h3>{movie.title}</h3>
+              </li>
+            ))}
+          </Slider2>
+        ) : (
+          <ul className="user-profile-list">
+            {myFav.map((movie) => (
+              <li key={movie.id}>
+                <img src={`http://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
+                <h3>{movie.title}</h3>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     <div className="user-profile3">
       <h2 className= "user-profile-h2">ACFILX 인기순위</h2>
       <ul className="user-profile-list">
