@@ -9,6 +9,12 @@ import '../css/index.css';
 
 const UserProfile = ({isSignIned}) => {
 
+  if (!isSignIned) {
+    // 로그인 되지 않았을 경우, '/login' 경로로 리디렉션
+    window.location.href = '/login';
+    return;
+  }
+
   // Hook
   const [myFav, setMyFav] = useState([]);
 
