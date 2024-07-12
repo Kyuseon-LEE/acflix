@@ -95,9 +95,9 @@ const ContentsModal = ({ movieInfo, closeModal }) => {
                 <span className="close" onClick={closeModal}>&times;</span>
                 <img src={`http://image.tmdb.org/t/p/w200${movieInfo.poster_path}`} alt={movieInfo.title} />
                 <h2>{movieInfo.title}</h2>
-                <button onClick={playBtnClickHandler}>▶</button>
-                <p>상세정보: {movieInfo.overview}</p>
-                <p>평점: {movieInfo.vote_average}</p>
+                <img src={process.env.PUBLIC_URL + '/imgs/ytb.png'} className="ytb" onClick={playBtnClickHandler} />
+                <p>상세정보: {movieInfo.overview}</p><br />
+                <p>평점: {movieInfo.vote_average}</p><br />
                 <p>관객수: {`${Math.floor(movieInfo.popularity)}만 명`}</p>
             </div>
             <button onClick={favBtnClickHandler}>♡</button>
