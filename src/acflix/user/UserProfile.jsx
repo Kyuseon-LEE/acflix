@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import api from "../js/api.js";
 
-import { getLoginedSessionID } from '../js/session.js';
+import { getLoginedSessionID, setLoginedSessionID } from '../js/session.js';
 import { getMyFavDB, getMyInfo, setMyInfo, getAllFavDB } from '../js/db.js';
 import { useNavigate } from "react-router-dom";
 
 import '../css/index.css';
 
 
-const UserProfile = () => {
+const UserProfile = ({setIsSignIned}) => {
 
   // Hook
   const [uId, setUId] = useState('');
@@ -194,7 +194,10 @@ const UserProfile = () => {
 
     alert("회원정보가 수정되었습니다.");
 
-    navigate('/');
+    setLoginedSessionID();
+    setIsSignIned(false);
+
+    navigate('/login');
   }
 
 

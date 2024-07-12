@@ -29,7 +29,7 @@ const Wrap = () => {
 
                     {/* 보호된 경로 */}
                     <Route element={<PrivateRoute isSignIned={isSignIned}/>}>
-                        <Route path="/userprofile" element={<UserProfile />} />
+                        <Route path="/userprofile" element={<UserProfile setIsSignIned={setIsSignIned} />} />
                         <Route path="/contentslist" element={<ContentsList />} />
                     </Route>
                 </Route>
