@@ -28,8 +28,10 @@ const Wrap = () => {
 
   return (
     <BrowserRouter>
-      <div id="wrap">
-        {isSignIned ? <MainHeader /> : <Header />} {/* 로그인 상태에 따라 다른 헤더 보이기 */}
+    {isSignIned ? 
+      (
+      <div id="main_wrap">
+        <MainHeader />
         <Routes>
           <Route path="/" element={isSignIned ? <ContentsList /> : <Home />} />
           <Route path="/signin" element={<SignIn setIsSignIned={setIsSignIned} />} />
@@ -40,6 +42,22 @@ const Wrap = () => {
         </Routes>
         <Footer />
       </div>
+      ) : 
+      (
+        <div id="wrap">
+        <Header />
+        <Routes>
+          <Route path="/" element={isSignIned ? <ContentsList /> : <Home />} />
+          <Route path="/signin" element={<SignIn setIsSignIned={setIsSignIned} />} />
+          <Route path="/login" element={<Login setIsSignIned={setIsSignIned} />} />
+          <Route path="/userprofile" element={<PrivateRoute element={<UserProfile />} isSignIned={isSignIned} />} />
+          <Route path="/contentslist" element={<PrivateRoute element={<ContentsList />} isSignIned={isSignIned} />} />
+          <Route path="/*" element={<NG />} />
+        </Routes>
+        <Footer />
+      </div>
+
+      )}
     </BrowserRouter>
   );
 }
