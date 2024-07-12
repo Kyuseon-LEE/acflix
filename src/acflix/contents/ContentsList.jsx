@@ -55,9 +55,10 @@ const ContentsList = ({ isSignIned }) => {
     // Slide
     const sliderSettings = {
         infinite: true,
-        speed: 500,
+        speed: 1000,
         slidesToShow: 7.5,
         slidesToScroll: 7.5,
+        arrows : true,
     };
 
     return (
