@@ -3,6 +3,12 @@
     margin: 0;
     padding: 0 ;
 }
+html{
+    height:100%;
+}
+body{
+    height: 100%;
+}
 
 a {
     text-decoration: none;
@@ -175,7 +181,6 @@ select{
 /* 메인 페이지 부분 */
 #main_wrap{
     background-color: #141414;
-    min-height: 285vh;
     background-size: cover;
     position: relative;
     overflow: hidden;
@@ -242,13 +247,17 @@ select{
 }
 
 /* USER PROFILE */
-.user-profile-h2{
-    color: #fff;
 
+.user-profile1{
+    margin-top:100px;
+    margin-bottom:100px;
 }
-
+.user-profile1 h3{
+    text-align: center;
+    color:#fff;
+    margin-bottom:20px;
+}
 .user-profile-list{
-    display: flex;
     padding : 20px;
     color: #fff;
 }
@@ -271,4 +280,52 @@ select{
 #wrap .error img{
     margin: auto;
     display: block;
+}
+/* 유저 프로필 부분 */
+
+.user_wrap{
+    height:230vh
+}
+.user-profile2{
+    margin-bottom: 100px;
+}
+.user-profile-list{
+    overflow: hidden;
+}
+.user-profile2 h2{
+    color:#fff;
+    margin-bottom:20px;
+    margin-left: 20px; 
+}
+
+.user-profile-list li{
+    float:left
+}
+
+.user-profile3 h2{
+    color:#fff;
+    margin-bottom:20px;
+    margin-left: 20px; 
+}
+
+.user-profile-list img{
+    width:200px;
+    height:300px;
+    border-radius: 10px;
+}
+.user-profile3 .user-profile-list {
+    position: relative;
+}
+.user-profile3 .user-profile-list img{
+    width:300px;
+    height:450px;
+}
+.user-profile3 .rank{
+    font-size: 7.5em;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-style: italic;
+}
+.user-profile3 h3{
+    text-align: left;
+    width:300px;
 }

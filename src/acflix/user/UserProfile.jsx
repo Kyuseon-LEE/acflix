@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import api from "../js/api.js";
+import Slider2 from "react-slick";
 
 import { getLoginedSessionID, setLoginedSessionID } from '../js/session.js';
 import { getMyFavDB, getMyInfo, setMyInfo, getAllFavDB } from '../js/db.js';
 import { useNavigate } from "react-router-dom";
+
+import 'slick-carousel/slick/slick.css';
+
 
 import '../css/index.css';
 
@@ -200,10 +204,29 @@ const UserProfile = ({setIsSignIned}) => {
     navigate('/login');
   }
 
+  // 찜목록 Slide
+  const sliderSettings = {
+    infinite: false,
+    speed: 400,
+    slidesToShow: 8.5,
+    slidesToScroll: 3,
+    arrows: false,
+};
+  //순위 슬라이드
+  const sliderSettings2 = {
+   infinite: false,
+   speed: 400,
+   slidesToShow: 4.5,
+   slidesToScroll: 3,
+   arrows: false,
+};
+
+
 
   return (
     <>
-    <div className="user-profile-h2">
+    <div className="user_wrap">
+    <div className="user-profile1">
       <h3>{uNick}님의 페이지</h3>
         <input className="txt_basic1" type="email" value={uId} readOnly/>
         <br />
@@ -224,27 +247,34 @@ const UserProfile = ({setIsSignIned}) => {
         <br />
         <button className="btn_basic" onClick={modifyBtnClickHandler}>정보 수정</button>
     </div>
-    <div className="user-profile-h2">
+    <div className="user-profile2">
       <h2 className="user-profile-h2">내가 찜한 영화 목록</h2>
-      <ul className="user-profile-list">
-        {myFav.map((movie) => (
+
+      <ul className="user-profile-list">      
+      <Slider2 {...sliderSettings}>
+        {myFav.map((movie) => (   
           <li key={movie.id}>
             <img src={`http://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title}/>
             <h3>{movie.title}</h3>
           </li>
-        ))}
+        ))}    
+        </Slider2>   
       </ul>
     </div>
-    <div className="user-profile-h2">
+    <div className="user-profile3">
       <h2 className= "user-profile-h2">ACFILX 인기순위</h2>
       <ul className="user-profile-list">
-        {allFav.map((movie) => (
+      <Slider2 {...sliderSettings2}>
+        {allFav.map((movie, index) => (
           <li key={movie.id}>
-            <img src={`http://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title}/>
+            <h3 className="rank">{index + 1}</h3>
+            <img src={`http://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title}/>
             <h3>{movie.title}</h3>
           </li>
         ))}
+        </Slider2>  
       </ul>
+    </div>
     </div>
     </> 
 
