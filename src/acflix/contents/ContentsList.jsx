@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
-import { useNavigate } from "react-router-dom";
 
 import api from '../js/api.js';
 import requests from '../js/requests.js';
@@ -10,11 +9,8 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import MainImg from "./MainImg.jsx";
 
-import { getLoginedSessionID } from "../js/session.js";
 
 import '../css/modal.css'
-
-
 
 const ContentsList = () => {
 
@@ -24,28 +20,15 @@ const ContentsList = () => {
     const [comedyList, setComedyList] = useState([]);
     const [selectedMovie, setSelectedMovie] = useState(null);
 
-    const navigate = useNavigate();
-    
 
     useEffect(() => {
-        // // 도메인 유효성 검사 
-        // console.log('[ContentsList] useEffect()');
-        // if (getLoginedSessionID() === ''){
-        //     alert('로그인 하시겠습니까?');
-
-        //     navigate('/signin');
-        //     return;
-
-        // }
+        // 로그인 상태 확인
+       
         
-            fetchData(requests.fetchNowPlaying, setMovieList);
-        
-            fetchData(requests.fetchActionMovies, setActionList);
-
-            fetchData(requests.fetchComedyMovies, setComedyList);
-
+        fetchData(requests.fetchNowPlaying, setMovieList);
+        fetchData(requests.fetchActionMovies, setActionList);
+        fetchData(requests.fetchComedyMovies, setComedyList);
     }, []);
-
 
     // get api
     const fetchData = async (request, setData) => {
@@ -70,51 +53,52 @@ const ContentsList = () => {
     // Slide
     const sliderSettings = {
         infinite: true,
-        speed: 500,
+        speed: 1000,
         slidesToShow: 7.5,
         slidesToScroll: 7.5,
+        arrows : true,
     };
 
     return (
         <>
-        <MainImg/>
+        <MainImg />
         <div className="content-list">            
             <h2 className="info">TOP 20</h2>
             <Slider {...sliderSettings}>                
-                    {movieList.map((item, idx) => (
-                        <label onClick={() => movieInfoClickHandler(item)}>
-                        <div key={idx} className="movie-item">
+                {movieList.map((item, idx) => (
+                    <label key={idx} onClick={() => movieInfoClickHandler(item)}>
+                        <div className="movie-item">
                             <img src={`http://image.tmdb.org/t/p/w500${item.poster_path}`} alt={item.title} />
                             <br />
-                            <a href="#none" className="title" >{item.title}</a>
+                            <a href="#none" className="title">{item.title}</a>
                         </div>
-                        </label>
-                    ))}
-                    </Slider>
-                <h2 className="info">액션</h2>
-                <Slider {...sliderSettings}> 
-                    {actionList.map((item, idx) => (
-                        <label onClick={() => movieInfoClickHandler(item)}>
-                        <div key={idx} className="movie-item">
+                    </label>
+                ))}
+            </Slider>
+            <h2 className="info">액션</h2>
+            <Slider {...sliderSettings}> 
+                {actionList.map((item, idx) => (
+                    <label key={idx} onClick={() => movieInfoClickHandler(item)}>
+                        <div className="movie-item">
                             <img src={`http://image.tmdb.org/t/p/w500${item.poster_path}`} alt={item.title} />
                             <br />
-                            <a href="#none" className="title" >{item.title}</a>
+                            <a href="#none" className="title">{item.title}</a>
                         </div>
-                        </label>
-                    ))}
-                    </Slider>
-                <h2 className="info">코미디</h2>
-                <Slider {...sliderSettings}>
-                    {comedyList.map((item, idx) => (
-                        <label onClick={() => movieInfoClickHandler(item)}>
-                        <div key={idx} className="movie-item">
+                    </label>
+                ))}
+            </Slider>
+            <h2 className="info">코미디</h2>
+            <Slider {...sliderSettings}>
+                {comedyList.map((item, idx) => (
+                    <label key={idx} onClick={() => movieInfoClickHandler(item)}>
+                        <div className="movie-item">
                             <img src={`http://image.tmdb.org/t/p/w500${item.poster_path}`} alt={item.title} />
                             <br />
-                            <a href="#none" className="title" >{item.title}</a>
+                            <a href="#none" className="title">{item.title}</a>
                         </div>
-                        </label>
-                    ))}
-                   </Slider>
+                    </label>
+                ))}
+            </Slider>
             {selectedMovie && (
                 <ContentsModal movieInfo={selectedMovie} closeModal={closeModal} />
             )}

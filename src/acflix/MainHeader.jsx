@@ -1,15 +1,30 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 
+const MainHeader = ({ isSignIned, setIsSignIned }) => {
+  const navigate = useNavigate();
 
-const MainHeader = () => {
-  return(
-    <div class="header">
-            <a href="/"><img src={process.env.PUBLIC_URL + '/imgs/logo.png'} alt="" /></a>
-            <ul>
-            <li><a href="/userprofile">내프로필</a></li>
-            <li><a href="/">로그아웃</a></li>
-            </ul>
-        </div>
+  const handleLogout = () => {
+    setIsSignIned(false); // 로그아웃 상태로 설정
+    navigate('/'); // 홈 페이지로 이동
+  };
+
+  return (
+    <div className="header">
+      <Link to="/"><img src={process.env.PUBLIC_URL + '/imgs/logo.png'} alt="" /></Link>
+      <ul>
+        {isSignIned ? (
+          <>
+            <li><Link to="/userprofile">내 프로필</Link></li>
+            <li><button onClick={handleLogout}>로그아웃</button></li>
+          </>
+        ) : (
+          <>
+            <Link to ="/login"></Link>
+          </>
+        )}
+      </ul>
+    </div>
   );
 }
 
