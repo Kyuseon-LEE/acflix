@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from "react";
+// 캐러셀
 import Slider from "react-slick";
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
+// API
 import api from '../js/api.js';
 import requests from '../js/requests.js';
 
+// Modal
 import ContentsModal from "./ContentsModal.jsx";
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+
+// Main 이미지
 import MainImg from "./MainImg.jsx";
 
-
+// CSS
 import '../css/modal.css'
 
-const ContentsList = ({ isSignIned }) => {
+const ContentsList = () => {
 
     // Hook
     const [movieList, setMovieList] = useState([]);

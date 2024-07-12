@@ -34,8 +34,8 @@ const ContentsModal = ({ movieInfo, closeModal }) => {
         if (play !== null) {
 
             const iframe = document.createElement('iframe');
-            iframe.width = '560';
-            iframe.height = '315';
+            iframe.width = '1000';
+            iframe.height = '700';
             iframe.src = `https://www.youtube.com/embed/${play}`;
             iframe.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
             iframe.allowFullscreen = true;
