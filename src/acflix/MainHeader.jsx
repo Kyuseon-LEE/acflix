@@ -11,7 +11,7 @@ const MainHeader = ({ isSignIned, setIsSignIned }) => {
 
   return (
     <div className="header">
-      <Link to="/"><img src={process.env.PUBLIC_URL + '/imgs/logo.png'} alt="" /></Link>
+      <Link to="/contentlist"><img src={process.env.PUBLIC_URL + '/imgs/logo.png'} alt="" /></Link>
       <ul>
         {isSignIned ? (
           <>

@@ -12,7 +12,7 @@ import MainImg from "./MainImg.jsx";
 
 import '../css/modal.css'
 
-const ContentsList = () => {
+const ContentsList = (isSignIned) => {
 
     // Hook
     const [movieList, setMovieList] = useState([]);
