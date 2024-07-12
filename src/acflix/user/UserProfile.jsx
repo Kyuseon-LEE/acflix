@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import api from "../js/api.js";
 
-import { getLoginedSessionID } from '../js/session.js';
+import { getLoginedSessionID, setLoginedSessionID } from '../js/session.js';
 import { getMyFavDB, getMyInfo, setMyInfo, getAllFavDB } from '../js/db.js';
 import { useNavigate } from "react-router-dom";
 
 import '../css/index.css';
 
 
-const UserProfile = () => {
+const UserProfile = ({setIsSignIned}) => {
 
   // Hook
   const [uId, setUId] = useState('');
@@ -29,7 +29,7 @@ const UserProfile = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const pwRegex = /^.{6,}$/;
     const nickRegex = /^[가-힣a-zA-Z0-9]{2,6}$/;
-    const phoneRegex = /^\d{3} \d{4} \d{4}$/;
+    const phoneRegex = /^\d{3}-\d{4}-\d{4}$/;
 
     if (!emailRegex.test(uId)) {
         newErrors.uId = "올바른 이메일 주소를 입력하세요.";
@@ -41,7 +41,7 @@ const UserProfile = () => {
         newErrors.uNick = "닉네임은 2자 이상 6자 이하의 한글, 영어 또는 숫자여야 합니다.";
     }
     if (!phoneRegex.test(uPhone)) {
-        newErrors.uPhone = "전화번호는 '000 0000 0000' 형식이어야 합니다.";
+        newErrors.uPhone = "전화번호는 '000-0000-0000' 형식이어야 합니다.";
     }
     
     setErrors(newErrors);
@@ -194,7 +194,10 @@ const UserProfile = () => {
 
     alert("회원정보가 수정되었습니다.");
 
-    navigate('/');
+    setLoginedSessionID();
+    setIsSignIned(false);
+
+    navigate('/login');
   }
 
 

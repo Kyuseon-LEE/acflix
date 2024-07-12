@@ -28,11 +28,14 @@ const Login = ({setIsSignIned}) => {
     let myInfo = getMyInfo(uId);
     if (myInfo !== undefined && myInfo.uPw === uPw) {
         alert('로그인되었습니다.');
+
         setLoginedSessionID(uId);
         setIsSignIned(true);
         navigate('/contentslist');
+
     } else {
         alert('아이디 또는 비밀번호가 맞지 않습니다.');
+
         setLoginedSessionID('');
         setUId('');
         setUPw('');
@@ -42,6 +45,7 @@ const Login = ({setIsSignIned}) => {
 
   const signInBtnClickHandler = () => {
     console.log('signInBtnClickHandler()');
+    
     navigate('/signin');
   }
 
