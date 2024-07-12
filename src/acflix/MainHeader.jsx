@@ -4,9 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 const MainHeader = ({ isSignIned, setIsSignIned }) => {
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    setIsSignIned(false); // 로그아웃 상태로 설정
-    navigate('/'); // 홈 페이지로 이동
+  // Handler
+  const logoutClickHandler = () => {
+    setIsSignIned(false);
+    navigate('/');
   };
 
   return (
@@ -16,7 +17,7 @@ const MainHeader = ({ isSignIned, setIsSignIned }) => {
         {isSignIned ? (
           <>
             <li><Link to="/userprofile">내 프로필</Link></li>
-            <li><button onClick={handleLogout}>로그아웃</button></li>
+            <li><button onClick={logoutClickHandler}>로그아웃</button></li>
           </>
         ) : (
           <>
