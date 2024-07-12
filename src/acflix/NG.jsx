@@ -1,10 +1,11 @@
 import React from "react";
+import './css/index.css';
 
 const NG = () => {
     return(
-        <>
-            NG
-        </>
+        <div className="error">
+            <img src={process.env.PUBLIC_URL +"/imgs/404_error.jpg"} alt=""/>
+        </div>
     );
 }
 
