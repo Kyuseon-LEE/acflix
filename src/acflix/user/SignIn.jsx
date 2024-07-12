@@ -118,7 +118,7 @@ const SignIn = ({ setIsSignIned }) => {
         setUAge(0);
         setUPhone('');
 
-        setIsSignIned(true);
+        // setIsSignIned(true);
         navigate('/');
     }
 

@@ -3,11 +3,12 @@ import api from "../js/api.js";
 
 import { getLoginedSessionID } from '../js/session.js';
 import { getMyFavDB, getMyInfo, setMyInfo, getAllFavDB } from '../js/db.js';
+import { useNavigate } from "react-router-dom";
 
 import '../css/index.css';
 
 
-const UserProfile = ({isSignIned}) => {
+const UserProfile = () => {
 
   // Hook
   const [uId, setUId] = useState('');
@@ -47,6 +48,9 @@ const UserProfile = ({isSignIned}) => {
     return Object.keys(newErrors).length === 0;
 }
 
+  useEffect(() => {
+    console.log('[UserProfile] useEffect()');
+
     let myInfo = getMyInfo(getLoginedSessionID());
 
     if(myInfo === undefined){
@@ -66,9 +70,6 @@ const UserProfile = ({isSignIned}) => {
     
 
     // 유저 찜 목록 Function START
-  useEffect(() => {
-    console.log('[UserProfile] useEffect()');
-
     const fetchMyFav = async () => {
       let myFavMovies = getMyFavDB(getLoginedSessionID());
       console.log('session',getLoginedSessionID());
@@ -124,7 +125,7 @@ const UserProfile = ({isSignIned}) => {
         }
       });
   
-      // 배열 값으로 영화 ID 수 변환
+      //배열 값으로 영화 ID 수 변환
       const sortedMovies = Object.keys(movieCounts).map(id => ({
         id,
         count: movieCounts[id]
