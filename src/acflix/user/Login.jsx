@@ -27,12 +27,12 @@ const Login = ({setIsSignIned}) => {
     // 로그인 데이터 확인
     let myInfo = getMyInfo(uId);
     if (myInfo !== undefined && myInfo.uPw === uPw) {
-        alert('SIGNIN SUCCESS!!');
+        alert('로그인되었습니다.');
         setLoginedSessionID(uId);
         setIsSignIned(true);
         navigate('/contentslist');
     } else {
-        alert('SIGNIN FAIL!!');
+        alert('아이디 또는 비밀번호가 맞지 않습니다.');
         setLoginedSessionID('');
         setUId('');
         setUPw('');

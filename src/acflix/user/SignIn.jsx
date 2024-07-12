@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAcMemDB, setAcMemDB, getAcFavDB, setAcFavDB } from "../js/db";
 
-const SignIn = ({ setIsSignIned }) => {
+const SignIn = () => {
     //hook
     const [uId, setUId] = useState('');
     const [uPw, setUPw] = useState('');
@@ -118,8 +118,7 @@ const SignIn = ({ setIsSignIned }) => {
         setUAge(0);
         setUPhone('');
 
-        // setIsSignIned(true);
-        navigate('/');
+        navigate('/login');
     }
 
     return (
