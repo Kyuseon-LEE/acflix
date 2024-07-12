@@ -52,14 +52,32 @@ const ContentsList = ({ isSignIned }) => {
         setSelectedMovie(null);
     }
 
+    // Slide button
+    const NextArrow = ({ onClick }) => { 
+        return (
+            <img src={process.env.PUBLIC_URL + '/imgs/right.png'} className="right" onClick={onClick} type='button' />
+        );
+    };
+    
+    const PrevArrow = ({ onClick }) => {
+        return (
+            <img src={process.env.PUBLIC_URL + '/imgs/left.png'} className="left" onClick={onClick} type='button' />
+               
+        );
+    };
+
     // Slide
     const sliderSettings = {
         infinite: true,
-        speed: 1000,
-        slidesToShow: 7.5,
-        slidesToScroll: 7.5,
+        speed: 800,
+        slidesToShow: 8,
+        slidesToScroll: 8,
         arrows : true,
+        nextArrow: <NextArrow />,
+		prevArrow: <PrevArrow />,
+        draggable:false,
     };
+    
 
     return (
         <>
