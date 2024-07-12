@@ -175,7 +175,7 @@ select{
 /* 메인 페이지 부분 */
 #main_wrap{
     background-color: #141414;
-    min-height: 285vh;
+    min-height: 330vh;
     background-size: cover;
     position: relative;
     overflow: hidden;

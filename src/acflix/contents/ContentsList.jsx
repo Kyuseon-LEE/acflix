@@ -68,12 +68,13 @@ const ContentsList = () => {
     const sliderSettings = {
         infinite: true,
         speed: 800,
-        slidesToShow: 8,
-        slidesToScroll: 8,
+        slidesToShow: 6,
+        slidesToScroll: 6,
         arrows : true,
         nextArrow: <NextArrow />,
 		prevArrow: <PrevArrow />,
         draggable:false,
+        initialSlide: 0
     };
     
 

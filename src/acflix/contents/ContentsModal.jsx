@@ -99,8 +99,9 @@ const ContentsModal = ({ movieInfo, closeModal }) => {
                 <p>상세정보: {movieInfo.overview}</p><br />
                 <p>평점: {movieInfo.vote_average}</p><br />
                 <p>관객수: {`${Math.floor(movieInfo.popularity)}만 명`}</p>
-            </div>
+                
             <button onClick={favBtnClickHandler}>♡</button>
+            </div>
         </div>
     );
 }
