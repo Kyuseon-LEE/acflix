@@ -17,7 +17,7 @@ const MainHeader = ({ isSignIned, setIsSignIned }) => {
         {isSignIned ? (
           <>
             <li><Link to="/userprofile">내 프로필</Link></li>
-            <li><button onClick={logoutClickHandler}>로그아웃</button></li>
+            <li><button onClick={logoutClickHandler}><span>로그아웃</span></button></li>
           </>
         ) : (
           <>
