@@ -105,15 +105,16 @@ const UserProfileModal = ({ movieInfo, closeModal }) => {
     return (
         <div className="modal">
             <div className="modal-content">
-                <span className="close" onClick={closeModal}>&times;</span>
+                
                 <img src={`http://image.tmdb.org/t/p/w200${movieInfo.poster_path}`} alt={movieInfo.title} />
                 <h2>{movieInfo.title}</h2>
-                <img src={process.env.PUBLIC_URL + '/imgs/ytb.png'} className="ytb" onClick={playBtnClickHandler} />
+                
                 <p className="m_info">상세정보: {movieInfo.overview}</p><br />
                 <p className="m_score">평점: {`${Math.round(movieInfo.vote_average * 100) / 100}점`}</p><br />
                 <p className="m_audi">관객수: {`${Math.floor(movieInfo.popularity)}만 명`}</p>
-                
+                <img src={process.env.PUBLIC_URL + '/imgs/ytb.png'} className="ytb" onClick={playBtnClickHandler} />
                 <button className='favbtn' onClick={favBtnClickHandler}></button>
+                <span className="close" onClick={closeModal}>&times;</span>
             </div>
         </div>
     );
