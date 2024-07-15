@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from '../js/api.js';
+import requests from '../js/requests.js';
 import { getMyFavDB, setMyFavDB } from '../js/db.js';
 import { getLoginedSessionID } from '../js/session.js';
 
@@ -7,13 +8,30 @@ const UserProfileModal = ({ movieInfo, closeModal }) => {
 
     // Hook
     const [play, setPlay] = useState(null);
+    const [movieList, setMovieList] = useState([]);
+    const [selectedMovie, setSelectedMovie] = useState(null);
+
 
     useEffect(() => {
 
         fetchPlay(movieInfo.id);
+        fetchData(requests.fetchTopRated, setMovieList);
 
     }, [movieInfo.id]);
 
+    // 모달창 띄울 시 스크롤 방지
+    useEffect(() => {
+        document.body.style.cssText = `
+          position: fixed; 
+          top: -${window.scrollY}px;
+          overflow-y: scroll;
+          width: 100%;`;
+        return () => {
+          const scrollY = document.body.style.top;
+          document.body.style.cssText = '';
+          window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+        };
+      }, []);
 
     // GET Movie Streaming API 
     const fetchPlay = async (movieId) => {
@@ -26,6 +44,16 @@ const UserProfileModal = ({ movieInfo, closeModal }) => {
             }
         } catch (error) {
             console.log('Error fetching video data:', error);
+        }
+    };
+
+     // get api
+     const fetchData = async (request, setData) => {
+        try {
+            const response = await api.get(request);
+            setData(response.data.results);
+        } catch (error) {
+            console.log('Error fetching data:', error);
         }
     };
 
@@ -91,6 +119,9 @@ const UserProfileModal = ({ movieInfo, closeModal }) => {
         }
     };
 
+    const movieInfoClickHandler = (item) => {
+        setSelectedMovie(item);
+    }
     
     // Function
     const handleCloseModal = () => {
@@ -115,6 +146,28 @@ const UserProfileModal = ({ movieInfo, closeModal }) => {
                 <img src={process.env.PUBLIC_URL + '/imgs/ytb.png'} className="ytb" onClick={playBtnClickHandler} />
                 <button className='favbtn' onClick={favBtnClickHandler}></button>
                 <span className="close" onClick={closeModal}>&times;</span>
+                <div className="modal-list">
+                <h2>추천 컨텐츠</h2>
+                {movieList.slice(0,5).map((item, idx) => (
+                    <label key={idx} onClick={() => movieInfoClickHandler(item)}>
+                        <div className="modal-item">
+                            <img src={`http://image.tmdb.org/t/p/w200${item.poster_path}`} alt={item.title} />
+                            <br />
+                            <a href="#none" className="modal-title">{item.title}</a>
+                        </div>
+                    </label>
+                ))}
+                {movieList.slice(6,11).map((item, idx) => (
+                    <label key={idx} onClick={() => movieInfoClickHandler(item)}>
+                        <div className="modal-item">
+                            <img src={`http://image.tmdb.org/t/p/w200${item.poster_path}`} alt={item.title} />
+                            <br />
+                            <a href="#none" className="modal-title">{item.title}</a>
+                        </div>
+                    </label>
+                ))}
+                
+            </div>
             </div>
         </div>
     );

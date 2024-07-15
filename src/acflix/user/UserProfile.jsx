@@ -233,15 +233,17 @@ const UserProfile = ({setIsSignIned}) => {
     }
   }
 
+
   // 찜목록 Slide
   const sliderSettings = {
     infinite: false,
     speed: 400,
     slidesToShow: 8.5,
     slidesToScroll: 3,
-    arrows: false,
+    arrows: false,    
+    touchThreshold : 100,
 };
-  //순위 슬라이드
+  // 순위 Slide
   const sliderSettings2 = {
    infinite: false,
    speed: 400,
@@ -263,6 +265,8 @@ const closeModal = () => {
 
 
   return (
+    
+    // 나의 프로필 부분
     <>
     <div className="user_wrap">
     <div className="user-profile1">
@@ -287,6 +291,8 @@ const closeModal = () => {
         <button className="btn_basic" onClick={modifyBtnClickHandler}>정보 수정</button>
         <button className="btn_basic" onClick={deleteBtnClickHandler}>회원 탈퇴</button>
     </div>
+
+    {/* 영화 찜목록 부분 */}
     <div className="user-profile2">
       <h2 className="user-profile-h2">내가 찜한 영화 목록</h2>
       {myFav.length >= 9 ? (
@@ -309,10 +315,12 @@ const closeModal = () => {
           </ul>
         )}
       </div>
+
+    {/* 인기순위 부분 */}
     <div className="user-profile3">
       <h2 className= "user-profile-h2">ACFILX 인기순위</h2>
-      <ul className="user-profile-list">
-      <Slider2 {...sliderSettings2}>
+      {allFav.length >= 5? (
+        <Slider2 {...sliderSettings2}>
         {allFav.map((movie, index) => (
           <li key={movie.id} onClick={() => movieInfoClickHandler(movie)}>
             <h3 className="rank">{index + 1}</h3>
@@ -320,8 +328,19 @@ const closeModal = () => {
             <h3>{movie.title}</h3>
           </li>
         ))}
-        </Slider2>  
-      </ul>
+        </Slider2> 
+      ) : (
+        <ul className="user-profile-list">
+          {allFav.map((movie, index) => (
+            <li key={movie.id} onClick={() => movieInfoClickHandler(movie)}>
+            <h3 className="rank">{index + 1}</h3>
+            <img src={`http://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title}/>
+            <h3>{movie.title}</h3>
+          </li>
+          ))}
+        </ul>
+      )}
+      
     </div>
     {selectedMovie && (
         <UserProfileModal movieInfo={selectedMovie} closeModal={closeModal} />

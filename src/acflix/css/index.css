@@ -345,7 +345,15 @@ select{
 .user-profile3 h2{
     color:#fff;
     margin-bottom:20px;
-    margin-left: 20px; 
+    margin-left: 20px;
+}
+
+
+.user-profile3 img{
+    width:200px;
+    height:300px;
+    border-radius: 10px;
+
 }
 
 .user-profile-list img{
@@ -356,27 +364,34 @@ select{
 .user-profile3 .user-profile-list {
     position: relative;
 }
-.user-profile3 .user-profile-list img{
+.user-profile3 img{
     width:300px;
     height:450px;
+    margin-right:50px;
 }
+
 .user-profile3 .rank{
     font-size: 7.5em;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-style: italic;
+    color:#fff
 }
 .user-profile3 h3{
     text-align: left;
     width:300px;
+    color:#fff;
 }
 
+
+/* 찜목록 */
 .favbtn {
     --c: red;
-    width: 50px;
+    width: 30px;
     aspect-ratio: 1;
     background:
      /* 1 */ radial-gradient(circle at 60% 65%,var(--c) 64%,#0000 65%) top left/50% 50%,
      /* 2 */ radial-gradient(circle at 40% 65%,var(--c) 64%,#0000 65%) top right/50% 50%,
      /* 3 */ conic-gradient(from -45deg at 50% 85.5%,var(--c) 90deg,#0000 0) bottom/100% 50%;
     background-repeat: no-repeat;
+    margin-top:6px;
 }
