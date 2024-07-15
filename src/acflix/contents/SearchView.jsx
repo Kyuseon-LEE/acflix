@@ -13,20 +13,20 @@ const SearchView = () => {
     const [selectedMovie, setSelectedMovie] = useState(null);
 
     useEffect(() => {
-      const fetchData = async (searchTerm) => {
-        try {
-          const response = await api.get(`/search/movie`, {
-            params: {
-              query: searchTerm,
-            },
-        });
-          setSearchMv(response.data.results); // 검색 결과를 상태에 업데이트
-        } catch (error) {
-          console.log('Error fetching data:', error);
+        const fetchData = async (searchTerm) => {
+            try {
+            const response = await api.get(`/search/movie`, {
+                params: {
+                query: searchTerm,
+                },
+            });
+        setSearchMv(response.data.results); // 검색 결과를 상태에 업데이트
+            } catch (error) {
+            console.log('Error fetching data:', error);
         }
     };
 
-      if (search) {
+        if (search) {
         fetchData(search); // 검색어가 있을 때 fetchData 호출
     }
 
