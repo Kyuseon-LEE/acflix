@@ -3,7 +3,7 @@ import api from '../js/api.js';
 import { getMyFavDB, setMyFavDB } from '../js/db.js';
 import { getLoginedSessionID } from '../js/session.js';
 
-const ContentsModal = ({ movieInfo, closeModal }) => {
+const UserProfileModal = ({ movieInfo, closeModal }) => {
 
     // Hook
     const [play, setPlay] = useState(null);
@@ -83,7 +83,7 @@ const ContentsModal = ({ movieInfo, closeModal }) => {
                 myFavs = myFavs.filter((e) => e !== movieInfo.id);
                 setMyFavDB(getLoginedSessionID(), myFavs);
                 alert(`${movieInfo.title}을 찜 목록에서 삭제하셨습니다!!`);
-                
+
 
             } else {
                 alert('찜 목록 삭제를 취소하셨습니다.');
@@ -119,4 +119,4 @@ const ContentsModal = ({ movieInfo, closeModal }) => {
     );
 }
 
-export default ContentsModal;
+export default UserProfileModal;
