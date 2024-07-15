@@ -3,13 +3,15 @@ import api from "../js/api.js";
 import Slider2 from "react-slick";
 
 import { getLoginedSessionID, setLoginedSessionID } from '../js/session.js';
-import { getMyFavDB, getMyInfo, setMyInfo, getAllFavDB } from '../js/db.js';
+import { getMyFavDB, getMyInfo, setMyInfo, getAllFavDB, setAcMemDB, setAcFavDB, getAllMemInfo, getAllFavInfo } from '../js/db.js';
 import { useNavigate } from "react-router-dom";
 
 import 'slick-carousel/slick/slick.css';
 
 
+
 import '../css/index.css';
+import UserProfileModal from "./UserProfileModal.jsx";
 
 
 const UserProfile = ({setIsSignIned}) => {
@@ -23,8 +25,12 @@ const UserProfile = ({setIsSignIned}) => {
   const [uPhone, setUPhone] = useState('');
   const [errors, setErrors] = useState({});
   const [profilePicture, setProfilePicture] = useState(null);
+  const [selectedMovie, setSelectedMovie] = useState(null);
+  
   const [myFav, setMyFav] = useState([]);
   const [allFav, setAllFav] = useState([]);
+
+  const [refresh, setRefresh] = useState(false);
 
   const navigate = useNavigate();
 
@@ -56,6 +62,7 @@ const UserProfile = ({setIsSignIned}) => {
     console.log('[UserProfile] useEffect()');
 
     let myInfo = getMyInfo(getLoginedSessionID());
+    
 
     if(myInfo === undefined){
       alert('로그인이 필요합니다.');
@@ -64,7 +71,7 @@ const UserProfile = ({setIsSignIned}) => {
       return;
       
     }
-    
+
     setUId(myInfo.uId);
     setUPw(myInfo.uPw);
     setUNick(myInfo.uNick);
@@ -163,7 +170,7 @@ const UserProfile = ({setIsSignIned}) => {
 
   fetchAllFav();
 
-  }, []);
+  }, [refresh]);
 
   // Handler
 
@@ -213,6 +220,30 @@ const UserProfile = ({setIsSignIned}) => {
     navigate('/login');
   }
 
+  const deleteBtnClickHandler = () => {
+    console.log('[UserProfile] deleteBtnClickHandler()');
+
+    if (window.confirm('정말 탈퇴하시겠어요?')) {
+      // 맴버 삭제
+      let allMemInfo = getAllMemInfo();
+      delete allMemInfo[getLoginedSessionID()];
+      setAcMemDB(allMemInfo);
+
+      // 찜 삭제 getAllFavInfo
+      let allFavInfo = getAllFavInfo();
+      delete allFavInfo[uId];
+      setAcFavDB(allFavInfo);
+
+      alert('회원탈퇴가 완료되었습니다.');
+
+      setLoginedSessionID();
+      setIsSignIned(false);
+      navigate('/')
+    } else {
+      alert('회원탈퇴가 취소되었습니다.');
+    }
+  }
+
   // 찜목록 Slide
   const sliderSettings = {
     infinite: false,
@@ -230,6 +261,16 @@ const UserProfile = ({setIsSignIned}) => {
    arrows: false,
 };
 
+const movieInfoClickHandler = (movie) => {
+  setSelectedMovie(movie);
+}
+
+// Function
+const closeModal = () => {
+  setSelectedMovie(null);
+  
+  setRefresh(v => !v);
+}
 
 
   return (
@@ -259,22 +300,23 @@ const UserProfile = ({setIsSignIned}) => {
         {errors.uPhone && <p style={{ color: 'red', textAlign: 'center' }}>{errors.uPhone}</p>}
         <br />
         <button className="btn_basic" onClick={modifyBtnClickHandler}>정보 수정</button>
+        <button className="btn_basic" onClick={deleteBtnClickHandler}>회원 탈퇴</button>
     </div>
     <div className="user-profile2">
       <h2 className="user-profile-h2">내가 찜한 영화 목록</h2>
       {myFav.length >= 9 ? (
           <Slider2 {...sliderSettings}>
             {myFav.map((movie) => (
-              <li key={movie.id}>
+              <li key={movie.id} onClick={() => movieInfoClickHandler(movie)}>
                 <img src={`http://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
-                <h3>{movie.title}</h3>
+                <a href="#none" className="title">{movie.title}</a>
               </li>
             ))}
           </Slider2>
         ) : (
           <ul className="user-profile-list">
             {myFav.map((movie) => (
-              <li key={movie.id}>
+              <li key={movie.id} onClick={() => movieInfoClickHandler(movie)}>
                 <img src={`http://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
                 <h3>{movie.title}</h3>
               </li>
@@ -287,7 +329,7 @@ const UserProfile = ({setIsSignIned}) => {
       <ul className="user-profile-list">
       <Slider2 {...sliderSettings2}>
         {allFav.map((movie, index) => (
-          <li key={movie.id}>
+          <li key={movie.id} onClick={() => movieInfoClickHandler(movie)}>
             <h3 className="rank">{index + 1}</h3>
             <img src={`http://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title}/>
             <h3>{movie.title}</h3>
@@ -296,6 +338,9 @@ const UserProfile = ({setIsSignIned}) => {
         </Slider2>  
       </ul>
     </div>
+    {selectedMovie && (
+        <UserProfileModal movieInfo={selectedMovie} closeModal={closeModal} />
+    )}
     </div>
     </> 
 

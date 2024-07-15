@@ -57,8 +57,18 @@ const SignIn = () => {
         setUAge(e.target.value);
     }
 
+    const hypenPhoneNumber = (value) => {
+        const cleaned = value.replace(/\D/g, '');
+        const match = cleaned.match(/^(\d{3})(\d{3,4})(\d{4})$/);
+        if (match) {
+            return `${match[1]}-${match[2]}-${match[3]}`;
+        }
+        return cleaned;
+    }
+
     const uPhoneChangeHandler = (e) => {
-        setUPhone(e.target.value);
+        const changePhoneNumber = hypenPhoneNumber(e.target.value);
+        setUPhone(changePhoneNumber);
     }
 
     const closeClickHandler = () => {
