@@ -26,7 +26,6 @@ const UserProfile = ({setIsSignIned}) => {
   const [errors, setErrors] = useState({});
 
   const [selectedMovie, setSelectedMovie] = useState(null);
-  
   const [myFav, setMyFav] = useState([]);
   const [allFav, setAllFav] = useState([]);
 
