@@ -261,6 +261,10 @@ select{
     padding : 20px;
     color: #fff;
 }
+.user-profile-list img{
+    cursor: pointer;
+}
+
 
 .txt_basic1 {
     width: 300px;
@@ -297,13 +301,17 @@ select{
     margin-bottom:20px;
     margin-left: 20px; 
 }
-.user-profile2 h3{
+.user-profile2 .title{
     font-size:1.0em;
     color: #fff;
     width:200px;
 }
 .user-profile2 img{
     margin-right:20px;
+    width:200px;
+    height:300px;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
 .user-profile-list li{

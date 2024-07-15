@@ -78,7 +78,7 @@ const ContentsList = () => {
         nextArrow: <NextArrow />,
 		prevArrow: <PrevArrow />,
         draggable:false,
-        padding : '70px',
+        slidesOffsetAfter:20,
     };
     
 
