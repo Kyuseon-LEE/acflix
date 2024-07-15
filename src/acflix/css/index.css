@@ -143,6 +143,7 @@ button.btn_basic:hover{
     text-align: center;
     background-color: #fff;
     border-radius: 25px;
+    color:#000;
 }
 #sign_up_modal div.sign_up_modal_content > .close > .p{
     font: #000;
@@ -222,6 +223,20 @@ select{
     width:100%;
     margin: 0 auto;
 }
+
+/* 로그아웃 css 추가 */
+#main_wrap .header ul li button {
+    color: #fff;
+    background-color: #000;
+    border: 0;
+    background-color: transparent;
+    font-size: 1em;
+}
+
+#main_wrap .header ul li button:hover {
+    cursor: pointer;
+}
+
 /* 메인 이미지 부분 */
 .mainimg {
     width: 100%;
