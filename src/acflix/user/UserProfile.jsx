@@ -281,9 +281,9 @@ const UserProfile = ({setIsSignIned}) => {
     <>
     <div className="user_wrap">
     <div className="user-profile1">
-      {uPicture && <img src={uPicture} alt="Profile" style={{ width: '200px', height: '200px', borderRadius: '50%' }} />}
+      {uPicture && <img src={uPicture} className="profile_img"alt="Profile"  />}
       <h3>{uNick}님의 페이지</h3>
-        <input className="txt_basic1" type="file" accept="image/*" onChange={profilePicChangeHandler} />
+        <input className="txt_basic1" type="file" accept="image/*" id="file" onChange={profilePicChangeHandler} />
         <br />
         <input className="txt_basic1" type="email" value={uId} readOnly/>
         <br />

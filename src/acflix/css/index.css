@@ -219,6 +219,10 @@ select{
     float:right;
     padding : 15px;
 }
+#main_wrap .header ul li img{
+    line-height: 35px;
+    padding: 0px;
+}
 #main_wrap .header ul li a{
     color: #fff;
 }
@@ -315,7 +319,7 @@ select{
 /* 유저 프로필 부분 */
 
 .user_wrap{
-    height:230vh
+    height:270vh
 }
 .user-profile2{
     margin-bottom: 100px;
@@ -384,6 +388,16 @@ select{
     width:300px;
     color:#fff;
 }
+.profile_img{
+    width: 200px;
+    height: 200px; 
+    border-radius: 50%;
+    margin: 0 auto;
+    display: block;
+    margin-bottom:30px;
+}
+
+
 
 
 /* 찜목록 */
