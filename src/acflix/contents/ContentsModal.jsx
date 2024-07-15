@@ -3,6 +3,7 @@ import api from '../js/api.js';
 import { getMyFavDB, setMyFavDB } from '../js/db.js';
 import { getLoginedSessionID } from '../js/session.js';
 
+
 const ContentsModal = ({ movieInfo, closeModal }) => {
 
     // Hook
@@ -113,7 +114,7 @@ const ContentsModal = ({ movieInfo, closeModal }) => {
                 <p>평점: {`${Math.round(movieInfo.vote_average * 100) / 100}점`}</p><br />
                 <p>관객수: {`${Math.floor(movieInfo.popularity)}만 명`}</p>
                 
-            <button onClick={favBtnClickHandler}>♡</button>
+            <button className='favbtn' onClick={favBtnClickHandler}></button>
             </div>
         </div>
     );

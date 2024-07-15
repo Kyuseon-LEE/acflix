@@ -113,7 +113,7 @@ const UserProfileModal = ({ movieInfo, closeModal }) => {
                 <p>평점: {`${Math.round(movieInfo.vote_average * 100) / 100}점`}</p><br />
                 <p>관객수: {`${Math.floor(movieInfo.popularity)}만 명`}</p>
                 
-            <button onClick={favBtnClickHandler}>♡</button>
+                <button className='favbtn' onClick={favBtnClickHandler}></button>
             </div>
         </div>
     );
