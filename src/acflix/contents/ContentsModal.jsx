@@ -1,19 +1,37 @@
 import React, { useEffect, useState } from "react";
 import api from '../js/api.js';
+import requests from '../js/requests.js';
 import { getMyFavDB, setMyFavDB } from '../js/db.js';
 import { getLoginedSessionID } from '../js/session.js';
-
 
 const ContentsModal = ({ movieInfo, closeModal }) => {
 
     // Hook
     const [play, setPlay] = useState(null);
+    const [movieList, setMovieList] = useState([]);
+    const [selectedMovie, setSelectedMovie] = useState(null);
 
     useEffect(() => {
 
         fetchPlay(movieInfo.id);
+        fetchData(requests.fetchTopRated, setMovieList);
 
     }, [movieInfo.id]);
+
+
+    // 모달창 띄울 시 스크롤 방지
+    useEffect(() => {
+        document.body.style.cssText = `
+          position: fixed; 
+          top: -${window.scrollY}px;
+          overflow-y: scroll;
+          width: 100%;`;
+        return () => {
+          const scrollY = document.body.style.top;
+          document.body.style.cssText = '';
+          window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+        };
+      }, []);
 
 
     // GET Movie Streaming API 
@@ -30,12 +48,23 @@ const ContentsModal = ({ movieInfo, closeModal }) => {
         }
     };
 
+     // get api
+     const fetchData = async (request, setData) => {
+        try {
+            const response = await api.get(request);
+            setData(response.data.results);
+        } catch (error) {
+            console.log('Error fetching data:', error);
+        }
+    };
+    
+
     // Handler
     const playBtnClickHandler = () => {
         if (play !== null) {
-
+            
             const iframe = document.createElement('iframe');
-            iframe.width = '1000';
+            iframe.width = '1200';
             iframe.height = '700';
             iframe.src = `https://www.youtube.com/embed/${play}`;
             iframe.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
@@ -92,6 +121,10 @@ const ContentsModal = ({ movieInfo, closeModal }) => {
         }
     };
 
+    const movieInfoClickHandler = (item) => {
+        setSelectedMovie(item);
+    }
+
     
     // Function
     const handleCloseModal = () => {
@@ -105,18 +138,39 @@ const ContentsModal = ({ movieInfo, closeModal }) => {
 
     return (
         <div className="modal">
-            <div className="modal-content">
-                <span className="close" onClick={closeModal}>&times;</span>
-                <img src={`http://image.tmdb.org/t/p/w200${movieInfo.poster_path}`} alt={movieInfo.title} />
-                <h2>{movieInfo.title}</h2>
-                <img src={process.env.PUBLIC_URL + '/imgs/ytb.png'} className="ytb" onClick={playBtnClickHandler} />
-                <p className="m_info">상세정보: {movieInfo.overview}</p><br />
-                <p className="m_score">평점: {`${Math.round(movieInfo.vote_average * 100) / 100}점`}</p><br />
-                <p className="m_audi">관객수: {`${Math.floor(movieInfo.popularity)}만 명`}</p>
-                
+        <div className="modal-content">       
+            <img src={`http://image.tmdb.org/t/p/w200${movieInfo.poster_path}`} alt={movieInfo.title} />
+            <h2>{movieInfo.title}</h2>            
+            <p className="m_info">상세정보: {movieInfo.overview}</p><br />
+            <p className="m_score">평점: {`${Math.round(movieInfo.vote_average * 100) / 100}점`}</p><br />
+            <p className="m_audi">관객수: {`${Math.floor(movieInfo.popularity)}만 명`}</p>
+            <img src={process.env.PUBLIC_URL + '/imgs/ytb.png'} className="ytb" onClick={playBtnClickHandler} />
             <button className='favbtn' onClick={favBtnClickHandler}></button>
+            <span className="close" onClick={closeModal}>&times;</span>
+            <div className="modal-list">
+                <h2>추천 컨텐츠</h2>
+                {movieList.slice(0,5).map((item, idx) => (
+                    <label key={idx} onClick={() => movieInfoClickHandler(item)}>
+                        <div className="modal-item">
+                            <img src={`http://image.tmdb.org/t/p/w200${item.poster_path}`} alt={item.title} />
+                            <br />
+                            <a href="#none" className="modal-title">{item.title}</a>
+                        </div>
+                    </label>
+                ))}
+                {movieList.slice(6,11).map((item, idx) => (
+                    <label key={idx} onClick={() => movieInfoClickHandler(item)}>
+                        <div className="modal-item">
+                            <img src={`http://image.tmdb.org/t/p/w200${item.poster_path}`} alt={item.title} />
+                            <br />
+                            <a href="#none" className="modal-title">{item.title}</a>
+                        </div>
+                    </label>
+                ))}
+                
             </div>
         </div>
+    </div>
     );
 }
 

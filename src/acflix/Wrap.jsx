@@ -6,6 +6,7 @@ import Login from "./user/Login";
 import SignIn from "./user/SignIn";
 import UserProfile from "./user/UserProfile";
 import ContentsList from "./contents/ContentsList";
+import SearchView from "./contents/SearchView";
 import Layout from "./LayOut";
 import NG from "./NG";
 import './css/index.css'
@@ -39,6 +40,7 @@ const Wrap = () => {
                     <Route element={<PrivateRoute isSignIned={isSignIned}/>}>
                         <Route path="userprofile" element={<UserProfile setIsSignIned={setIsSignIned}/>} />
                         <Route path="contentslist" element={<ContentsList />} />
+                        <Route path="searchview" element={<SearchView />} />
                     </Route>
                 </Route>
             </Routes>
