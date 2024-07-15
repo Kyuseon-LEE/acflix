@@ -43,11 +43,19 @@ const Login = ({setIsSignIned}) => {
     // 로그인 데이터 확인 끝
   }
 
+  // 엔터키 적용
+  const enterKeyHandler = (e) => {
+    if (e.key === 'Enter') {
+      loginBtnClickHandler();
+    }
+  }
+
   const signInBtnClickHandler = () => {
     console.log('signInBtnClickHandler()');
     
     navigate('/signin');
   }
+
 
   return (
     <>
@@ -55,7 +63,7 @@ const Login = ({setIsSignIned}) => {
         <h2>로그인</h2>
         <input className="txt_basic" type="text" value={uId} onChange={uIdChangeHandler} placeholder="아이디를 입력하시오" />
         <br />
-        <input className="txt_basic" type="password" value={uPw} onChange={uPwChangeHandler} placeholder="비밀번호를 입력하시오" />
+        <input className="txt_basic" type="password" value={uPw} onChange={uPwChangeHandler} onKeyDown={enterKeyHandler} placeholder="비밀번호를 입력하시오" />
         <br />
         <button className="btn_basic" onClick={loginBtnClickHandler}>로그인</button>
         <button className="btn_basic" onClick={signInBtnClickHandler}>회원가입</button>

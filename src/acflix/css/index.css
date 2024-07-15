@@ -20,6 +20,13 @@ li {
     list-style: none;
 }
 
+/* 홈 화면  */
+#homepage {
+    text-align: center;
+    color: #fff;
+    margin-top: 200px;
+}
+
 /* 로그인 화면 부분 */
 #wrap{
     background: url(../../../public/imgs/bg.jpg);
@@ -137,7 +144,9 @@ button.btn_basic:hover{
     background-color: #fff;
     border-radius: 25px;
 }
-
+#sign_up_modal div.sign_up_modal_content > .close > .p{
+    font: #000;
+}
 #sign_up_modal div.sign_up_modal_content h2{
     text-align: center  ;
     padding-top: 40px;
