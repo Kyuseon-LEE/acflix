@@ -22,7 +22,7 @@ const UserProfile = ({setIsSignIned}) => {
   const [uAge, setUAge] = useState(0);
   const [uPhone, setUPhone] = useState('');
   const [errors, setErrors] = useState({});
-  
+  const [profilePicture, setProfilePicture] = useState(null);
   const [myFav, setMyFav] = useState([]);
   const [allFav, setAllFav] = useState([]);
 
@@ -71,6 +71,7 @@ const UserProfile = ({setIsSignIned}) => {
     setUGender(myInfo.uGender);
     setUAge(myInfo.uAge);
     setUPhone(myInfo.uPhone);
+    setProfilePicture(myInfo.profilePicture);
     
 
     // 유저 찜 목록 Function START
@@ -181,6 +182,13 @@ const UserProfile = ({setIsSignIned}) => {
     setUPhone(e.target.value);
   }
 
+  //프로필 핸들러 추가
+  const profilePictureChangeHandler = (e) => {
+    console.log('[UserProfile] profilePictureChangeHandler()');
+    const file = e.target.files[0];
+    setProfilePicture(URL.createObjectURL(file));
+  }
+
   const modifyBtnClickHandler = () => {
     console.log('[UserProfile] modifyBtnClickHandler()');
 
@@ -193,6 +201,7 @@ const UserProfile = ({setIsSignIned}) => {
     myInfo.uPw = uPw;
     myInfo.uNick = uNick;
     myInfo.uPhone = uPhone;
+    myInfo.profilePicture = profilePicture; // 프로필 사진 업로드
 
     setMyInfo(getLoginedSessionID(), myInfo);
 
@@ -227,7 +236,11 @@ const UserProfile = ({setIsSignIned}) => {
     <>
     <div className="user_wrap">
     <div className="user-profile1">
+    {profilePicture && <img src={profilePicture} alt="Profile" style={{ width: '200px', height: '200px', borderRadius: '50%', border: "1px solid #fff" }} />}
       <h3>{uNick}님의 페이지</h3>
+        {/* 프로필 파일 업로드 버튼 */}
+        <input className="txt_basic1" type="file" accept="image/*" onChange={profilePictureChangeHandler} />
+        <br />
         <input className="txt_basic1" type="email" value={uId} readOnly/>
         <br />
         <input className="txt_basic1" type="password" value={uPw} onChange={uPwChangeHandler} placeholder="비밀번호" />

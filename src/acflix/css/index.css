@@ -20,6 +20,13 @@ li {
     list-style: none;
 }
 
+/* 홈 화면  */
+#homepage {
+    text-align: center;
+    color: #fff;
+    margin-top: 200px;
+}
+
 /* 로그인 화면 부분 */
 #wrap{
     background: url(../../../public/imgs/bg.jpg);
@@ -339,3 +346,5 @@ select{
     text-align: left;
     width:300px;
 }
+
+/* 메인 해더 로그아웃 버튼 */

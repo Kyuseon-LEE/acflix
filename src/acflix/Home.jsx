@@ -11,7 +11,7 @@ const Home = () => {
   }
 
   return(
-    <div style={{textAlign: 'center', color: '#fff', marginTop: '200px' }}>
+    <div id="homepage">
       <h2>회원님, 반갑습니다.</h2>
       <br />
       <h1>영화, 시리즈 등을 무제한으로</h1>
