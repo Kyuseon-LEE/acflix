@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAcMemDB, setAcMemDB, getAcFavDB, setAcFavDB } from "../js/db";
 
+const profilePic = process.env.PUBLIC_URL + '/imgs/none.png' 
+
 const SignIn = () => {
     //hook
     const [uId, setUId] = useState('');
@@ -10,6 +12,7 @@ const SignIn = () => {
     const [uGender, setUGender] = useState(0);
     const [uAge, setUAge] = useState(0);
     const [uPhone, setUPhone] = useState('');
+    const [uPicture, setUPicture] = useState(profilePic);
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
 
@@ -89,7 +92,8 @@ const SignIn = () => {
                     'uNick': uNick,
                     'uGender': uGender,
                     'uAge': uAge,
-                    'uPhone': uPhone,    
+                    'uPhone': uPhone,
+                    'uPicture': uPicture,
                 }
             }
             setAcMemDB(newMemObj);
@@ -101,7 +105,8 @@ const SignIn = () => {
                 'uNick': uNick,
                 'uGender': uGender,
                 'uAge': uAge,
-                'uPhone': uPhone,         
+                'uPhone': uPhone,
+                'uPicture': uPicture,
             }
             setAcMemDB(aldAcMem);
         }
@@ -127,7 +132,7 @@ const SignIn = () => {
         setUGender(0);
         setUAge(0);
         setUPhone('');
-
+        setUPicture(profilePic);
         navigate('/login');
     }
 
@@ -139,13 +144,13 @@ const SignIn = () => {
                 </div>
                 <h2>회원 가입</h2>
                 <input className="txt_basic" type="email" value={uId} onChange={uIdChangeHandler} placeholder="이메일 주소(아이디)" />
-                {errors.uId && <p style={{ color: 'red', textAlign: 'center' }}>{errors.uId}</p>}
+                {errors.uId && <p>{errors.uId}</p>}
                 <br />
                 <input className="txt_basic" type="password" value={uPw} onChange={uPwChangeHandler} placeholder="비밀번호" />
-                {errors.uPw && <p style={{ color: 'red', textAlign: 'center' }}>{errors.uPw}</p>}
+                {errors.uPw && <p>{errors.uPw}</p>}
                 <br />
                 <input className="txt_basic" type="text" value={uNick} onChange={uNickChangeHandler} placeholder="닉네임" />
-                {errors.uNick && <p style={{ color: 'red', textAlign: 'center' }}>{errors.uNick}</p>}
+                {errors.uNick && <p>{errors.uNick}</p>}
                 <br />
                 <select className="gen" name="gender" id="gen" value={uGender} onChange={uGenderChangeHandler}>
                     <option value="0">성별</option>
@@ -166,7 +171,7 @@ const SignIn = () => {
                 </select>
                 <br />
                 <input className="txt_basic" type="text" value={uPhone} onChange={uPhoneChangeHandler} placeholder="휴대전화번호" />
-                {errors.uPhone && <p style={{ color: 'red', textAlign: 'center' }}>{errors.uPhone}</p>}
+                {errors.uPhone && <p>{errors.uPhone}</p>}
                 <br />
                 <button className="btn_basic" onClick={signUpBtnClickHandler}>회원 가입</button>
             </div>

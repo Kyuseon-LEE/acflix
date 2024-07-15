@@ -27,7 +27,7 @@ const UserProfile = ({setIsSignIned}) => {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [myFav, setMyFav] = useState([]);
   const [allFav, setAllFav] = useState([]);
-
+  const [uPicture, setUPicture] = useState(null);
   const [refresh, setRefresh] = useState(false);
 
   const navigate = useNavigate();
@@ -54,7 +54,7 @@ const UserProfile = ({setIsSignIned}) => {
     
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-}
+    }
 
   useEffect(() => {
     console.log('[UserProfile] useEffect()');
@@ -76,6 +76,7 @@ const UserProfile = ({setIsSignIned}) => {
     setUGender(myInfo.uGender);
     setUAge(myInfo.uAge);
     setUPhone(myInfo.uPhone);
+    setUPicture(myInfo.uPicture);
     
 
     // 유저 찜 목록 Function START
@@ -186,6 +187,12 @@ const UserProfile = ({setIsSignIned}) => {
     setUPhone(e.target.value);
   }
 
+  const profilePicChangeHandler = (e) => {
+    console.log('[UserProfile] profilePicChangeHandler()');
+    const file = e.target.files[0];
+    setUPicture(URL.createObjectURL(file));
+  }
+  
   const modifyBtnClickHandler = () => {
     console.log('[UserProfile] modifyBtnClickHandler()');
 
@@ -198,6 +205,7 @@ const UserProfile = ({setIsSignIned}) => {
     myInfo.uPw = uPw;
     myInfo.uNick = uNick;
     myInfo.uPhone = uPhone;
+    myInfo.uPicture = uPicture;
 
     setMyInfo(getLoginedSessionID(), myInfo);
 
@@ -240,7 +248,7 @@ const UserProfile = ({setIsSignIned}) => {
     slidesToShow: 8.5,
     slidesToScroll: 3,
     arrows: false,
-};
+  };
   //순위 슬라이드
   const sliderSettings2 = {
    infinite: false,
@@ -248,25 +256,30 @@ const UserProfile = ({setIsSignIned}) => {
    slidesToShow: 4.5,
    slidesToScroll: 3,
    arrows: false
-};
+  };
 
-const movieInfoClickHandler = (movie) => {
+  const movieInfoClickHandler = (movie) => {
   setSelectedMovie(movie);
-}
+  }
 
-// Function
-const closeModal = () => {
-  setSelectedMovie(null);
+
+
+  // Function
+  const closeModal = () => {
+    setSelectedMovie(null);
   
-  setRefresh(v => !v);
-}
+    setRefresh(v => !v);
+  }
 
 
   return (
     <>
     <div className="user_wrap">
     <div className="user-profile1">
+      {uPicture && <img src={uPicture} alt="Profile" style={{ width: '200px', height: '200px', borderRadius: '50%' }} />}
       <h3>{uNick}님의 페이지</h3>
+        <input className="txt_basic1" type="file" accept="image/*" onChange={profilePicChangeHandler} />
+        <br />
         <input className="txt_basic1" type="email" value={uId} readOnly/>
         <br />
         <input className="txt_basic1" type="password" value={uPw} onChange={uPwChangeHandler} placeholder="비밀번호" />
