@@ -24,6 +24,7 @@ const UserProfile = ({setIsSignIned}) => {
   const [uAge, setUAge] = useState(0);
   const [uPhone, setUPhone] = useState('');
   const [errors, setErrors] = useState({});
+
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [myFav, setMyFav] = useState([]);
   const [allFav, setAllFav] = useState([]);
@@ -185,6 +186,7 @@ const UserProfile = ({setIsSignIned}) => {
     console.log('[UserProfile] uPhoneChangeHandler()');
     setUPhone(e.target.value);
   }
+
 
   const modifyBtnClickHandler = () => {
     console.log('[UserProfile] modifyBtnClickHandler()');
