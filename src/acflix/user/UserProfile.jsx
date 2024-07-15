@@ -258,7 +258,7 @@ const UserProfile = ({setIsSignIned}) => {
    speed: 400,
    slidesToShow: 4.5,
    slidesToScroll: 3,
-   arrows: false,
+   arrows: false
 };
 
 const movieInfoClickHandler = (movie) => {
@@ -318,7 +318,7 @@ const closeModal = () => {
             {myFav.map((movie) => (
               <li key={movie.id} onClick={() => movieInfoClickHandler(movie)}>
                 <img src={`http://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
-                <h3>{movie.title}</h3>
+                <a href="#none" className="title">{movie.title}</a>
               </li>
             ))}
           </ul>
