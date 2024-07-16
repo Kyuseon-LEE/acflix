@@ -8,13 +8,13 @@ const SearchViewModal = ( { movieInfo, closeModal } ) => {
     
     // Hook
     const [play, setPlay] = useState(null);
-    const [movieList, setMovieList] = useState([]);
-    const [selectedMovie, setSelectedMovie] = useState(null);
+    const [myFavs, setMyFavs] = useState([]);
 
     useEffect(() => {
 
         fetchPlay(movieInfo.id);
-        fetchData(requests.fetchTopRated, setMovieList);
+
+        setMyFavs(getMyFavDB(getLoginedSessionID()));
 
     }, [movieInfo.id]);
 
@@ -30,16 +30,6 @@ const SearchViewModal = ( { movieInfo, closeModal } ) => {
             }
         } catch (error) {
             console.log('Error fetching video data:', error);
-        }
-    };
-
-    // get api
-    const fetchData = async (request, setData) => {
-        try {
-            const response = await api.get(request);
-            setData(response.data.results);
-        } catch (error) {
-            console.log('Error fetching data:', error);
         }
     };
 
@@ -73,41 +63,34 @@ const SearchViewModal = ( { movieInfo, closeModal } ) => {
 
     const favBtnClickHandler = () => {
 
-        let myFavs = getMyFavDB(getLoginedSessionID());
+        let updatedFavs = [...myFavs]; // 현재 찜하기 업데이트
+        const movieId = movieInfo.id;
 
-        if (!Array.isArray(myFavs)) {
-            myFavs = [];
-        }
-    
         // 찜 목록 중복체크
-        if (!myFavs.includes(movieInfo.id)) {
+        if (!updatedFavs.includes(movieId)) {
 
-            myFavs.push(movieInfo.id);
-            setMyFavDB(getLoginedSessionID(), myFavs);
+            updatedFavs.push(movieId);
+            setMyFavDB(getLoginedSessionID(), updatedFavs);
+            setMyFavs(updatedFavs); 
             alert(`${movieInfo.title}을 찜하셨습니다!!`);
 
         } else {
 
             alert(`${movieInfo.title}가 이미 찜 목록에 있습니다!!`);
 
-
             // 찜 목록 삭제 알림
-            if(window.confirm(`${movieInfo.title}을 찜 목록에서 삭제하시겠습니까?`)){
+            if (window.confirm(`${movieInfo.title}을 찜 목록에서 삭제하시겠습니까?`)) {
 
-                myFavs = myFavs.filter((e) => e !== movieInfo.id);
-                setMyFavDB(getLoginedSessionID(), myFavs);
+                updatedFavs = updatedFavs.filter((e) => e !== movieId);
+                setMyFavDB(getLoginedSessionID(), updatedFavs);
+                setMyFavs(updatedFavs); 
                 alert(`${movieInfo.title}을 찜 목록에서 삭제하셨습니다!!`);
-
 
             } else {
                 alert('찜 목록 삭제를 취소하셨습니다.');
             }
         }
     };
-    
-    const movieInfoClickHandler = (item) => {
-        setSelectedMovie(item);
-    }
 
     const onErrorImg = (e) => {
         e.target.onerror = null;
@@ -133,7 +116,13 @@ const SearchViewModal = ( { movieInfo, closeModal } ) => {
             <p className="m_score">평점: {`${Math.round(movieInfo.vote_average * 100) / 100}점`}</p><br />
             <p className="m_audi">관객수: {`${Math.floor(movieInfo.popularity)}만 명`}</p>
             <img src={process.env.PUBLIC_URL + '/imgs/ytb.png'} className="ytb" onClick={playBtnClickHandler} />
-            <button className='favbtn' onClick={favBtnClickHandler}></button>
+            <button className='favbtn' onClick={favBtnClickHandler}>
+                {Array.isArray(myFavs) && myFavs.includes(movieInfo.id) ? (
+                    <img src="/imgs/heart1.png" alt="favMv" />
+                ) : (
+                    <img src="/imgs/heart2.png" alt="noFavMv" />
+                )}
+            </button>
             <span className="close" onClick={closeModal}>&times;</span>
             
         </div>
