@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import api from '../js/api.js';
-import requests from '../js/requests.js';
 import { getMyFavDB, setMyFavDB } from '../js/db.js';
 import { getLoginedSessionID } from '../js/session.js';
 

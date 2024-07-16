@@ -16,7 +16,7 @@ const ContentsModal = ({ movieInfo, closeModal }) => {
 
         fetchPlay(movieInfo.id);
         fetchData(requests.fetchTopRated, setMovieList);
-
+        fetchData(requests.fetchTrending, setMovieList);
 
         setMyFavs(getMyFavDB(getLoginedSessionID()));
 
@@ -135,15 +135,56 @@ const ContentsModal = ({ movieInfo, closeModal }) => {
 
         closeModal();
     };
-    
 
+    // 가져온 Movie API 섞기
+    const getRandomMovies = (count) => {
+        const shuffled = movieList.sort(() => 0.5 - Math.random());
+        const uMovies = new Set();
+
+        while (uMovies.size < count && uMovies.size < shuffled.length) {
+            const randomIndex = Math.floor(Math.random() * shuffled.length);
+            const movie = shuffled[randomIndex];
+            if (!uMovies.has(movie)) {
+                uMovies.add(movie);
+            }
+        }
+
+        return Array.from(uMovies).slice(0, count);
+    };
+
+    // 섞은 Movie list 보여주기
+    const recommendMovies = () => {
+        const randomMovies = getRandomMovies(10);
+        return randomMovies.map((movie, idx) => (
+            <label key={idx} onClick={() => movieInfoClickHandler(movie)}>
+                <div className="modal-item">
+                    <img src={`http://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
+                    <br />
+                    {
+                        movie.title
+                        ? 
+                        <a href="#none" className="modal-title">{movie.title}</a>
+                        :
+                        <a href="#none" className="modal-title">{movie.name}</a>
+                    }   
+                </div>
+            </label>
+        ));
+    };
+    
     return (
         <div className="modal">
         <div className="modal-content">       
         {selectedMovie ? (
                     <>
                         <img src={`http://image.tmdb.org/t/p/w200${selectedMovie.poster_path}`} alt={selectedMovie.title} />
-                        <h2>{selectedMovie.title}</h2>
+                        {
+                            selectedMovie.title
+                            ? 
+                            <h2>{selectedMovie.title}</h2>
+                            :
+                            <h2>{selectedMovie.name}</h2>
+                        }
                         <p className="m_info">상세정보: {selectedMovie.overview}</p><br />
                         <p className="m_score">평점: {`${Math.round(selectedMovie.vote_average * 100) / 100}점`}</p><br />
                         <p className="m_audi">관객수: {`${Math.floor(selectedMovie.popularity)}만 명`}</p>
@@ -169,24 +210,7 @@ const ContentsModal = ({ movieInfo, closeModal }) => {
                 )}
             <div className="modal-list">
                 <h2>추천 컨텐츠</h2>
-                {movieList.slice(0,5).map((movie, idx) => (
-                    <label key={idx} onClick={() => movieInfoClickHandler(movie)}>
-                        <div className="modal-item">
-                            <img src={`http://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
-                            <br />
-                            <a href="#none" className="modal-title">{movie.title}</a>
-                        </div>
-                    </label>
-                ))}
-                {movieList.slice(6,11).map((movie, idx) => (
-                    <label key={idx} onClick={() => movieInfoClickHandler(movie)}>
-                        <div className="modal-item">
-                            <img src={`http://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
-                            <br />
-                            <a href="#none" className="modal-title">{movie.title}</a>
-                        </div>
-                    </label>
-                ))}    
+                {recommendMovies()}    
             </div>
         </div>
     </div>
