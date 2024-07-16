@@ -116,13 +116,13 @@ const SearchViewModal = ( { movieInfo, closeModal } ) => {
             <p className="m_score">평점: {`${Math.round(movieInfo.vote_average * 100) / 100}점`}</p><br />
             <p className="m_audi">관객수: {`${Math.floor(movieInfo.popularity)}만 명`}</p>
             <img src={process.env.PUBLIC_URL + '/imgs/ytb.png'} className="ytb" onClick={playBtnClickHandler} />
-            <button className='favbtn' onClick={favBtnClickHandler}>
+            <div className='favbtn' onClick={favBtnClickHandler}>
                 {Array.isArray(myFavs) && myFavs.includes(movieInfo.id) ? (
                     <img src="/imgs/heart1.png" alt="favMv" />
                 ) : (
                     <img src="/imgs/heart2.png" alt="noFavMv" />
                 )}
-            </button>
+            </div>
             <span className="close" onClick={closeModal}>&times;</span>
             
         </div>

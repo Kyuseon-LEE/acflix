@@ -28,6 +28,7 @@ const UserProfile = ({setIsSignIned}) => {
   const [allFav, setAllFav] = useState([]);
   const [uPicture, setUPicture] = useState(null);
   const [refresh, setRefresh] = useState(false);
+  const [dragging, setDragging] =useState(false);
 
   const navigate = useNavigate();
 
@@ -171,7 +172,7 @@ const UserProfile = ({setIsSignIned}) => {
   // 페이지 이동 시 상단 노출
   useEffect(() => {
     window.scrollTo(0, 0);
-})
+  }, [])
 
   // Handler
   const uPwChangeHandler = (e) => {
@@ -262,12 +263,11 @@ const UserProfile = ({setIsSignIned}) => {
    slidesToScroll: 3,
    arrows: false
   };
+ 
 
   const movieInfoClickHandler = (movie) => {
   setSelectedMovie(movie);
   }
-
-
 
   // Function
   const closeModal = () => {
@@ -275,6 +275,21 @@ const UserProfile = ({setIsSignIned}) => {
   
     setRefresh(v => !v);
   }
+
+  // 드래그 시 클릭 비활성화
+  const handleMouseDown = () => {
+    setDragging(false);
+  }
+  
+  const handleMouseMove = () => {
+    setDragging(true);
+  }
+  const handleMouseUp = (movie) =>{
+    if(!dragging){
+      movieInfoClickHandler(movie);
+    }
+    setDragging(false);
+  };
 
 
   return (
@@ -318,7 +333,10 @@ const UserProfile = ({setIsSignIned}) => {
       {myFav.length >= 9 ? (
           <Slider2 {...sliderSettings}>
             {myFav.map((movie) => (
-              <li key={movie.id} onClick={() => movieInfoClickHandler(movie)}>
+              <li key={movie.id}
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={()=> handleMouseUp(movie)}>
                 <img src={`http://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
                 <a href="#none" className="title">{movie.title}</a>
               </li>
@@ -342,7 +360,11 @@ const UserProfile = ({setIsSignIned}) => {
       {allFav.length >= 5? (
         <Slider2 {...sliderSettings2}>
         {allFav.map((movie, index) => (
-          <li key={movie.id} onClick={() => movieInfoClickHandler(movie)}>
+          <li key={movie.id}
+           onMouseDown={handleMouseDown}
+           onMouseMove={handleMouseMove}
+           onMouseUp={() => handleMouseUp(movie)}
+           >
             <h3 className="rank">{index + 1}</h3>
             <img src={`http://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title}/>
             <h3>{movie.title}</h3>
