@@ -322,6 +322,7 @@ select{
 .user-profile1{
     margin-top:100px;
     margin-bottom:100px;
+    position: relative;
 }
 .user-profile1 h3{
     text-align: center;
@@ -428,7 +429,7 @@ select{
     height:45px;
     position: absolute;
     left:52.5%;
-    top:9%;
+    top:14%;
     cursor: pointer;
 }
 .user-profile2 li:hover,
@@ -465,7 +466,12 @@ button.btn_img:hover {
 }
 
 /* 프로필 유효성 검사 */
+
 .user-profile1 p{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    width:450px;
     font-size: 0.9em;
     line-height: 14px;
     color: #f00;
@@ -502,6 +508,7 @@ ul.search-list .movie img
     margin-right: 20px;
     border-radius: 10px;
     cursor: pointer;
+    margin-top:10px;
 }
 
 .search-results .movie .title,

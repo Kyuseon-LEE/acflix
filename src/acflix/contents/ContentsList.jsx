@@ -37,7 +37,7 @@ const ContentsList = () => {
     // 페이지 이동 시 상단 노출
     useEffect(() => {
         window.scrollTo(0, 0);
-    })
+    },[])
 
     // get api
     const fetchData = async (request, setData) => {
