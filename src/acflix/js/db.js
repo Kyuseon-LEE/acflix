@@ -5,14 +5,14 @@ export const ACFLIX_FAVORITE_DB_IN_LOCALSTORAGE = 'acFavDB'
 
 // 멤버
 export const getAcMemDB = () => {
-    console.log('getAcMemDB()');
+    console.log('[DB] getAcMemDB()');
 
     return localStorage.getItem(ACFLIX_MEMBER_DB_IN_LOCALSTORAGE);
 
 }
 
 export const setAcMemDB = (member) => {
-    console.log('setAcMemDB()');
+    console.log('[DB] setAcMemDB()');
 
     localStorage.setItem(ACFLIX_MEMBER_DB_IN_LOCALSTORAGE, JSON.stringify(member));
     

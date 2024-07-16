@@ -5,7 +5,8 @@ import { getAcMemDB, setAcMemDB, getAcFavDB, setAcFavDB } from "../js/db";
 const profilePic = process.env.PUBLIC_URL + '/imgs/none.png' 
 
 const SignIn = () => {
-    //hook
+
+    // Hook
     const [uId, setUId] = useState('');
     const [uPw, setUPw] = useState('');
     const [uNick, setUNick] = useState('');
@@ -16,22 +17,26 @@ const SignIn = () => {
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
 
+    // 유효성 검사
     const validateInputs = () => {
         const newErrors = {};
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const pwRegex = /^.{6,}$/;
-        const nickRegex = /^[가-힣a-zA-Z0-9]{2,6}$/;
-        const phoneRegex = /^\d{3}-\d{4}-\d{4}$/;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;    // @가 있어야 하고 앞, 뒤로 문자가 있어야 함
+        const pwRegex = /^.{6,}$/;                          // 6자리 이상
+        const nickRegex = /^[가-힣a-zA-Z0-9]{2,6}$/;        // 한글, 영어 대소문자, 숫자가 2 이상 6 이하
+        const phoneRegex = /^\d{3}-\d{4}-\d{4}$/;           // {}안에 숫자가 지정한 개수 만큼 있어야 함
 
         if (!emailRegex.test(uId)) {
             newErrors.uId = "올바른 이메일 주소를 입력하세요.";
         }
+
         if (!pwRegex.test(uPw)) {
             newErrors.uPw = "비밀번호는 6자 이상이어야 합니다.";
         }
+
         if (!nickRegex.test(uNick)) {
             newErrors.uNick = "닉네임은 2자 이상 6자 이하의 한글, 영어 또는 숫자여야 합니다.";
         }
+
         if (!phoneRegex.test(uPhone)) {
             newErrors.uPhone = "전화번호는 '000-0000-0000' 형식이어야 합니다.";
         }
@@ -60,8 +65,9 @@ const SignIn = () => {
         setUAge(e.target.value);
     }
 
+    // 하이픈 자동 입력
     const hypenPhoneNumber = (value) => {
-        const cleaned = value.replace(/\D/g, '');
+        const cleaned = value.replace(/\D/g, ''); 
         const match = cleaned.match(/^(\d{3})(\d{3,4})(\d{4})$/);
         if (match) {
             return `${match[1]}-${match[2]}-${match[3]}`;
@@ -79,11 +85,21 @@ const SignIn = () => {
     }
 
     const signUpBtnClickHandler = () => {
+        // 아이디 DB와 대조
+        let acMemDB = getAcMemDB();
+        if (acMemDB !== null) {
+            let aldAcMem = JSON.parse(acMemDB);
+            if (aldAcMem[uId]) {
+                alert("이미 가입된 회원입니다.");
+                navigate('/login');
+                return; // 중복 회원이면 가입 절차 중단
+            }
+        }
+
         if (!validateInputs()) {
             return;
         }
 
-        let acMemDB = getAcMemDB();
         if (acMemDB === null) {
             let newMemObj = {
                 [uId]: {
@@ -97,6 +113,7 @@ const SignIn = () => {
                 }
             }
             setAcMemDB(newMemObj);
+
         } else {
             let aldAcMem = JSON.parse(acMemDB);
             aldAcMem[uId] = {
@@ -110,13 +127,15 @@ const SignIn = () => {
             }
             setAcMemDB(aldAcMem);
         }
-  
+
+        // 찜 목록 생성
         let acFavDB = getAcFavDB();
         if (acFavDB === null) {
             let newFavs = {
                 [uId]: {}
             }
             setAcFavDB(newFavs);
+
         } else {
             let aldAcFavDB = JSON.parse(acFavDB);
             aldAcFavDB[uId] = {};

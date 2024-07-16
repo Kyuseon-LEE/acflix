@@ -7,12 +7,10 @@ import { getMyFavDB, getMyInfo, setMyInfo, getAllFavDB, setAcMemDB, setAcFavDB, 
 import { useNavigate } from "react-router-dom";
 
 import 'slick-carousel/slick/slick.css';
-
-
-
 import '../css/index.css';
 import UserProfileModal from "./UserProfileModal.jsx";
 
+const profilePic = process.env.PUBLIC_URL + '/imgs/none.png' 
 
 const UserProfile = ({setIsSignIned}) => {
 
@@ -33,22 +31,21 @@ const UserProfile = ({setIsSignIned}) => {
 
   const navigate = useNavigate();
 
+  // 유효성 검사
   const validateInputs = () => {
     const newErrors = {};
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const pwRegex = /^.{6,}$/;
     const nickRegex = /^[가-힣a-zA-Z0-9]{2,6}$/;
     const phoneRegex = /^\d{3}-\d{4}-\d{4}$/;
 
-    if (!emailRegex.test(uId)) {
-        newErrors.uId = "올바른 이메일 주소를 입력하세요.";
-    }
     if (!pwRegex.test(uPw)) {
         newErrors.uPw = "비밀번호는 6자 이상이어야 합니다.";
     }
+
     if (!nickRegex.test(uNick)) {
         newErrors.uNick = "닉네임은 2자 이상 6자 이하의 한글, 영어 또는 숫자여야 합니다.";
     }
+
     if (!phoneRegex.test(uPhone)) {
         newErrors.uPhone = "전화번호는 '000-0000-0000' 형식이어야 합니다.";
     }
@@ -62,13 +59,11 @@ const UserProfile = ({setIsSignIned}) => {
 
     let myInfo = getMyInfo(getLoginedSessionID());
     
-
     if(myInfo === undefined){
       alert('로그인이 필요합니다.');
 
       navigate('/login');
       return;
-      
     }
 
     setUId(myInfo.uId);
@@ -172,7 +167,6 @@ const UserProfile = ({setIsSignIned}) => {
   }, [refresh]);
 
   // Handler
-
   const uPwChangeHandler = (e) => {
     console.log('[UserProfile] uPwChangeHandler()');
     setUPw(e.target.value);
@@ -193,12 +187,15 @@ const UserProfile = ({setIsSignIned}) => {
     const file = e.target.files[0];
     setUPicture(URL.createObjectURL(file));
   }
+
+  const basicImgClickHandler = () => {
+    setUPicture(profilePic);
+  }
   
   const modifyBtnClickHandler = () => {
     console.log('[UserProfile] modifyBtnClickHandler()');
-
     let myInfo = getMyInfo(getLoginedSessionID());
-    
+
     if (!validateInputs()) {
       return;
     }
@@ -209,12 +206,9 @@ const UserProfile = ({setIsSignIned}) => {
     myInfo.uPicture = uPicture;
 
     setMyInfo(getLoginedSessionID(), myInfo);
-
     alert("회원정보가 수정되었습니다.");
-
     setLoginedSessionID();
     setIsSignIned(false);
-
     navigate('/login');
   }
 
@@ -231,12 +225,11 @@ const UserProfile = ({setIsSignIned}) => {
       let allFavInfo = getAllFavInfo();
       delete allFavInfo[uId];
       setAcFavDB(allFavInfo);
-
       alert('회원탈퇴가 완료되었습니다.');
-
       setLoginedSessionID();
       setIsSignIned(false);
       navigate('/')
+
     } else {
       alert('회원탈퇴가 취소되었습니다.');
     }
@@ -251,7 +244,7 @@ const UserProfile = ({setIsSignIned}) => {
     slidesToScroll: 3,
     arrows: false,    
     touchThreshold : 100,
-};
+  };
   // 순위 Slide
   const sliderSettings2 = {
    infinite: false,
@@ -281,7 +274,8 @@ const UserProfile = ({setIsSignIned}) => {
     <>
     <div className="user_wrap">
     <div className="user-profile1">
-      {uPicture && <img src={uPicture} className="profile_img"alt="Profile"  />}
+      {uPicture && <img src={uPicture} className="profile_img" alt="Profile" />}
+      <button className="btn_img" onClick={basicImgClickHandler}>기본 이미지 적용</button>
       <h3>{uNick}님의 페이지</h3>
         <label className="input-file-button" for="file">
           <img src={process.env.PUBLIC_URL + '/imgs/profile_none.png'} alt="" />
@@ -291,10 +285,10 @@ const UserProfile = ({setIsSignIned}) => {
         <input className="txt_basic1" type="email" value={uId} readOnly/>
         <br />
         <input className="txt_basic1" type="password" value={uPw} onChange={uPwChangeHandler} placeholder="비밀번호" />
-        {errors.uPw && <p style={{ color: 'red', textAlign: 'center' }}>{errors.uPw}</p>}
+        {errors.uPw && <p>{errors.uPw}</p>}
         <br />
         <input className="txt_basic1" type="text" value={uNick} onChange={uNickChangeHandler} placeholder="닉네임" />
-        {errors.uNick && <p style={{ color: 'red', textAlign: 'center' }}>{errors.uNick}</p>}
+        {errors.uNick && <p>{errors.uNick}</p>}
         <br />
         <input className="txt_basic1" name="gender" id="gen" value={uGender} readOnly>  
         </input>
@@ -303,7 +297,7 @@ const UserProfile = ({setIsSignIned}) => {
         </input>
         <br />
         <input className="txt_basic1" type="text" value={uPhone} onChange={uPhoneChangeHandler} placeholder="휴대전화번호" />
-        {errors.uPhone && <p style={{ color: 'red', textAlign: 'center' }}>{errors.uPhone}</p>}
+        {errors.uPhone && <p>{errors.uPhone}</p>}
         <br />
         <button className="btn_basic" onClick={modifyBtnClickHandler}>정보 수정</button>
         <button className="btn_basic" onClick={deleteBtnClickHandler}>회원 탈퇴</button>

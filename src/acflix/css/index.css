@@ -159,7 +159,7 @@ button.btn_basic:hover{
     color: #242424;
     margin-bottom:5px;
 }
-/* 폰트 색상 및 가운데 정렬 추가(장진언) */
+/* 폰트 색상 및 가운데 정렬 추가 */
 .sign_up_modal_content p{
     position: fixed;
     left: 50%;
@@ -249,7 +249,7 @@ select{
     margin: 0 auto;
 }
 
-/* 로그아웃 css 추가(장진언) */
+/* 로그아웃 css 추가 */
 #main_wrap .header ul li button {
     color: #fff;
     background-color: #000;
@@ -414,7 +414,7 @@ select{
     border-radius: 50%;
     margin: 0 auto;
     display: block;
-    margin-bottom:30px;
+    margin-bottom:10px;
 }
 .input-file-button img{
     width:45px;
@@ -423,9 +423,36 @@ select{
     left:52.5%;
     top:9%;
     cursor: pointer;
-  }
+}
 
+/* 기본 이미지 적용 버튼 */
+button.btn_img {
+    width: 140px;
+    height:35px;
+    color:#fff;
+    font-size:.9em;
+    background-color: #e00808;
+    border : none;
+    outline: none;
+    border-radius: 20px;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    box-sizing: border-box;
+    margin-bottom: 50px;
+}
 
+button.btn_img:hover {
+    background-color: #a10808;
+}
+
+/* 프로필 유효성 검사 */
+.user-profile1 p{
+    font-size: 0.9em;
+    line-height: 14px;
+    color: #f00;
+    text-align: center;
+}
 
 /* 찜목록 */
 .favbtn {
