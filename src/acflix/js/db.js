@@ -75,8 +75,13 @@ export const setAcFavDB = (favs) => {
 export const getMyFavDB = (uId) => {
     console.log('[DB] getMyFavDB()');
 
-    let favs = JSON.parse(getAcFavDB());
-    let myFavs = favs[uId];
+    let favs = JSON.parse(getAcFavDB()) || {};
+    let myFavs = favs[uId] || [];
+
+    // 만약 myFavs가 배열이 아니라면 빈 배열로 설정
+    if (!Array.isArray(myFavs)) {
+        myFavs = [];
+    }
 
     return myFavs;
 

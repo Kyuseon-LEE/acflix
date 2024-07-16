@@ -158,7 +158,7 @@ const ContentsModal = ({ movieInfo, closeModal }) => {
                         <p className="m_audi">관객수: {`${Math.floor(movieInfo.popularity)}만 명`}</p>
                         <img src={process.env.PUBLIC_URL + '/imgs/ytb.png'} className="ytb" onClick={playBtnClickHandler} />
                         <button className='favbtn' onClick={favBtnClickHandler}>
-                            {myFavs.includes(movieInfo.id) ? (
+                            {Array.isArray(myFavs) && myFavs.includes(movieInfo.id) ? (
                                 <img src="/imgs/heart1.png" alt="favMv" />
                             ) : (
                                 <img src="/imgs/heart2.png" alt="noFavMv" />

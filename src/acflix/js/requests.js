@@ -10,7 +10,7 @@ const requests = {
 
     fetchPlay: "movie/movie_id/videos?language=ko-KR",               // 유튜브 스트리밍
 
-    fetchSimilar: "movie/movie_id/similar?language=ko-KR&page=1"     // 연관 영화
+    fetchSimilar: "movie/movie_id/similar?language=ko-KR"     // 연관 영화
   };
   
   export default requests;
