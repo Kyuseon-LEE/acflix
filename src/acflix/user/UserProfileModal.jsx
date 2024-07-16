@@ -104,8 +104,6 @@ const UserProfileModal = ({ movieInfo, closeModal }) => {
 
         } else {
 
-            alert(`${movieInfo.title}가 이미 찜 목록에 있습니다!!`);
-
             // 찜 목록 삭제 알림
             if (window.confirm(`${movieInfo.title}을 찜 목록에서 삭제하시겠습니까?`)) {
 
