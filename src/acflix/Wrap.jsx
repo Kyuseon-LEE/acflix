@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes, Navigate, Outlet, BrowserRouter } from "react-router-dom";
 
 import Home from "./Home";
@@ -26,6 +26,11 @@ const PrivateRoute = ({ isSignIned }) => {
 
 const Wrap = () => {
     const [isSignIned, setIsSignIned] = useState(false);
+    
+    // 페이지 이동 시 상단 노출
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    })
 
     return (
       <BrowserRouter>

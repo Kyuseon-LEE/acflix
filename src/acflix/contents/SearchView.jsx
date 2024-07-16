@@ -35,6 +35,7 @@ const SearchView = () => {
           console.log('Error fetching data:', error);
       }
     };
+    
 
       // 비슷한 영화 Function START
       const fetchSimilarMovies = async (movieId) => {
@@ -52,6 +53,11 @@ const SearchView = () => {
 
   }, [search]); // search 값이 변경될 때마다 fetchData 다시 호출
 
+  // 페이지 이동 시 상단 노출
+  useEffect(() => {
+    window.scrollTo(0, 0);
+})
+
 
 
 
@@ -65,6 +71,10 @@ const SearchView = () => {
         setSelectedMovie(null);
         
     }
+    const onErrorImg = (e) => {
+      e.target.onerror = null;
+      e.target.src="https://via.placeholder.com/200?text=none";
+    }
 
     return (
       <div className="search-list">
@@ -73,7 +83,8 @@ const SearchView = () => {
             {searchMv && searchMv.length > 0 ? (
               searchMv.map((movie) => (
                 <li key={movie.id} className="movie" onClick={() => movieInfoClickHandler(movie)}>
-                  <img src={`http://image.tmdb.org/t/p/w300${movie.poster_path}`} alt={movie.title}/>
+                  <img src={`http://image.tmdb.org/t/p/w300${movie.poster_path}`} alt={movie.title} 
+                  onError={onErrorImg}/>
                   <a href="#none" className="title">{movie.title}</a>
                 </li>
               ))
@@ -86,7 +97,7 @@ const SearchView = () => {
           {relative.length > 0 ? (
             relative.map((movie) => (
               <li key={movie.id} className="movie" onClick={() => movieInfoClickHandler(movie)}>
-                <img src={`http://image.tmdb.org/t/p/w300${movie.poster_path}`} alt={movie.title}/>
+                <img src={`http://image.tmdb.org/t/p/w300${movie.poster_path}`} alt={movie.title} onError={onErrorImg}/>
                 <a href="#none" className="title">{movie.title}</a>
               </li>
             ))

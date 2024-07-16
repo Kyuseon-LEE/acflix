@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from '../js/api.js';
+import requests from '../js/requests.js';
 import { getMyFavDB, setMyFavDB } from '../js/db.js';
 import { getLoginedSessionID } from '../js/session.js';
 
@@ -7,10 +8,13 @@ const SearchViewModal = ( { movieInfo, closeModal } ) => {
     
     // Hook
     const [play, setPlay] = useState(null);
+    const [movieList, setMovieList] = useState([]);
+    const [selectedMovie, setSelectedMovie] = useState(null);
 
     useEffect(() => {
 
         fetchPlay(movieInfo.id);
+        fetchData(requests.fetchTopRated, setMovieList);
 
     }, [movieInfo.id]);
 
@@ -26,6 +30,16 @@ const SearchViewModal = ( { movieInfo, closeModal } ) => {
             }
         } catch (error) {
             console.log('Error fetching video data:', error);
+        }
+    };
+
+    // get api
+    const fetchData = async (request, setData) => {
+        try {
+            const response = await api.get(request);
+            setData(response.data.results);
+        } catch (error) {
+            console.log('Error fetching data:', error);
         }
     };
 
@@ -90,6 +104,15 @@ const SearchViewModal = ( { movieInfo, closeModal } ) => {
             }
         }
     };
+    
+    const movieInfoClickHandler = (item) => {
+        setSelectedMovie(item);
+    }
+
+    const onErrorImg = (e) => {
+        e.target.onerror = null;
+        e.target.src="https://via.placeholder.com/300?text=none";
+      }
 
     
     // Function
@@ -103,18 +126,18 @@ const SearchViewModal = ( { movieInfo, closeModal } ) => {
     
     return(
         <div className="modal">
-            <div className="modal-content">
-                <span className="close" onClick={closeModal}>&times;</span>
-                <img src={`http://image.tmdb.org/t/p/w200${movieInfo.poster_path}`} alt={movieInfo.title} />
-                <h2>{movieInfo.title}</h2>
-                <img src={process.env.PUBLIC_URL + '/imgs/ytb.png'} className="ytb" onClick={playBtnClickHandler} />
-                <p className="m_info">상세정보: {movieInfo.overview}</p><br />
-                <p className="m_score">평점: {`${Math.round(movieInfo.vote_average * 100) / 100}점`}</p><br />
-                <p className="m_audi">관객수: {`${Math.floor(movieInfo.popularity)}만 명`}</p>
-                
-                <button className='favbtn' onClick={favBtnClickHandler}></button>
-            </div>
+            <div className="modal-content">       
+            <img src={`http://image.tmdb.org/t/p/w200${movieInfo.poster_path}`} alt={movieInfo.title} onError={onErrorImg}/>
+            <h2>{movieInfo.title}</h2>            
+            <p className="m_info">상세정보: {movieInfo.overview}</p><br />
+            <p className="m_score">평점: {`${Math.round(movieInfo.vote_average * 100) / 100}점`}</p><br />
+            <p className="m_audi">관객수: {`${Math.floor(movieInfo.popularity)}만 명`}</p>
+            <img src={process.env.PUBLIC_URL + '/imgs/ytb.png'} className="ytb" onClick={playBtnClickHandler} />
+            <button className='favbtn' onClick={favBtnClickHandler}></button>
+            <span className="close" onClick={closeModal}>&times;</span>
+            
         </div>
+    </div>
     );
 }
 
