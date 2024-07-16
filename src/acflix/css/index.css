@@ -295,24 +295,6 @@ select{
     left:5%;
 }
 
-/* USER PROFILE */
-
-.user-profile1{
-    margin-top:100px;
-    margin-bottom:100px;
-}
-.user-profile1 h3{
-    text-align: center;
-    color:#fff;
-    margin-bottom:20px;
-}
-.user-profile-list{
-    padding : 20px;
-    color: #fff;
-}
-.user-profile-list img{
-    cursor: pointer;
-}
 
 
 .txt_basic1 {
@@ -334,10 +316,31 @@ select{
     margin: auto;
     display: block;
 }
-/* 유저 프로필 부분 */
+
+/* USER PROFILE */
+
+.user-profile1{
+    margin-top:100px;
+    margin-bottom:100px;
+}
+.user-profile1 h3{
+    text-align: center;
+    color:#fff;
+    margin-bottom:20px;
+}
+.user-profile-list{
+    padding : 20px;
+    color: #fff;
+}
+.user-profile-list img{
+    cursor: pointer;
+}
+
 
 .user_wrap{
-    height:270vh
+    height:100%;
+    min-height: 100vh;
+    margin-bottom:300px;
 }
 .user-profile2{
     margin-bottom: 100px;
@@ -371,6 +374,10 @@ select{
     color:#fff;
     margin-bottom:20px;
     margin-left: 20px;
+}
+.user-profile3 h3{
+    color:#fff;
+    opacity: 0.7;
 }
 
 
@@ -424,6 +431,17 @@ select{
     top:9%;
     cursor: pointer;
 }
+.user-profile2 li:hover,
+.user-profile3 li:hover
+{
+    transform: translateY(-10px);
+    transition: 0.3s;
+}
+.user-profile2 li:hover .title,
+.user-profile3 li:hover h3{
+    opacity: 1;
+    transition: 0.3s;
+}
 
 /* 기본 이미지 적용 버튼 */
 button.btn_img {
@@ -468,20 +486,72 @@ button.btn_img:hover {
 }
 
 /* 검색창 페이지 */
+
 .search-list{
     margin-top:60px;
-    height:100vh;
+    height:100%;
+    min-height: 100vh;
+    margin-bottom: 200px;
+}
+.search-list ul{
+    overflow: hidden;
+}
+.search-results,
+ul.search-list
+{
+    margin-left:50px;
+}
+ul.search-list{
+    margin-top: 0px;
 }
 .search-results .movie{
     float:left;
 }
-.search-results .movie img{
+.search-results .movie img,
+ul.search-list .movie img
+{
     width:200px;
     height:300px;
-    margin-right:50px;
+    margin-right: 20px;
+    border-radius: 10px;
+    cursor: pointer;
 }
-.search-results .movie h3{
+
+.search-results .movie .title,
+ul.search-list .movie .title
+{
     color: #fff;
-    width:200px;
     font-size: 0.9em;
+    width:200px;
+    height: 70px;
 }
+.search-list .info,
+ul.search-list h2 {
+    padding: 30px;
+    padding-left:50px;
+    font-size: 2.3em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color:#fff;
+}
+
+ul.search-list h2{
+    padding-left: 0px;
+}
+ul.search-list .movie{
+    float:left;
+}
+
+.search-list .movie:hover{
+    transform: translateY(-10px);
+    transition: 0.3s;
+}
+.search-list .movie:hover .title{
+    opacity: 1;
+    transition: 0.3s;
+}
+.search-list p{
+    color: #fff;
+    font-size:1.3em;
+}
+

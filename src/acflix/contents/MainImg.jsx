@@ -47,13 +47,15 @@ const MainImg = () => {
                 <div className="main1">
                     <a href="#none">
                         <img className="img1" src={process.env.PUBLIC_URL + '/imgs/main1.jpg'} alt="main1" />
-                        <img className="logo1" src={process.env.PUBLIC_URL + '/imgs/main1_logo.png'} alt="main1" onClick={() => playMainImg("https://www.youtube.com/embed/CWfWMxDqbN0?si=rgHmbQqoUNPY0RzS")} />
+                        <img className="logo1" src={process.env.PUBLIC_URL + '/imgs/main1_logo.png'} alt="main1" 
+                        onClick={() => playMainImg("https://www.youtube.com/embed/CWfWMxDqbN0?si=rgHmbQqoUNPY0RzS")} />
                     </a>
                 </div>
                 <div className="main2">
                     <a href="#none">
                         <img className="img2" src={process.env.PUBLIC_URL + '/imgs/main2.jpg'} alt="main2" />
-                        <img className="logo2" src={process.env.PUBLIC_URL + '/imgs/main2_logo.png'} alt="main2" onClick={() => playMainImg("https://www.youtube.com/embed/-AZ7cnwn2YI?si=_V31nZuLpAPN_WLh")}/>
+                        <img className="logo2" src={process.env.PUBLIC_URL + '/imgs/main2_logo.png'} alt="main2" 
+                        onClick={() => playMainImg("https://www.youtube.com/embed/-AZ7cnwn2YI?si=_V31nZuLpAPN_WLh")}/>
                     </a>
                 </div>
             </Slider>
