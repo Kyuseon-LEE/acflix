@@ -62,8 +62,8 @@ const UserProfileModal = ({ movieInfo, closeModal }) => {
         if (play !== null) {
 
             const iframe = document.createElement('iframe');
-            iframe.width = '1000';
-            iframe.height = '700';
+            iframe.width = '900';
+            iframe.height = '600';
             iframe.src = `https://www.youtube.com/embed/${play}`;
             iframe.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
             iframe.allowFullscreen = true;
@@ -119,8 +119,8 @@ const UserProfileModal = ({ movieInfo, closeModal }) => {
         }
     };
 
-    const movieInfoClickHandler = (item) => {
-        setSelectedMovie(item);
+    const movieInfoClickHandler = (movie) => {
+        setSelectedMovie(movie);
     }
     
     // Function
@@ -148,21 +148,21 @@ const UserProfileModal = ({ movieInfo, closeModal }) => {
                 <span className="close" onClick={closeModal}>&times;</span>
                 <div className="modal-list">
                 <h2>추천 컨텐츠</h2>
-                {movieList.slice(0,5).map((item, idx) => (
-                    <label key={idx} onClick={() => movieInfoClickHandler(item)}>
+                {movieList.slice(0,5).map((movie, idx) => (
+                    <label key={idx} onClick={() => movieInfoClickHandler(movie)}>
                         <div className="modal-item">
-                            <img src={`http://image.tmdb.org/t/p/w200${item.poster_path}`} alt={item.title} />
+                            <img src={`http://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
                             <br />
-                            <a href="#none" className="modal-title">{item.title}</a>
+                            <a href="#none" className="modal-title">{movie.title}</a>
                         </div>
                     </label>
                 ))}
-                {movieList.slice(6,11).map((item, idx) => (
-                    <label key={idx} onClick={() => movieInfoClickHandler(item)}>
+                {movieList.slice(6,11).map((movie, idx) => (
+                    <label key={idx} onClick={() => movieInfoClickHandler(movie)}>
                         <div className="modal-item">
-                            <img src={`http://image.tmdb.org/t/p/w200${item.poster_path}`} alt={item.title} />
+                            <img src={`http://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
                             <br />
-                            <a href="#none" className="modal-title">{item.title}</a>
+                            <a href="#none" className="modal-title">{movie.title}</a>
                         </div>
                     </label>
                 ))}
