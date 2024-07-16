@@ -12,7 +12,9 @@
 .modal-content {
     background-color: #222326;
     border-radius: 20px;
-    max-height: calc(100vh - 200px);
+    height:auto;
+    height: 850px;
+    overflow-y: auto;
     scrollbar-width: none;
     width:auto;
     overflow-y: auto;
@@ -20,7 +22,6 @@
     top:50%;
     left:50%;
     transform: translate(-50%,-50%);
-    box-sizing: border-box;
     padding:20px;
 }
 .modal-content img{
@@ -182,6 +183,7 @@
 }
 .modal-list .modal-item{
     margin-left:18px;
+    margin-bottom:30px;
 }
 
 .modal-list .modal-item img{
@@ -199,6 +201,7 @@
     display: block;
     opacity: 0.7;
     text-align: center;
+    height:30px;
 }
 
 /* 찜 버튼 */
