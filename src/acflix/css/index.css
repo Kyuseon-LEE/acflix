@@ -422,13 +422,14 @@ select{
     margin: 0 auto;
     display: block;
     margin-bottom:10px;
+    position: relative;
 }
 .input-file-button img{
     width:45px;
     height:45px;
     position: absolute;
     left:52.5%;
-    top:9%;
+    top:14%;
     cursor: pointer;
 }
 .user-profile2 li:hover,
@@ -473,16 +474,15 @@ button.btn_img:hover {
 }
 
 /* 찜목록 */
-.favbtn {
-    --c: red;
-    width: 30px;
-    aspect-ratio: 1;
-    background:
-     /* 1 */ radial-gradient(circle at 60% 65%,var(--c) 64%,#0000 65%) top left/50% 50%,
-     /* 2 */ radial-gradient(circle at 40% 65%,var(--c) 64%,#0000 65%) top right/50% 50%,
-     /* 3 */ conic-gradient(from -45deg at 50% 85.5%,var(--c) 90deg,#0000 0) bottom/100% 50%;
-    background-repeat: no-repeat;
-    margin-top:6px;
+.favbtn{
+    margin: 0;
+    padding:0;
+}
+.favbtn img{
+    width:30px;
+    height:30px;
+    margin:0;
+    padding:0;
 }
 
 /* 검색창 페이지 */
