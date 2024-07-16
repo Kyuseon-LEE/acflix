@@ -192,7 +192,9 @@ const UserProfile = ({setIsSignIned}) => {
   const profilePicChangeHandler = (e) => {
     console.log('[UserProfile] profilePicChangeHandler()');
     const file = e.target.files[0];
+    if (file) {
     setUPicture(URL.createObjectURL(file));
+    }
   }
 
   const basicImgClickHandler = () => {
