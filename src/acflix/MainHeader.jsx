@@ -40,9 +40,9 @@ const MainHeader = ({ isSignIned, setIsSignIned }) => {
       <ul>
         {isSignIned ? (
           <>
-            <li><input className="search" placeholder="찾으시는 영화가 있으신가요?" onChange={searchHandler} value={search}/></li>
             <li><Link to="/searchview" onClick={clearSearch} state={{ search: search } } >검색</Link></li>
-            <li><img src={uPicture} alt="Profile" style={{ width: '30px', height: '30px', borderRadius: '50%' }} /></li>
+            <li><input className="search" placeholder="찾으시는 영화가 있으신가요?" onChange={searchHandler} value={search}/></li>
+            <li><img src={uPicture} alt="Profile" /></li>
             <li><Link to="/userprofile">내 프로필</Link></li>
             <li><button onClick={logoutClickHandler}><span>로그아웃</span></button></li>
           </>

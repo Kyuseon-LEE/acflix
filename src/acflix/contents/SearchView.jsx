@@ -45,7 +45,7 @@ const SearchView = () => {
     }
 
     return (
-        <div className="content-list">
+        <div className="search-list">
           <h2 className="info">"{search}"에 대한 검색 결과</h2>
           <div className="search-results">
             {searchMv && searchMv.length > 0 ? (

@@ -219,9 +219,27 @@ select{
     float:right;
     padding : 15px;
 }
+#main_wrap .header ul li:nth-child(1){
+    margin-right: 20px;
+}
 #main_wrap .header ul li img{
-    line-height: 35px;
-    padding: 0px;
+    width:40px;
+    height: 40px;
+    border-radius: 50%;
+    padding: 0;
+    margin:0;
+    margin-top:-7px;
+}
+#main_wrap .header ul li .search{
+    width:210px;
+    height:30px;
+    text-align: left;
+    outline: none;
+    background-color:#000;
+    color:#fff;
+    border:1px solid #fff;
+    margin: -7px;
+    padding-left:5px;
 }
 #main_wrap .header ul li a{
     color: #fff;
@@ -367,6 +385,7 @@ select{
     width:200px;
     height:300px;
     border-radius: 10px;
+    cursor: pointer;
 }
 .user-profile3 .user-profile-list {
     position: relative;
@@ -375,6 +394,7 @@ select{
     width:300px;
     height:450px;
     margin-right:50px;
+    cursor: pointer;
 }
 
 .user-profile3 .rank{
@@ -396,7 +416,14 @@ select{
     display: block;
     margin-bottom:30px;
 }
-
+.input-file-button img{
+    width:45px;
+    height:45px;
+    position: absolute;
+    left:52.5%;
+    top:9%;
+    cursor: pointer;
+  }
 
 
 
@@ -411,4 +438,23 @@ select{
      /* 3 */ conic-gradient(from -45deg at 50% 85.5%,var(--c) 90deg,#0000 0) bottom/100% 50%;
     background-repeat: no-repeat;
     margin-top:6px;
+}
+
+/* 검색창 페이지 */
+.search-list{
+    margin-top:60px;
+    height:100vh;
+}
+.search-results .movie{
+    float:left;
+}
+.search-results .movie img{
+    width:200px;
+    height:300px;
+    margin-right:50px;
+}
+.search-results .movie h3{
+    color: #fff;
+    width:200px;
+    font-size: 0.9em;
 }

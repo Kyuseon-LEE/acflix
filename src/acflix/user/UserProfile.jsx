@@ -283,7 +283,10 @@ const UserProfile = ({setIsSignIned}) => {
     <div className="user-profile1">
       {uPicture && <img src={uPicture} className="profile_img"alt="Profile"  />}
       <h3>{uNick}님의 페이지</h3>
-        <input className="txt_basic1" type="file" accept="image/*" id="file" onChange={profilePicChangeHandler} />
+        <label className="input-file-button" for="file">
+          <img src={process.env.PUBLIC_URL + '/imgs/profile_none.png'} alt="" />
+        </label>
+        <input type="file" accept="image/*" id="file" style={{display:"none"}} onChange={profilePicChangeHandler} />
         <br />
         <input className="txt_basic1" type="email" value={uId} readOnly/>
         <br />
