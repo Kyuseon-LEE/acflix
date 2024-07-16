@@ -10,11 +10,15 @@ const ContentsModal = ({ movieInfo, closeModal }) => {
     const [play, setPlay] = useState(null);
     const [movieList, setMovieList] = useState([]);
     const [selectedMovie, setSelectedMovie] = useState(null);
+    const [myFavs, setMyFavs] = useState([]);
 
     useEffect(() => {
 
         fetchPlay(movieInfo.id);
         fetchData(requests.fetchTopRated, setMovieList);
+
+
+        setMyFavs(getMyFavDB(getLoginedSessionID()));
 
     }, [movieInfo.id]);
 
@@ -89,31 +93,28 @@ const ContentsModal = ({ movieInfo, closeModal }) => {
 
     const favBtnClickHandler = () => {
 
-        let myFavs = getMyFavDB(getLoginedSessionID());
+        let updatedFavs = [...myFavs]; // 현재 찜하기 업데이트
+        const movieId = movieInfo.id;
 
-        if (!Array.isArray(myFavs)) {
-            myFavs = [];
-        }
-    
         // 찜 목록 중복체크
-        if (!myFavs.includes(movieInfo.id)) {
+        if (!updatedFavs.includes(movieId)) {
 
-            myFavs.push(movieInfo.id);
-            setMyFavDB(getLoginedSessionID(), myFavs);
+            updatedFavs.push(movieId);
+            setMyFavDB(getLoginedSessionID(), updatedFavs);
+            setMyFavs(updatedFavs); 
             alert(`${movieInfo.title}을 찜하셨습니다!!`);
 
         } else {
 
             alert(`${movieInfo.title}가 이미 찜 목록에 있습니다!!`);
 
-
             // 찜 목록 삭제 알림
-            if(window.confirm(`${movieInfo.title}을 찜 목록에서 삭제하시겠습니까?`)){
+            if (window.confirm(`${movieInfo.title}을 찜 목록에서 삭제하시겠습니까?`)) {
 
-                myFavs = myFavs.filter((e) => e !== movieInfo.id);
-                setMyFavDB(getLoginedSessionID(), myFavs);
+                updatedFavs = updatedFavs.filter((e) => e !== movieId);
+                setMyFavDB(getLoginedSessionID(), updatedFavs);
+                setMyFavs(updatedFavs); 
                 alert(`${movieInfo.title}을 찜 목록에서 삭제하셨습니다!!`);
-                
 
             } else {
                 alert('찜 목록 삭제를 취소하셨습니다.');
@@ -121,8 +122,8 @@ const ContentsModal = ({ movieInfo, closeModal }) => {
         }
     };
 
-    const movieInfoClickHandler = (item) => {
-        setSelectedMovie(item);
+    const movieInfoClickHandler = (movie) => {
+        setSelectedMovie(movie);
     }
 
     
@@ -139,35 +140,53 @@ const ContentsModal = ({ movieInfo, closeModal }) => {
     return (
         <div className="modal">
         <div className="modal-content">       
-            <img src={`http://image.tmdb.org/t/p/w200${movieInfo.poster_path}`} alt={movieInfo.title} />
-            <h2>{movieInfo.title}</h2>            
-            <p className="m_info">상세정보: {movieInfo.overview}</p><br />
-            <p className="m_score">평점: {`${Math.round(movieInfo.vote_average * 100) / 100}점`}</p><br />
-            <p className="m_audi">관객수: {`${Math.floor(movieInfo.popularity)}만 명`}</p>
-            <img src={process.env.PUBLIC_URL + '/imgs/ytb.png'} className="ytb" onClick={playBtnClickHandler} />
-            <button className='favbtn' onClick={favBtnClickHandler}></button>
-            <span className="close" onClick={closeModal}>&times;</span>
+        {selectedMovie ? (
+                    <>
+                        <img src={`http://image.tmdb.org/t/p/w200${selectedMovie.poster_path}`} alt={selectedMovie.title} />
+                        <h2>{selectedMovie.title}</h2>
+                        <p className="m_info">상세정보: {selectedMovie.overview}</p><br />
+                        <p className="m_score">평점: {`${Math.round(selectedMovie.vote_average * 100) / 100}점`}</p><br />
+                        <p className="m_audi">관객수: {`${Math.floor(selectedMovie.popularity)}만 명`}</p>
+                        <span className="close" onClick={handleCloseModal}>&times;</span>
+                    </>
+                ) : (
+                    <>
+                        <img src={`http://image.tmdb.org/t/p/w200${movieInfo.poster_path}`} alt={movieInfo.title} />
+                        <h2>{movieInfo.title}</h2>
+                        <p className="m_info">상세정보: {movieInfo.overview}</p><br />
+                        <p className="m_score">평점: {`${Math.round(movieInfo.vote_average * 100) / 100}점`}</p><br />
+                        <p className="m_audi">관객수: {`${Math.floor(movieInfo.popularity)}만 명`}</p>
+                        <img src={process.env.PUBLIC_URL + '/imgs/ytb.png'} className="ytb" onClick={playBtnClickHandler} />
+                        <button className='favbtn' onClick={favBtnClickHandler}>
+                            {myFavs.includes(movieInfo.id) ? (
+                                <img src="/imgs/heart1.png" alt="favMv" />
+                            ) : (
+                                <img src="/imgs/heart2.png" alt="noFavMv" />
+                            )}
+                        </button>
+                        <span className="close" onClick={handleCloseModal}>&times;</span>
+                    </>
+                )}
             <div className="modal-list">
                 <h2>추천 컨텐츠</h2>
-                {movieList.slice(0,5).map((item, idx) => (
-                    <label key={idx} onClick={() => movieInfoClickHandler(item)}>
+                {movieList.slice(0,5).map((movie, idx) => (
+                    <label key={idx} onClick={() => movieInfoClickHandler(movie)}>
                         <div className="modal-item">
-                            <img src={`http://image.tmdb.org/t/p/w200${item.poster_path}`} alt={item.title} />
+                            <img src={`http://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
                             <br />
-                            <a href="#none" className="modal-title">{item.title}</a>
+                            <a href="#none" className="modal-title">{movie.title}</a>
                         </div>
                     </label>
                 ))}
-                {movieList.slice(6,11).map((item, idx) => (
-                    <label key={idx} onClick={() => movieInfoClickHandler(item)}>
+                {movieList.slice(6,11).map((movie, idx) => (
+                    <label key={idx} onClick={() => movieInfoClickHandler(movie)}>
                         <div className="modal-item">
-                            <img src={`http://image.tmdb.org/t/p/w200${item.poster_path}`} alt={item.title} />
+                            <img src={`http://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
                             <br />
-                            <a href="#none" className="modal-title">{item.title}</a>
+                            <a href="#none" className="modal-title">{movie.title}</a>
                         </div>
                     </label>
-                ))}
-                
+                ))}    
             </div>
         </div>
     </div>

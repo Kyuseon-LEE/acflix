@@ -443,21 +443,6 @@ select{
     transition: 0.3s;
 }
 
-
-
-/* 찜목록 */
-.favbtn {
-    --c: red;
-    width: 30px;
-    aspect-ratio: 1;
-    background:
-     /* 1 */ radial-gradient(circle at 60% 65%,var(--c) 64%,#0000 65%) top left/50% 50%,
-     /* 2 */ radial-gradient(circle at 40% 65%,var(--c) 64%,#0000 65%) top right/50% 50%,
-     /* 3 */ conic-gradient(from -45deg at 50% 85.5%,var(--c) 90deg,#0000 0) bottom/100% 50%;
-    background-repeat: no-repeat;
-    margin-top:6px;
-}
-
 /* 검색창 페이지 */
 
 .search-list{

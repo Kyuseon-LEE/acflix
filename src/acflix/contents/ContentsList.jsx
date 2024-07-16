@@ -50,8 +50,8 @@ const ContentsList = () => {
     };
     
     // Handler
-    const movieInfoClickHandler = (item) => {
-        setSelectedMovie(item);
+    const movieInfoClickHandler = (movie) => {
+        setSelectedMovie(movie);
     }
 
     // Function
@@ -92,36 +92,36 @@ const ContentsList = () => {
         <div className="content-list">            
             <h2 className="info">TOP 20</h2>
             <Slider {...sliderSettings}>                
-                {movieList.map((item, idx) => (
-                    <label key={idx} onClick={() => movieInfoClickHandler(item)}>
+                {movieList.map((movie, idx) => (
+                    <label key={idx} onClick={() => movieInfoClickHandler(movie)}>
                         <div className="movie-item">
-                            <img src={`http://image.tmdb.org/t/p/w500${item.poster_path}`} alt={item.title} />
+                            <img src={`http://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
                             <br />
-                            <a href="#none" className="title">{item.title}</a>
+                            <a href="#none" className="title">{movie.title}</a>
                         </div>
                     </label>
                 ))}
             </Slider>
             <h2 className="info">액션</h2>
             <Slider {...sliderSettings}> 
-                {actionList.map((item, idx) => (
-                    <label key={idx} onClick={() => movieInfoClickHandler(item)}>
+                {actionList.map((movie, idx) => (
+                    <label key={idx} onClick={() => movieInfoClickHandler(movie)}>
                         <div className="movie-item">
-                            <img src={`http://image.tmdb.org/t/p/w500${item.poster_path}`} alt={item.title} />
+                            <img src={`http://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
                             <br />
-                            <a href="#none" className="title">{item.title}</a>
+                            <a href="#none" className="title">{movie.title}</a>
                         </div>
                     </label>
                 ))}
             </Slider>
             <h2 className="info">코미디</h2>
             <Slider {...sliderSettings}>
-                {comedyList.map((item, idx) => (
-                    <label key={idx} onClick={() => movieInfoClickHandler(item)}>
+                {comedyList.map((movie, idx) => (
+                    <label key={idx} onClick={() => movieInfoClickHandler(movie)}>
                         <div className="movie-item">
-                            <img src={`http://image.tmdb.org/t/p/w500${item.poster_path}`} alt={item.title} />
+                            <img src={`http://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
                             <br />
-                            <a href="#none" className="title">{item.title}</a>
+                            <a href="#none" className="title">{movie.title}</a>
                         </div>
                     </label>
                 ))}
