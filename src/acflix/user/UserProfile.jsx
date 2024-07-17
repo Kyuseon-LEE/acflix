@@ -267,7 +267,7 @@ const UserProfile = ({setIsSignIned}) => {
    infinite: false,
    speed: 400,
    slidesToShow: 5,
-   slidesToScroll: 3,
+   slidesToScroll: 5,
    arrows: false
   };
  
@@ -404,7 +404,7 @@ const UserProfile = ({setIsSignIned}) => {
 
     {/* 인기순위 부분 */}
     <div className="user-profile3">
-      <h2 className= "user-profile-h2">ACFILX 인기순위</h2>
+      <h2 className= "rcmd">ACFILX 인기순위</h2>
       {allFav.length >= 6? (
         <Slider2 {...sliderSettings2}>
         {allFav.map((movie, index) => (
@@ -432,22 +432,46 @@ const UserProfile = ({setIsSignIned}) => {
       )}
       {/* 연령별 추천 부분 */}
       <ul className="user-profile-list">
-      <h2>{`${uAge}대가 많이 선택한 영화`}</h2>
-        <Slider2 {...sliderSettings2}>
-          {ageRecommend[uAge] && ageRecommend[uAge].map((movieId, index) => {
-            const movie = allFav.find((m) => m.id === movieId);
-            if (movie) {
-              return (
-                <li key={index} onClick={() => setSelectedMovie(movie)}>
-                  <img src={`http://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title}/>
-                  <h3>{movie.title}</h3>
-                </li>
-              );
-            } else {
-              return null;
-            }
-          })}
-        </Slider2>
+      <h2 class="rcmd">{`${uAge}대가 많이 선택한 영화`}</h2>
+          {ageRecommend[uAge] && ageRecommend[uAge].length >= 6 ? (
+            <Slider2 {...sliderSettings2}>
+            {ageRecommend[uAge].map((movieId, index) => {
+              const movie = allFav.find((m) => m.id === movieId);
+              if (movie) {
+                return (
+                  <li key={index}
+                  onMouseDown={handleMouseDown}
+                  onMouseMove={handleMouseMove}
+                  onMouseUp={() => handleMouseUp(movie)}
+                  > 
+                    <h3 className="rank">{index + 1}</h3>
+                    <img src={`http://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title}/>
+                    <h3>{movie.title}</h3>
+                  </li>
+                );
+              } else {
+                return null;
+              }
+            })}
+          </Slider2>
+          ) : (
+            <ul>
+       {ageRecommend[uAge] && ageRecommend[uAge].map((movieId, index) => {
+        const movie = allFav.find((m) => m.id === movieId);
+        if (movie) {
+          return (
+            <li key={index} onClick={() => setSelectedMovie(movie)}>
+              <h3 className="rank">{index + 1}</h3>
+              <img src={`http://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
+              <h3>{movie.title}</h3>
+            </li>
+          );
+        } else {
+          return null;
+         }
+        })}
+        </ul>
+       )}         
       </ul>
       
       

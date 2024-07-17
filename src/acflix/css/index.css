@@ -347,6 +347,12 @@ select{
 .user-profile2{
     margin-bottom: 100px;
 }
+.user-profile2,
+.user-profile3{
+    width:100%;
+    max-width:1920px;
+    margin: 0 auto;
+}
 .user-profile-list{
     overflow: hidden;
 }
@@ -430,8 +436,9 @@ select{
     margin-bottom:10px;
 }
 .input-file-button img{
-    width:45px;
-    height:45px;
+    width:100%;
+    max-width: 45px;
+    height:auto;
     position: absolute;
     left:52.5%;
     top:14%;
@@ -447,6 +454,10 @@ select{
 .user-profile3 li:hover h3{
     opacity: 1;
     transition: 0.3s;
+}
+
+.rcmd{
+    margin-top:100px;
 }
 
 /* 기본 이미지 적용 버튼 */
