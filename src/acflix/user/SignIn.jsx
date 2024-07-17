@@ -16,7 +16,7 @@ const numToTxt = {
 };
 
 const generateRandomData = (length) => {
-    const txts = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const txts = 'ABCDEFGHIJKLMNOPQRSTUVWYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
     for (let i = 0; i < length; i++) {
         result += txts.charAt(Math.floor(Math.random() * txts.length));
@@ -31,7 +31,7 @@ const encrypt = (value) => {
         if (numToTxt[num]) {
             encrypted += numToTxt[num] + generateRandomData(3);
         } else {
-            encrypted += num;
+            encrypted += 'X' + num;
         }
     }
     return encrypted;

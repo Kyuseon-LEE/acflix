@@ -14,23 +14,17 @@ const numToTxt = {
   '6': 'e', '7': 'c', '8': 'j', '9': 'z', '0': 'n'
 };
 
-const generateRandomData = (length) => {
-  const txts = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let result = '';
-  for (let i = 0; i < length; i++) {
-      result += txts.charAt(Math.floor(Math.random() * txts.length));
-  }
-  return result;
-}
-
 const decrypt = (encryptedValue) => {
   let decrypted = '';
-  for (let i = 0; i < encryptedValue.length; i += 4) {
+  let i = 0;
+  while (i < encryptedValue.length) {
       const num = encryptedValue.charAt(i);
       if (txtToNum[num]) {
-          decrypted += txtToNum[num]
-      } else {
-          decrypted += num;
+        decrypted += txtToNum[num];
+        i += 4;
+      } else if (num === 'X') {
+        decrypted += encryptedValue.charAt(i + 1);
+        i += 2;
       }
   }
   return decrypted;
