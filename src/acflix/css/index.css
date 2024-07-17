@@ -329,7 +329,8 @@ select{
     color:#fff;
     margin-bottom:20px;
 }
-.user-profile-list{
+.user-profile-list li,
+.user-profile2 li{
     padding : 20px;
     color: #fff;
 }
@@ -390,7 +391,7 @@ select{
 
 }
 
-.user-profile-list img{
+.user-profile2 .user-profile-list img{
     width:200px;
     height:300px;
     border-radius: 10px;
@@ -415,6 +416,10 @@ select{
     text-align: left;
     width:300px;
     color:#fff;
+}
+.user-profile3 li{
+    padding:20px;
+    margin-right:40px;
 }
 .profile_img{
     width: 200px;

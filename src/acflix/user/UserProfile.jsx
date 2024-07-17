@@ -287,7 +287,7 @@ const UserProfile = ({setIsSignIned}) => {
   const sliderSettings = {
     infinite: false,
     speed: 400,
-    slidesToShow: 8.5,
+    slidesToShow: 7,
     slidesToScroll: 3,
     arrows: false,    
     touchThreshold : 100,
@@ -296,7 +296,7 @@ const UserProfile = ({setIsSignIned}) => {
   const sliderSettings2 = {
    infinite: false,
    speed: 400,
-   slidesToShow: 4.5,
+   slidesToShow: 5,
    slidesToScroll: 3,
    arrows: false
   };
@@ -367,7 +367,7 @@ const UserProfile = ({setIsSignIned}) => {
     {/* 영화 찜목록 부분 */}
     <div className="user-profile2">
       <h2 className="user-profile-h2">내가 찜한 영화 목록</h2>
-      {myFav.length >= 9 ? (
+      {myFav.length >= 8 ? (
           <Slider2 {...sliderSettings}>
             {myFav.map((movie) => (
               <li key={movie.id}
@@ -394,7 +394,7 @@ const UserProfile = ({setIsSignIned}) => {
     {/* 인기순위 부분 */}
     <div className="user-profile3">
       <h2 className= "user-profile-h2">ACFILX 인기순위</h2>
-      {allFav.length >= 5? (
+      {allFav.length >= 6? (
         <Slider2 {...sliderSettings2}>
         {allFav.map((movie, index) => (
           <li key={movie.id}

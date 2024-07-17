@@ -78,7 +78,7 @@ const ContentsList = () => {
         infinite: true,
         speed: 800,
         slidesToShow: 6,
-        slidesToScroll: 5,
+        slidesToScroll: 6,
         arrows : true,
         nextArrow: <NextArrow />,
 		prevArrow: <PrevArrow />,
@@ -90,7 +90,7 @@ const ContentsList = () => {
                 slidesToShow: 3,
                 slidesToScroll: 1,
                 infinite: true,
-                dots: true,
+                dots: false,
               },
             },
             {

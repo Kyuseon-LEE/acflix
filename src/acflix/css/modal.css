@@ -31,9 +31,7 @@
     margin-right: 20px;
     border-radius: 10px;
     cursor: pointer;
- 
 }
-
 .close {
     position: absolute;
     top: 10px;
@@ -80,6 +78,7 @@
 .content-list{
     height:100%;
     margin: 0 auto;
+    width:100%;
     max-width: 1780px;
     margin-bottom: 300px;
     padding: 0 20px;
@@ -106,16 +105,19 @@
 
 
 .movie-item {
-    width: 250px;
+    flex: 0 0 auto;
+    width:100%;
+    max-width: 250px;
     text-align: center;
     padding-top: 10px;
     margin-left:20px;
+    overflow: hidden;
   }
 
 
 .movie-item img {
-    width: 100%;
-    height: 350px;
+    max-width: 100%;
+    height: 375px;
     cursor: pointer;
     border-radius: 10px;
     margin-bottom:-15px;
@@ -131,32 +133,33 @@
 }
 
 .info {
-    padding: 30px;
-    padding-left:50px;
+    padding-left:20px;
     font-size: 2.3em;
     font-weight: bold;
     margin-bottom: 10px;
     color: #fff;
 }
 .left{
-    width:30px;
+    width:100%;
+    max-width:30px;
     height:50px;
     cursor: pointer;
     position: absolute;
     top:40%;
     z-index: 50;
     display: block;
-    left:1%;
+    left:-1%;
     opacity: 0.7;    
     
 }
 .right{
-    width:30px;
+    width:100%;
+    max-width: 30px;
     height:50px;
     cursor: pointer;
     position: absolute;
     top:40%;
-    right:1%;
+    right:-1%;
     opacity: 0.7;
 }
 .left:hover{
