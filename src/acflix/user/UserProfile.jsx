@@ -22,16 +22,17 @@ const UserProfile = ({setIsSignIned}) => {
   const [uGender, setUGender] = useState(0);
   const [uAge, setUAge] = useState(0);
   const [uPhone, setUPhone] = useState('');
+  const [uPicture, setUPicture] = useState(null);
   const [errors, setErrors] = useState({});
 
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [myFav, setMyFav] = useState([]);
   const [allFav, setAllFav] = useState([]);
-  const [uPicture, setUPicture] = useState(null);
-  const [refresh, setRefresh] = useState(false);
-  const [dragging, setDragging] =useState(false);
-
   const [ageRecommend, setAgeRecommend] = useState([]);
+
+  const [dragging, setDragging] = useState(false);
+
+  const [refresh, setRefresh] = useState(false);
 
   const navigate = useNavigate();
 
@@ -170,41 +171,11 @@ const UserProfile = ({setIsSignIned}) => {
 
   fetchAllFav();
 
-  // 연령별 추천 Function START
-  const addAgeRecommend = () => {
-    const allMembers = getAllMemInfo(); 
-    const currentUser = getMyInfo(getLoginedSessionID()); 
-  
-    // 연령별 추천 영화를 담을 객체 초기화
-    const ageRecommend = {}; 
-  
-    // 연령별 추천 리스트 구성
-    Object.values(allMembers).forEach((member) => {
-      const { uId, uAge } = member;
-      const myFavMovies = getMyFavDB(uId); 
-  
-      // 현재 사용자와 동일한 연령대의 멤버들만 고려
-      if (uAge === currentUser.uAge) {
-        if (!ageRecommend[uAge]) {
-          ageRecommend[uAge] = [];
-        }
-        // 찜한 영화를 해당 연령별 추천 리스트에 추가
-        myFavMovies.forEach((movieId) => {
-          if (!ageRecommend[uAge].includes(movieId)) {
-            ageRecommend[uAge].push(movieId);
-          }
-        });
-      }
-    });
-  
-    return ageRecommend; 
-  };
-
-  // 연령별 추천 리스트 생성 및 설정
+  // 연령별 추천 리스트 업데이트
   const recommendations = addAgeRecommend();
   setAgeRecommend(recommendations);
 
-  }, [refresh]);
+}, [refresh]);
 
   // 페이지 이동 시 상단 노출
   useEffect(() => {
@@ -306,11 +277,51 @@ const UserProfile = ({setIsSignIned}) => {
   setSelectedMovie(movie);
   }
 
+
   // Function
   const closeModal = () => {
     setSelectedMovie(null);
   
     setRefresh(v => !v);
+  }
+
+  // 연령별 추천 Function START
+  const addAgeRecommend = () => {
+    const allMembers = getAllMemInfo(); 
+    const currentUser = getMyInfo(getLoginedSessionID()); 
+  
+    const ageRecommend = {}; 
+  
+    // 연령별 추천 리스트 구성
+    Object.values(allMembers).forEach((member) => {
+      const { uId, uAge } = member;
+      const myFavMovies = getMyFavDB(uId); 
+  
+      // 현재 사용자와 동일한 연령대 멤버
+      if (uAge === currentUser.uAge) {
+        if (!ageRecommend[uAge]) {
+          ageRecommend[uAge] = [];
+        }
+
+      // 해당 연령별 추천 리스트에 추가
+        myFavMovies.forEach((movieId) => {
+          if (!ageRecommend[uAge].includes(movieId)) {
+            ageRecommend[uAge].push(movieId);
+          }
+        });
+      }
+    });
+
+    // 연령별 추천 리스트 순위 정렬
+    Object.keys(ageRecommend).forEach((age) => {
+      ageRecommend[age].sort((a, b) => {
+        const countA = myFav.filter((movie) => ageRecommend[age].includes(movie.id)).filter((m) => m.id === a).length;
+        const countB = myFav.filter((movie) => ageRecommend[age].includes(movie.id)).filter((m) => m.id === b).length;
+        return countB - countA;
+      });
+    });
+    
+    return ageRecommend; 
   }
 
   // 드래그 시 클릭 비활성화
@@ -415,33 +426,30 @@ const UserProfile = ({setIsSignIned}) => {
             <h3 className="rank">{index + 1}</h3>
             <img src={`http://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title}/>
             <h3>{movie.title}</h3>
-          </li>
+            </li>
           ))}
         </ul>
       )}
       {/* 연령별 추천 부분 */}
-      <div className="user-profile3">
-        <ul>
-          {Object.keys(ageRecommend).map((age) => (
-            <li key={age}>
-              <h2>{`${age}대가 많이 선택한 영화`}</h2>
-              <ul className="age-recommend-movies">
-                {ageRecommend[age].map((movieId) => {
-                  // 영화 ID로부터 해당 영화 정보를 찾기
-                  const movie = allFav.find((m) => m.id === movieId);
-                  if (!movie) return null; // 영화 정보가 없으면 null 반환
-                    return (
-                      <li key={movie.id}>
-                        <img src={`http://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
-                      <h4 className="title">{movie.title}</h4>
-                    </li>
-                  );
-                })}
-              </ul>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ul className="user-profile-list">
+      <h2>{`${uAge}대가 많이 선택한 영화`}</h2>
+        <Slider2 {...sliderSettings2}>
+          {ageRecommend[uAge] && ageRecommend[uAge].map((movieId, index) => {
+            const movie = allFav.find((m) => m.id === movieId);
+            if (movie) {
+              return (
+                <li key={index} onClick={() => setSelectedMovie(movie)}>
+                  <img src={`http://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title}/>
+                  <h3>{movie.title}</h3>
+                </li>
+              );
+            } else {
+              return null;
+            }
+          })}
+        </Slider2>
+      </ul>
+      
       
     </div>
     {selectedMovie && (
