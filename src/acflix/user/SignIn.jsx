@@ -220,10 +220,7 @@ const SignIn = () => {
                     <option value="30">30대</option>
                     <option value="40">40대</option>
                     <option value="50">50대</option>
-                    <option value="60">60대</option>
-                    <option value="70">70대</option>
-                    <option value="80">80대</option>
-                    <option value="90">90대</option>
+                    <option value="60">60대 이상</option>
                 </select>
                 <br />
                 <input className="txt_basic" type="text" value={uPhone} onChange={uPhoneChangeHandler} placeholder="휴대전화번호" />
