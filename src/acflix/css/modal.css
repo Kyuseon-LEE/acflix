@@ -32,6 +32,18 @@
     border-radius: 10px;
     cursor: pointer;
 }
+.m_close{
+    color: #fff;
+    font-size:1.5em;
+    cursor: pointer;
+    text-align: center;
+    line-height: 35px;
+    border-radius: 50px;
+    position:absolute;
+    right:0.5%;
+    top:0%
+
+}
 .close {
     position: absolute;
     top: 10px;
@@ -112,6 +124,7 @@
     padding-top: 10px;
     margin-left:20px;
     overflow: hidden;
+    margin-bottom:50px;
   }
 
 

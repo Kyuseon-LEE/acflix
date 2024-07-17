@@ -12,7 +12,7 @@ const MainImg = () => {
     const [videoUrl, setVideoUrl] = useState("");
 
     const settings = {
-        dots: true,
+        dots: false,
         infinite: true,
         speed: 1000,
         slidesToShow: 1,
@@ -63,6 +63,7 @@ const MainImg = () => {
             {modalOpen && (
                 <div className="modal">
                     <div className="modal-content">
+                    <p className="m_close" onClick={handleCloseModal}>X</p>
                         <iframe
                             width="900"
                             height="600"
@@ -70,8 +71,7 @@ const MainImg = () => {
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             allowFullScreen
                             title="video"
-                        ></iframe>
-                        <button onClick={handleCloseModal}>Close</button>
+                        ></iframe>                        
                     </div>
                 </div>
             )}
