@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import api from "../js/api.js";
 import Slider2 from "react-slick";
-
+import { encrypt, decrypt } from "../js/encrypt.js";
 import { getLoginedSessionID, setLoginedSessionID } from '../js/session.js';
 import { getMyFavDB, getAllFavDB, 
          getMyInfo, setMyInfo, setAcMemDB, setAcFavDB, getAllMemInfo } from '../js/db.js';
@@ -62,8 +62,6 @@ const UserProfile = ({setIsSignIned}) => {
     console.log('[UserProfile] useEffect()');
 
     let myInfo = getMyInfo(getLoginedSessionID());
-
-    
     
     if(myInfo === undefined){
       alert('로그인이 필요합니다.');
@@ -73,13 +71,12 @@ const UserProfile = ({setIsSignIned}) => {
     }
 
     setUId(myInfo.uId);
-    setUPw(myInfo.uPw);
+    setUPw(decrypt(myInfo.uPw));
     setUNick(myInfo.uNick);
     setUGender(myInfo.uGender);
     setUAge(myInfo.uAge);
     setUPhone(myInfo.uPhone);
     setUPicture(myInfo.uPicture);
-    
 
     // 유저 찜 목록 Function START
     const fetchMyFav = async () => {
@@ -103,7 +100,6 @@ const UserProfile = ({setIsSignIned}) => {
           console.error("Failed to fetch movie details for id:", id);
           
           return null;
-        
         }  
       })
     );
@@ -247,7 +243,10 @@ const UserProfile = ({setIsSignIned}) => {
       return;
     }
 
-    myInfo.uPw = uPw;
+    // 비밀번호 암호화
+    const encryptedPw = encrypt(uPw);
+
+    myInfo.uPw = encryptedPw;
     myInfo.uNick = uNick;
     myInfo.uPhone = uPhone;
     myInfo.uPicture = uPicture;
