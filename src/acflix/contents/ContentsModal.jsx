@@ -46,14 +46,17 @@ const ContentsModal = ({ movieInfo, closeModal }) => {
             
             if (videos.length > 0) {
                 setPlay(videos[0].key);
+            } else {
+                setPlay(null);
             }
         } catch (error) {
             console.log('Error fetching video data:', error);
         }
     };
 
-     // get api
-     const fetchData = async (request, setData) => {
+
+    // get api
+    const fetchData = async (request, setData) => {
         try {
             const response = await api.get(request);
             setData(response.data.results);
@@ -89,8 +92,39 @@ const ContentsModal = ({ movieInfo, closeModal }) => {
             alert('예고편이 존재하지 않습니다.');
 
         }
-    }
+    };
+    
+    // 추천 찜하기 버튼
+    const recommendFavBtnClickHandler = () => {
 
+        let updatedFavs = [...myFavs]; // 현재 찜하기 업데이트
+        const movieId = selectedMovie.id || selectedMovie.name;
+
+        // 찜 목록 중복체크
+        if (!updatedFavs.includes(movieId)) {
+
+            updatedFavs.push(movieId);
+            setMyFavDB(getLoginedSessionID(), updatedFavs);
+            setMyFavs(updatedFavs); 
+            alert(`${selectedMovie.title || selectedMovie.name}을 찜하셨습니다!!`);
+
+        } else {
+
+            // 찜 목록 삭제 알림
+            if (window.confirm(`${selectedMovie.title || selectedMovie.name}을 찜 목록에서 삭제하시겠습니까?`)) {
+
+                updatedFavs = updatedFavs.filter((e) => e !== movieId);
+                setMyFavDB(getLoginedSessionID(), updatedFavs);
+                setMyFavs(updatedFavs); 
+                alert(`${selectedMovie.title || selectedMovie.name}을 찜 목록에서 삭제하셨습니다!!`);
+
+            } else {
+                alert('찜 목록 삭제를 취소하셨습니다.');
+            }
+        }
+    };
+
+    // 찜하기 버튼
     const favBtnClickHandler = () => {
 
         let updatedFavs = [...myFavs]; // 현재 찜하기 업데이트
@@ -122,6 +156,7 @@ const ContentsModal = ({ movieInfo, closeModal }) => {
 
     const movieInfoClickHandler = (movie) => {
         setSelectedMovie(movie);
+        fetchPlay(movie.id);
     }
 
     
@@ -186,6 +221,14 @@ const ContentsModal = ({ movieInfo, closeModal }) => {
                         <p className="m_info">상세정보: {selectedMovie.overview}</p><br />
                         <p className="m_score">평점: {`${Math.round(selectedMovie.vote_average * 100) / 100}점`}</p><br />
                         <p className="m_audi">관객수: {`${Math.floor(selectedMovie.popularity)}만 명`}</p>
+                        <img src={process.env.PUBLIC_URL + '/imgs/ytb.png'} className="ytb" onClick={playBtnClickHandler} />
+                        <div className='favbtn' onClick={recommendFavBtnClickHandler}>
+                            {Array.isArray(myFavs) && myFavs.includes(selectedMovie.id || selectedMovie.name) ? (
+                                <img src="/imgs/heart1.png" alt="favMv" />
+                            ) : (
+                                <img src="/imgs/heart2.png" alt="noFavMv" />
+                            )}
+                        </div>
                         <span className="close" onClick={handleCloseModal}>&times;</span>
                     </>
                 ) : (

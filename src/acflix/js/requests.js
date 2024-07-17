@@ -1,7 +1,7 @@
 const requests = {
     fetchNowPlaying: "movie/now_playing",                           // 현재 상영
     fetchNetFlixOriginals: "/discover/tv?with_networks=213",        // 넷플 오리지널
-    fetchTrending: "/trending/all/week",                            // 최신 트랜드
+    fetchTrending: "/trending/movie/week",                          // 최신 트랜드
     fetchTopRated: "movie/top_rated",                               // 영화 순위
     fetchTv: "tv/top_rated?language=ko-KR&page=1",                  // TV 상영
     fetchAnimation: "/discover/movie?with_genres=16",               // 애니메이션

@@ -173,8 +173,8 @@ const SignIn = () => {
                 <br />
                 <select className="gen" name="gender" id="gen" value={uGender} onChange={uGenderChangeHandler}>
                     <option value="0">성별</option>
-                    <option value="m">남성</option>
-                    <option value="w">여성</option>
+                    <option value="M">남성</option>
+                    <option value="W">여성</option>
                 </select>
                 <select name="u_age" id="age" value={uAge} onChange={uAgeChangeHandler}>
                     <option value="0">나이</option>

@@ -3,7 +3,8 @@ import api from "../js/api.js";
 import Slider2 from "react-slick";
 
 import { getLoginedSessionID, setLoginedSessionID } from '../js/session.js';
-import { getMyFavDB, getMyInfo, setMyInfo, getAllFavDB, setAcMemDB, setAcFavDB, getAllMemInfo, getAllFavInfo } from '../js/db.js';
+import { getMyFavDB, getAllFavDB, 
+         getMyInfo, setMyInfo, setAcMemDB, setAcFavDB, getAllMemInfo } from '../js/db.js';
 import { useNavigate } from "react-router-dom";
 
 import 'slick-carousel/slick/slick.css';
@@ -29,6 +30,8 @@ const UserProfile = ({setIsSignIned}) => {
   const [uPicture, setUPicture] = useState(null);
   const [refresh, setRefresh] = useState(false);
   const [dragging, setDragging] =useState(false);
+
+  const [ageRecommend, setAgeRecommend] = useState([]);
 
   const navigate = useNavigate();
 
@@ -167,6 +170,40 @@ const UserProfile = ({setIsSignIned}) => {
 
   fetchAllFav();
 
+  // 연령별 추천 Function START
+  const addAgeRecommend = () => {
+    const allMembers = getAllMemInfo(); 
+    const currentUser = getMyInfo(getLoginedSessionID()); 
+  
+    // 연령별 추천 영화를 담을 객체 초기화
+    const ageRecommend = {}; 
+  
+    // 연령별 추천 리스트 구성
+    Object.values(allMembers).forEach((member) => {
+      const { uId, uAge } = member;
+      const myFavMovies = getMyFavDB(uId); 
+  
+      // 현재 사용자와 동일한 연령대의 멤버들만 고려
+      if (uAge === currentUser.uAge) {
+        if (!ageRecommend[uAge]) {
+          ageRecommend[uAge] = [];
+        }
+        // 찜한 영화를 해당 연령별 추천 리스트에 추가
+        myFavMovies.forEach((movieId) => {
+          if (!ageRecommend[uAge].includes(movieId)) {
+            ageRecommend[uAge].push(movieId);
+          }
+        });
+      }
+    });
+  
+    return ageRecommend; 
+  };
+
+  // 연령별 추천 리스트 생성 및 설정
+  const recommendations = addAgeRecommend();
+  setAgeRecommend(recommendations);
+
   }, [refresh]);
 
   // 페이지 이동 시 상단 노출
@@ -231,8 +268,8 @@ const UserProfile = ({setIsSignIned}) => {
       delete allMemInfo[getLoginedSessionID()];
       setAcMemDB(allMemInfo);
 
-      // 찜 삭제 getAllFavInfo
-      let allFavInfo = getAllFavInfo();
+      // 찜 삭제
+      let allFavInfo = getAllFavDB();
       delete allFavInfo[uId];
       setAcFavDB(allFavInfo);
       alert('회원탈퇴가 완료되었습니다.');
@@ -382,6 +419,29 @@ const UserProfile = ({setIsSignIned}) => {
           ))}
         </ul>
       )}
+      {/* 연령별 추천 부분 */}
+      <div className="user-profile3">
+        <ul>
+          {Object.keys(ageRecommend).map((age) => (
+            <li key={age}>
+              <h2>{`${age}대가 많이 선택한 영화`}</h2>
+              <ul className="age-recommend-movies">
+                {ageRecommend[age].map((movieId) => {
+                  // 영화 ID로부터 해당 영화 정보를 찾기
+                  const movie = allFav.find((m) => m.id === movieId);
+                  if (!movie) return null; // 영화 정보가 없으면 null 반환
+                    return (
+                      <li key={movie.id}>
+                        <img src={`http://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
+                      <h4 className="title">{movie.title}</h4>
+                    </li>
+                  );
+                })}
+              </ul>
+            </li>
+          ))}
+        </ul>
+      </div>
       
     </div>
     {selectedMovie && (
