@@ -3,7 +3,7 @@ import api from "../js/api.js";
 import Slider2 from "react-slick";
 
 import { getLoginedSessionID, setLoginedSessionID } from '../js/session.js';
-import { getMyFavDB, getMyInfo, setMyInfo, getAllFavDB, setAcMemDB, setAcFavDB, getAllMemInfo, getAllFavInfo } from '../js/db.js';
+import { getMyFavDB, getMyInfo, setMyInfo, getAllFavDB, setAcMemDB, setAcFavDB, getAllMemInfo } from '../js/db.js';
 import { useNavigate } from "react-router-dom";
 
 import 'slick-carousel/slick/slick.css';
@@ -231,8 +231,8 @@ const UserProfile = ({setIsSignIned}) => {
       delete allMemInfo[getLoginedSessionID()];
       setAcMemDB(allMemInfo);
 
-      // 찜 삭제 getAllFavInfo
-      let allFavInfo = getAllFavInfo();
+      // 찜 삭제 
+      let allFavInfo = getAllFavDB();
       delete allFavInfo[uId];
       setAcFavDB(allFavInfo);
       alert('회원탈퇴가 완료되었습니다.');

@@ -50,12 +50,6 @@ export const getAllMemInfo = () => {
     return JSON.parse(getAcMemDB());
 }
 
-export const getAllFavInfo = () => {
-    console.log('[DB] getAllMemInfo()');
-
-    return JSON.parse(getAcFavDB());
-}
-
 // 찜
 export const getAcFavDB = () => {
     console.log('[DB] getAcFavDB()');

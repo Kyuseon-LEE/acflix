@@ -2,7 +2,40 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAcMemDB, setAcMemDB, getAcFavDB, setAcFavDB } from "../js/db";
 
-const profilePic = process.env.PUBLIC_URL + '/imgs/none.png' 
+const profilePic = process.env.PUBLIC_URL + '/imgs/none.png'
+
+// 비밀번호 암호화 정의
+const txtToNum = {
+    'b': '1', 't': '2', 'f': '3', 'q': '4', 'u': '5',
+    'e': '6', 'c': '7', 'j': '8', 'z': '9', 'n': '0'
+};
+
+const numToTxt = {
+    '1': 'b', '2': 't', '3': 'f', '4': 'q', '5': 'u',
+    '6': 'e', '7': 'c', '8': 'j', '9': 'z', '0': 'n'
+};
+
+const generateRandomData = (length) => {
+    const txts = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+        result += txts.charAt(Math.floor(Math.random() * txts.length));
+    }
+    return result;
+}
+
+const encrypt = (value) => {
+    let encrypted = '';
+    const strValue = value.toString();
+    for (let num of strValue) {
+        if (numToTxt[num]) {
+            encrypted += numToTxt[num] + generateRandomData(3);
+        } else {
+            encrypted += num;
+        }
+    }
+    return encrypted;
+}
 
 const SignIn = () => {
 
@@ -96,15 +129,19 @@ const SignIn = () => {
             }
         }
 
+        // 유효성 검사
         if (!validateInputs()) {
             return;
         }
+
+        // 비밀번호 암호화
+        const encryptedPw = encrypt(uPw);
 
         if (acMemDB === null) {
             let newMemObj = {
                 [uId]: {
                     'uId': uId,
-                    'uPw': uPw,
+                    'uPw': encryptedPw,
                     'uNick': uNick,
                     'uGender': uGender,
                     'uAge': uAge,
@@ -118,7 +155,7 @@ const SignIn = () => {
             let aldAcMem = JSON.parse(acMemDB);
             aldAcMem[uId] = {
                 'uId': uId,
-                'uPw': uPw,
+                'uPw': encryptedPw,
                 'uNick': uNick,
                 'uGender': uGender,
                 'uAge': uAge,
@@ -162,10 +199,10 @@ const SignIn = () => {
                     X
                 </div>
                 <h2>회원 가입</h2>
-                <input className="txt_basic" type="email" value={uId} onChange={uIdChangeHandler} placeholder="이메일 주소(아이디)" />
+                <input className="txt_basic" type="email" value={uId} onChange={uIdChangeHandler} placeholder="이메일 주소" />
                 {errors.uId && <p>{errors.uId}</p>}
                 <br />
-                <input className="txt_basic" type="password" value={uPw} onChange={uPwChangeHandler} placeholder="비밀번호" />
+                <input className="txt_basic" type="password" value={uPw} onChange={uPwChangeHandler} placeholder="비밀번호를 추가하세요" />
                 {errors.uPw && <p>{errors.uPw}</p>}
                 <br />
                 <input className="txt_basic" type="text" value={uNick} onChange={uNickChangeHandler} placeholder="닉네임" />
