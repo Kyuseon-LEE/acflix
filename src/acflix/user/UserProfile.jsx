@@ -284,7 +284,6 @@ const UserProfile = ({setIsSignIned}) => {
     setRefresh(v => !v);
   }
 
-  
   // 연령별 추천 Function START
   const addAgeRecommend = () => {
     const allMembers = getAllMemInfo(); 
