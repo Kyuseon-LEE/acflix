@@ -78,15 +78,19 @@
     opacity: 1  ;
 }
 .content-list{
-    height:220vh
+    height:100%;
+    margin: 0 auto;
+    max-width: 1780px;
+    margin-bottom: 300px;
+    padding: 0 20px;
 }
 
 
 /* 영화 리스트 부분 */
 
-.contents-list {
-    padding: 20px;
-    margin-bottom:50px;
+.slick-slide {
+    display: flex;
+    justify-content: center;
 }
 
 
@@ -101,15 +105,17 @@
 }
 
 
-.movie-item{
-    padding-left:50px;
-    padding-top:10px
-}
+.movie-item {
+    width: 250px;
+    text-align: center;
+    padding-top: 10px;
+    margin-left:20px;
+  }
 
 
 .movie-item img {
-    width: 305px;
-    height: 457px;
+    width: 100%;
+    height: 350px;
     cursor: pointer;
     border-radius: 10px;
     margin-bottom:-15px;
@@ -149,7 +155,7 @@
     height:50px;
     cursor: pointer;
     position: absolute;
-    top:35%;
+    top:40%;
     right:1%;
     opacity: 0.7;
 }

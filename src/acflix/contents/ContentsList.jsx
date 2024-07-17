@@ -83,6 +83,31 @@ const ContentsList = () => {
         nextArrow: <NextArrow />,
 		prevArrow: <PrevArrow />,
         draggable:false,
+        responsive: [
+            {
+              breakpoint: 1024, // At screen width <= 1024px
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                infinite: true,
+                dots: true,
+              },
+            },
+            {
+              breakpoint: 600, // At screen width <= 600px
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+              },
+            },
+            {
+              breakpoint: 480, // At screen width <= 480px
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+              },
+            },
+          ],
     };
     
 
