@@ -1,41 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAcMemDB, setAcMemDB, getAcFavDB, setAcFavDB } from "../js/db";
+import { encrypt } from "../js/encrypt.js";
 
 const profilePic = process.env.PUBLIC_URL + '/imgs/none.png'
-
-// 비밀번호 암호화 정의
-const txtToNum = {
-    'b': '1', 't': '2', 'f': '3', 'q': '4', 'u': '5',
-    'e': '6', 'c': '7', 'j': '8', 'z': '9', 'n': '0'
-};
-
-const numToTxt = {
-    '1': 'b', '2': 't', '3': 'f', '4': 'q', '5': 'u',
-    '6': 'e', '7': 'c', '8': 'j', '9': 'z', '0': 'n'
-};
-
-const generateRandomData = (length) => {
-    const txts = 'ABCDEFGHIJKLMNOPQRSTUVWYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
-    for (let i = 0; i < length; i++) {
-        result += txts.charAt(Math.floor(Math.random() * txts.length));
-    }
-    return result;
-}
-
-const encrypt = (value) => {
-    let encrypted = '';
-    const strValue = value.toString();
-    for (let num of strValue) {
-        if (numToTxt[num]) {
-            encrypted += numToTxt[num] + generateRandomData(3);
-        } else {
-            encrypted += 'X' + num;
-        }
-    }
-    return encrypted;
-}
 
 const SignIn = () => {
 
@@ -178,7 +146,6 @@ const SignIn = () => {
             aldAcFavDB[uId] = {};
             setAcFavDB(aldAcFavDB);
         }
-  
         alert('회원가입이 완료되었습니다.');
         
         // 입력 정보 초기화
