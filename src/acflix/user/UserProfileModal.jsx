@@ -79,8 +79,10 @@ const UserProfileModal = ({ movieInfo, closeModal }) => {
             modalContent.innerHTML = '';
             modalContent.appendChild(iframe);
 
-            const closeButton = document.createElement('button');
+            const closeButton = document.createElement('p');
             closeButton.textContent = 'CLOSE';
+            closeButton.textContent = '\u00D7';
+            closeButton.className = 'closebtn';
             closeButton.addEventListener('click', handleCloseModal);
             modalContent.appendChild(closeButton);
 

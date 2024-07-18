@@ -11,7 +11,7 @@ import 'slick-carousel/slick/slick.css';
 import '../css/index.css';
 import UserProfileModal from "./UserProfileModal.jsx";
 
-const profilePic = process.env.PUBLIC_URL + '/imgs/none.png' 
+const profilePic = process.env.PUBLIC_URL + '/imgs/none.png';
 
 const UserProfile = ({setIsSignIned}) => {
 

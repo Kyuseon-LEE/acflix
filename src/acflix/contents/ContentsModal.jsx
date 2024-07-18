@@ -83,6 +83,7 @@ const ContentsModal = ({ movieInfo, closeModal }) => {
             modalContent.appendChild(iframe);
 
             const closeButton = document.createElement('p');
+            closeButton.textContent = 'CLOSE';
             closeButton.textContent = '\u00D7';
             closeButton.className = 'closebtn';
             closeButton.addEventListener('click', handleCloseModal);
