@@ -4,7 +4,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { Outlet } from "react-router-dom";
 
-const Layout = ({ isSignIned, setIsSignIned, logoutClickHandler }) => {
+const Layout = ({ isSignIned, setIsSignIned}) => {
 
     useEffect(() => {
         console.log('useEffect--------------->');
