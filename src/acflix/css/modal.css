@@ -32,6 +32,9 @@
     border-radius: 10px;
     cursor: pointer;
 }
+.modal-content iframe{
+    margin: 10px;
+}
 .m_close{
     color: #fff;
     font-size:1.5em;
@@ -40,9 +43,8 @@
     line-height: 35px;
     border-radius: 50px;
     position:absolute;
-    right:0.5%;
-    top:0%
-
+    right:1.2%;
+    top:0%;
 }
 .close {
     position: absolute;
@@ -51,6 +53,15 @@
     cursor: pointer;
     font-size: 2em;
     color:#fff
+}
+.closebtn{
+    color:#fff;
+    display: block;
+    font-size:1.5em;
+    position: absolute;
+    top:0%;
+    right:1.2%;
+    cursor: pointer;
 }
 .modal-content > h2{
     color: #fff;
@@ -83,6 +94,7 @@
     cursor: pointer;
     margin:0;
     opacity: 0.8;
+    margin-top: 1px;
 }
 .modal-content .ytb:hover{
     opacity: 1  ;
