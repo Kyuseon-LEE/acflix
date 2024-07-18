@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getMyInfo } from "./js/db"
-import { getLoginedSessionID } from "./js/session"
+import { getLoginedSessionID, clearLoginedSessionID } from "./js/session"
 
 const MainHeader = ({ isSignIned, setIsSignIned }) => {
 
@@ -23,6 +23,7 @@ const MainHeader = ({ isSignIned, setIsSignIned }) => {
   // Handler
   const logoutClickHandler = () => {
     setIsSignIned(false);
+    clearLoginedSessionID('');
     navigate('/');
   };
 
