@@ -355,7 +355,7 @@ const UserProfile = ({setIsSignIned}) => {
       {uPicture && <img src={uPicture} className="profile_img" alt="Profile" />}
       <button className="btn_img" onClick={basicImgClickHandler}>기본 이미지 적용</button>
       <h3>{uNick}님의 페이지</h3>
-        <label className="input-file-button" htmlForfor="file">
+        <label className="input-file-button" htmlfor="file">
           <img src={process.env.PUBLIC_URL + '/imgs/profile_none.png'} alt="" />
         </label>
         <input type="file" accept="image/*" id="file" style={{display:"none"}} onChange={profilePicChangeHandler} />
