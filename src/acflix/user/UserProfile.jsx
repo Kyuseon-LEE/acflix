@@ -11,7 +11,7 @@ import 'slick-carousel/slick/slick.css';
 import '../css/index.css';
 import UserProfileModal from "./UserProfileModal.jsx";
 
-const profilePic = process.env.PUBLIC_URL + '/imgs/none.png';
+const profilePic = process.env.PUBLIC_URL + '/imgs/none.png' 
 
 const UserProfile = ({setIsSignIned}) => {
 
@@ -303,8 +303,8 @@ const UserProfile = ({setIsSignIned}) => {
         if (!ageRecommend[uAge]) {
           ageRecommend[uAge] = [];
         }
-
-      // 해당 연령별 추천 리스트에 추가
+  
+        // 해당 연령별 추천 리스트에 추가
         myFavMovies.forEach((movieId) => {
           if (!ageRecommend[uAge].includes(movieId)) {
             ageRecommend[uAge].push(movieId);
@@ -312,23 +312,33 @@ const UserProfile = ({setIsSignIned}) => {
         });
       }
     });
-
-    // 연령별 추천 리스트 순위 정렬
+  
+    // 연령별 추천 리스트 정렬
     Object.keys(ageRecommend).forEach((age) => {
       ageRecommend[age].sort((a, b) => {
-        const countA = allFav.filter((movie) => ageRecommend[age].includes(movie.id)).filter((m) => m.id === a).length;
-        const countB = allFav.filter((movie) => ageRecommend[age].includes(movie.id)).filter((m) => m.id === b).length;
-        if (countA === countB) {
-          return 0;
-        }
-        return countB - countA;
+        
+        const countA = getAllFavCount(a);
+        const countB = getAllFavCount(b);
+  
+        return countB - countA; 
       });
-
-      ageRecommend[age] = ageRecommend[age].slice(0, 10);
+  
+      ageRecommend[age] = ageRecommend[age].slice(0, 7); 
     });
     
     return ageRecommend; 
   }
+  
+  // 영화 개수 체크
+  const getAllFavCount = (movieId) => {
+    const allFavMovies = getAllFavDB(); 
+  
+    const allFavArray = Object.values(allFavMovies).flat();
+  
+    return allFavArray.filter(id => id === movieId).length;
+  }
+  
+  
 
   // 드래그 시 클릭 비활성화
   const handleMouseDown = () => {
@@ -355,7 +365,7 @@ const UserProfile = ({setIsSignIned}) => {
       {uPicture && <img src={uPicture} className="profile_img" alt="Profile" />}
       <button className="btn_img" onClick={basicImgClickHandler}>기본 이미지 적용</button>
       <h3>{uNick}님의 페이지</h3>
-        <label className="input-file-button" htmlfor="file">
+        <label className="input-file-button" htmlFor="file">
           <img src={process.env.PUBLIC_URL + '/imgs/profile_none.png'} alt="" />
         </label>
         <input type="file" accept="image/*" id="file" style={{display:"none"}} onChange={profilePicChangeHandler} />
@@ -368,9 +378,11 @@ const UserProfile = ({setIsSignIned}) => {
         <input className="txt_basic1" type="text" value={uNick} onChange={uNickChangeHandler} placeholder="닉네임" />
         {errors.uNick && <p>{errors.uNick}</p>}
         <br />
-        <input className="txt_basic1" name="gender" id="gen" value={uGender} readOnly />  
+        <input className="txt_basic1" name="gender" id="gen" value={uGender} readOnly>  
+        </input>
         <br />
-        <input className="txt_basic1" name="u_age" id="age" value={uAge} readOnly />
+        <input className="txt_basic1" name="u_age" id="age" value={uAge} readOnly>
+        </input>
         <br />
         <input className="txt_basic1" type="text" value={uPhone} onChange={uPhoneChangeHandler} placeholder="휴대전화번호" />
         {errors.uPhone && <p>{errors.uPhone}</p>}
@@ -408,7 +420,7 @@ const UserProfile = ({setIsSignIned}) => {
 
     {/* 인기순위 부분 */}
     <div className="user-profile3">
-      <h2 className= "rcmd">ACFILX 인기순위</h2>
+      <h2 className= "rcmd">ACFILX TOP 10</h2>
       {allFav.length >= 6? (
         <Slider2 {...sliderSettings2}>
         {allFav.map((movie, index) => (
