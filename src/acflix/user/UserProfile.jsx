@@ -323,7 +323,7 @@ const UserProfile = ({setIsSignIned}) => {
         return countB - countA; 
       });
   
-      ageRecommend[age] = ageRecommend[age].slice(0, 10); 
+      ageRecommend[age] = ageRecommend[age].slice(0, 7); 
     });
     
     return ageRecommend; 
