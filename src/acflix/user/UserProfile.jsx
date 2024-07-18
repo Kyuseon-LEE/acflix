@@ -303,8 +303,8 @@ const UserProfile = ({setIsSignIned}) => {
         if (!ageRecommend[uAge]) {
           ageRecommend[uAge] = [];
         }
-
-      // 해당 연령별 추천 리스트에 추가
+  
+        // 해당 연령별 추천 리스트에 추가
         myFavMovies.forEach((movieId) => {
           if (!ageRecommend[uAge].includes(movieId)) {
             ageRecommend[uAge].push(movieId);
@@ -312,23 +312,33 @@ const UserProfile = ({setIsSignIned}) => {
         });
       }
     });
-
-    // 연령별 추천 리스트 순위 정렬
+  
+    // 연령별 추천 리스트 정렬
     Object.keys(ageRecommend).forEach((age) => {
       ageRecommend[age].sort((a, b) => {
-        const countA = allFav.filter((movie) => ageRecommend[age].includes(movie.id)).filter((m) => m.id === a).length;
-        const countB = allFav.filter((movie) => ageRecommend[age].includes(movie.id)).filter((m) => m.id === b).length;
-        if (countA === countB) {
-          return 0;
-        }
-        return countB - countA;
+        
+        const countA = getAllFavCount(a);
+        const countB = getAllFavCount(b);
+  
+        return countB - countA; 
       });
-
-      ageRecommend[age] = ageRecommend[age].slice(0, 10);
+  
+      ageRecommend[age] = ageRecommend[age].slice(0, 10); 
     });
     
     return ageRecommend; 
   }
+  
+  // 영화 개수 체크
+  const getAllFavCount = (movieId) => {
+    const allFavMovies = getAllFavDB(); 
+  
+    const allFavArray = Object.values(allFavMovies).flat();
+  
+    return allFavArray.filter(id => id === movieId).length;
+  }
+  
+  
 
   // 드래그 시 클릭 비활성화
   const handleMouseDown = () => {
