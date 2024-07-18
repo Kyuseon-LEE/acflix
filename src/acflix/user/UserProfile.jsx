@@ -316,10 +316,15 @@ const UserProfile = ({setIsSignIned}) => {
     // 연령별 추천 리스트 순위 정렬
     Object.keys(ageRecommend).forEach((age) => {
       ageRecommend[age].sort((a, b) => {
-        const countA = myFav.filter((movie) => ageRecommend[age].includes(movie.id)).filter((m) => m.id === a).length;
-        const countB = myFav.filter((movie) => ageRecommend[age].includes(movie.id)).filter((m) => m.id === b).length;
+        const countA = allFav.filter((movie) => ageRecommend[age].includes(movie.id)).filter((m) => m.id === a).length;
+        const countB = allFav.filter((movie) => ageRecommend[age].includes(movie.id)).filter((m) => m.id === b).length;
+        if (countA === countB) {
+          return 0;
+        }
         return countB - countA;
       });
+
+      ageRecommend[age] = ageRecommend[age].slice(0, 10);
     });
     
     return ageRecommend; 
