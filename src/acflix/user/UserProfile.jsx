@@ -11,7 +11,7 @@ import 'slick-carousel/slick/slick.css';
 import '../css/index.css';
 import UserProfileModal from "./UserProfileModal.jsx";
 
-const profilePic = process.env.PUBLIC_URL + '/imgs/none.png' 
+const profilePic = process.env.PUBLIC_URL + '/imgs/none.png';
 
 const UserProfile = ({setIsSignIned}) => {
 
@@ -313,7 +313,7 @@ const UserProfile = ({setIsSignIned}) => {
 
     // 연령별 추천 리스트 순위 정렬
     Object.keys(ageRecommend).forEach((age) => {
-      ageRecommend[age].sort((a, b) => {
+      ageRecommend[age].sort((b, a) => {
         const countA = myFav.filter((movie) => ageRecommend[age].includes(movie.id)).filter((m) => m.id === a).length;
         const countB = myFav.filter((movie) => ageRecommend[age].includes(movie.id)).filter((m) => m.id === b).length;
         return countB - countA;
