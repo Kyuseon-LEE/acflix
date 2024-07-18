@@ -167,16 +167,18 @@ const UserProfile = ({setIsSignIned}) => {
 
   fetchAllFav();
 
-  // 연령별 추천 리스트 업데이트
-  const recommendations = addAgeRecommend();
-  setAgeRecommend(recommendations);
+  }, [refresh]);
 
-}, [refresh]);
+  useEffect(() => {
+    // 연령별 추천 리스트 업데이트
+    const recommendations = addAgeRecommend();
+    setAgeRecommend(recommendations);
+  }, [myFav]);
 
   // 페이지 이동 시 상단 노출
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [])
+  }, []);
 
   // Handler
   const uPwChangeHandler = (e) => {
