@@ -53,14 +53,7 @@ const SearchView = () => {
 
   }, [search]); // search 값이 변경될 때마다 fetchData 다시 호출
 
-  // 페이지 이동 시 상단 노출
-  useEffect(() => {
-    window.scrollTo(0, 0);
-})
-
-
-
-
+  
     // Handler
     
     const movieInfoClickHandler = (movie) => {
