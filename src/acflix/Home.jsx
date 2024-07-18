@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 
@@ -9,6 +9,10 @@ const Home = () => {
   const startClickHandler = () => {
     navigate('/login');
   }
+     // 페이지 이동 시 상단 노출
+     useEffect(() => {
+      window.scrollTo(0, 0);
+  })
 
   return(
     <div id="homepage">
