@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getMyInfo } from "./js/db"
-import { getLoginedSessionID } from "./js/session"
+import { getLoginedSessionID, clearLoginedSessionID } from "./js/session"
 
 const MainHeader = ({ isSignIned, setIsSignIned }) => {
 
@@ -23,6 +23,7 @@ const MainHeader = ({ isSignIned, setIsSignIned }) => {
   // Handler
   const logoutClickHandler = () => {
     setIsSignIned(false);
+    clearLoginedSessionID('');
     navigate('/');
   };
 
@@ -45,13 +46,27 @@ const MainHeader = ({ isSignIned, setIsSignIned }) => {
     setSearch('');
   };
 
+  const onClickSearch = (e) => {
+    e.preventDefault();
+  
+    const trimmedSearch = search.trim();
+    if (trimmedSearch === '') {
+      alert('검색어를 입력해주세요.');
+      inputRef.current.focus();
+    } else {
+      navigate('/searchview', { state: { search: trimmedSearch } });
+      clearSearch();
+    }
+  };
+  
+
   return (
     <div className="header">
       <Link to="/contentslist"><img src={process.env.PUBLIC_URL + '/imgs/logo.png'} alt="" /></Link>
       <ul>
         {isSignIned ? (
           <>
-            <li><Link to="/searchview" onClick={clearSearch} state={{ search: search } } >검색</Link></li>
+            <li><Link to="/searchview" onClick={onClickSearch} state={{ search: search } } >검색</Link></li>
             <li><input className="search" placeholder="찾으시는 영화가 있으신가요?" onChange={searchHandler} value={search} onBlur={blurHandler} ref={inputRef}/></li>
             <li><img src={uPicture} alt="Profile" /></li>
             <li><Link to="/userprofile">내 프로필</Link></li>

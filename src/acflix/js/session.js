@@ -1,17 +1,24 @@
 // 아이디 확인
-let loginedSessionID = '';
+export const SESSION_STORAGE_KEY = 'loginedSessionID';
 
 export const getLoginedSessionID = () => {
-    console.log('getLoginedSessionID()');
+    console.log('[Session] getLoginedSessionID()');
 
-    return loginedSessionID;
+    return sessionStorage.getItem(SESSION_STORAGE_KEY);
 
 }
 
 export const setLoginedSessionID = (id = '') => {
-    console.log('setLoginedSessionID()');
+    console.log('[Session] setLoginedSessionID()');
 
-    loginedSessionID = id;
+    sessionStorage.setItem(SESSION_STORAGE_KEY, id);
+
+}
+
+export const clearLoginedSessionID = () => {
+    console.log('[Session] clearLoginedSessionID()');
+
+    sessionStorage.removeItem(SESSION_STORAGE_KEY);
 
 }
 // 아이디 확인 종료
