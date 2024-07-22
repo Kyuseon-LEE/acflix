@@ -220,8 +220,8 @@ const UserProfile = ({setIsSignIned}) => {
     const encryptedPw = encrypt(uPw);
 
     if(uPw !== decrypt(myInfo.uPw)) {
-      if(window.confirm(`바꾸시려는 비밀번호가 ${uPw} 맞습니까?`)){
-        myInfo.uPw = encryptedPw;
+      if(window.confirm(`바꾸시려는 비밀번호가 "${uPw}" 맞습니까?`)){
+        myInfo.uPw = encryptedPw; 
       } else {
         alert("회원정보 수정이 취소되었습니다.");
         setUPw(decrypt(myInfo.uPw));
