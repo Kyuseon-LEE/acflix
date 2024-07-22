@@ -345,9 +345,18 @@ select{
 
 
 /* 404 ERROR PAGE */
-#wrap .error img{
-    margin: auto;
+.error{
+    height: 100vh;
+    background-color: #e00808;
+    
+}
+.error img{
+    width:100%;
+    height:100vh;
+    margin:0 auto;
     display: block;
+    z-index: 9999;
+    position: fixed;
 }
 
 #main_wrap .error img{

@@ -15,6 +15,7 @@
     max-height: calc(100vh - 80px);
     scrollbar-width: none;
     width:auto;
+    min-width:800px;
     overflow-y: auto;
     position: absolute;
     top:50%;
