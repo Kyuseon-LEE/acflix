@@ -92,7 +92,12 @@ const SignIn = () => {
             let aldAcMem = JSON.parse(acMemDB);
             if (aldAcMem[uId]) {
                 alert("이미 가입된 회원입니다.");
-                navigate('/login');
+                setUId('');
+                setUPw('');
+                setUNick('');
+                setUGender(0);
+                setUAge(0);
+                setUPhone('');
                 return; // 중복 회원이면 가입 절차 중단
             }
         }
