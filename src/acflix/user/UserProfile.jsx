@@ -219,12 +219,21 @@ const UserProfile = ({setIsSignIned}) => {
     // 비밀번호 암호화
     const encryptedPw = encrypt(uPw);
 
-    myInfo.uPw = encryptedPw;
+    if(uPw !== decrypt(myInfo.uPw)) {
+      if(window.confirm(`바꾸시려는 비밀번호가 ${uPw} 맞습니까?`)){
+        myInfo.uPw = encryptedPw;
+      } else {
+        alert("회원정보 수정이 취소되었습니다.");
+        setUPw(decrypt(myInfo.uPw));
+        return;
+      }
+    }
     myInfo.uNick = uNick;
     myInfo.uPhone = uPhone;
     myInfo.uPicture = uPicture;
 
     setMyInfo(getLoginedSessionID(), myInfo);
+
     alert("회원정보가 수정되었습니다.");
     setLoginedSessionID();
     setIsSignIned(false);
