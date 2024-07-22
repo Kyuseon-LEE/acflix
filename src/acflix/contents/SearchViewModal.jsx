@@ -124,7 +124,7 @@ const SearchViewModal = ( { movieInfo, closeModal } ) => {
             <div className="modal-content">       
             <img src={`http://image.tmdb.org/t/p/w200${movieInfo.poster_path}`} alt={movieInfo.title} onError={onErrorImg}/>
             <h2>{movieInfo.title}</h2>            
-            <p className="m_info">상세정보 : {movieInfo.overview !== ''? movieInfo.overview : '상세정보가 존재하지않습니다.'}</p><br />
+            <p className="m_info">상세정보 : {movieInfo.overview !== ''? movieInfo.overview : '상세정보가 존재하지 않습니다.'}</p><br />
             <p className="m_score">평점 : {`${Math.round(movieInfo.vote_average * 100) / 100}점`}</p><br />
             <p className="m_audi">관객수 : {`${Math.floor(movieInfo.popularity)}만 명`}</p>
             <img src={process.env.PUBLIC_URL + '/imgs/ytb.png'} className="ytb" onClick={playBtnClickHandler} />
