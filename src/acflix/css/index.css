@@ -350,6 +350,11 @@ select{
     display: block;
 }
 
+#main_wrap .error img{
+    margin: auto;
+    display: block;
+}
+
 /* USER PROFILE */
 
 .user-profile1{

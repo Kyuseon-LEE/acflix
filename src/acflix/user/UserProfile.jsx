@@ -140,7 +140,7 @@ const UserProfile = ({setIsSignIned}) => {
         count: movieCounts[id]
       }));
   
-      // 인기순위 오름차순 정렬
+      // 인기순위 내림차순 정렬
       sortedMovies.sort((a, b) => b.count - a.count);
   
       // 인기순위 영화 정보 가져오기

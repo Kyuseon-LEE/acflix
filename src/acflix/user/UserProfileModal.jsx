@@ -215,9 +215,9 @@ const UserProfileModal = ({ movieInfo, closeModal }) => {
                             :
                             <h2>{selectedMovie.name}</h2>
                         }
-                        <p className="m_info">상세정보: {selectedMovie.overview}</p><br />
-                        <p className="m_score">평점: {`${Math.round(selectedMovie.vote_average * 100) / 100}점`}</p><br />
-                        <p className="m_audi">관객수: {`${Math.floor(selectedMovie.popularity)}만 명`}</p>
+                        <p className="m_info">상세정보 : {selectedMovie.overview !== ''? selectedMovie.overview : '상세정보가 존재하지 않습니다.'}</p><br />
+                        <p className="m_score">평점 : {`${Math.round(selectedMovie.vote_average * 100) / 100}점`}</p><br />
+                        <p className="m_audi">관객수 : {`${Math.floor(selectedMovie.popularity)}만 명`}</p>
                         <img src={process.env.PUBLIC_URL + '/imgs/ytb.png'} className="ytb" onClick={playBtnClickHandler} />
                         <div className='favbtn' onClick={recommendFavBtnClickHandler}>
                             {Array.isArray(myFavs) && myFavs.includes(selectedMovie.id || selectedMovie.name) ? (
@@ -232,9 +232,9 @@ const UserProfileModal = ({ movieInfo, closeModal }) => {
                     <>
                         <img src={`http://image.tmdb.org/t/p/w200${movieInfo.poster_path}`} alt={movieInfo.title} />
                         <h2>{movieInfo.title}</h2>
-                        <p className="m_info">상세정보: {movieInfo.overview}</p><br />
-                        <p className="m_score">평점: {`${Math.round(movieInfo.vote_average * 100) / 100}점`}</p><br />
-                        <p className="m_audi">관객수: {`${Math.floor(movieInfo.popularity)}만 명`}</p>
+                        <p className="m_info">상세정보 : {movieInfo.overview !== ''? movieInfo.overview : '상세정보가 존재하지 않습니다.'}</p><br />
+                        <p className="m_score">평점 : {`${Math.round(movieInfo.vote_average * 100) / 100}점`}</p><br />
+                        <p className="m_audi">관객수 : {`${Math.floor(movieInfo.popularity)}만 명`}</p>
                         <img src={process.env.PUBLIC_URL + '/imgs/ytb.png'} className="ytb" onClick={playBtnClickHandler} />
                         <div className='favbtn' onClick={favBtnClickHandler}>
                             {Array.isArray(myFavs) && myFavs.includes(movieInfo.id) ? (
