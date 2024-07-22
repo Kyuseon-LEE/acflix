@@ -83,7 +83,7 @@ const SearchView = () => {
                 <li key={movie.id} className="movie" onClick={() => movieInfoClickHandler(movie)}>
                   <img src={`http://image.tmdb.org/t/p/w300${movie.poster_path}`} alt={movie.title} 
                   onError={onErrorImg}/>
-                  <a href="#none" className="title">{movie.title}</a>
+                  <a className="title">{movie.title}</a>
                 </li>
               ))
             ) : (
@@ -96,7 +96,7 @@ const SearchView = () => {
             relative.map((movie) => (
               <li key={movie.id} className="movie" onClick={() => movieInfoClickHandler(movie)}>
                 <img src={`http://image.tmdb.org/t/p/w300${movie.poster_path}`} alt={movie.title} onError={onErrorImg}/>
-                <a href="#none" className="title">{movie.title}</a>
+                <a className="title">{movie.title}</a>
               </li>
             ))
           ) : (

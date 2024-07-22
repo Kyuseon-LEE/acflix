@@ -346,23 +346,26 @@ select{
 
 /* 404 ERROR PAGE */
 .error{
-    height: 100vh;
-    background-color: #e00808;
+    height: 100%;
     
 }
-.error img{
-    width:100%;
-    height:100vh;
+#wrap .error img{
+    margin:0 auto;
+    display: block;
+    z-index: 9999;
+    position: absolute;
+    top:0%;
+}
+
+#main_wrap .error img{
     margin:0 auto;
     display: block;
     z-index: 9999;
     position: fixed;
 }
 
-#main_wrap .error img{
-    margin: auto;
-    display: block;
-}
+
+
 
 /* USER PROFILE */
 
@@ -620,6 +623,7 @@ ul.search-list .movie{
 .search-list .movie:hover .title{
     opacity: 1;
     transition: 0.3s;
+    cursor: pointer;
 }
 .search-list p{
     color: #fff;
