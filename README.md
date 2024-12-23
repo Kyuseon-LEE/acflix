@@ -1,6 +1,4 @@
-# Acfilx_react
-
-# 📃 프로젝트 정보
+# 📃  Acfilx_react 프로젝트 정보
 
 ### 1. 제작기간
 
