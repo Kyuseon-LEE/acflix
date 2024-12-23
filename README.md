@@ -22,10 +22,10 @@
 
 > React.js
 
-### 2. Tools
+### 2. Tools & API
 
 > Visual Basic Code<br>
-> The movie db API
+> The Movie DB API
 <br>
 
 # 📊 프로젝트 구조
@@ -47,3 +47,4 @@
 
 ### 1. 완료 보고서
 > [3조_3FD_액플릭스_완료보고서.pptx](https://github.com/user-attachments/files/18225229/3._3FD_._.pptx)
+
